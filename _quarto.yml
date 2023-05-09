@@ -5,16 +5,13 @@ project:
 website:
   title: "training_workshops"
   navbar:
-    style: "docked"
-    search: true
-    contents:
-      - section: "Basics"
-        contents:
-          - index.qmd
-          - about.qmd
-      - section: "Layout"
-        contents:
-          - nested.qmd
+    background: primary
+    search: false
+    left:
+      - text: "Home"
+        file: index.qmd
+      - about.qmd
+      - nested.qmd
 
 format:
   html:
