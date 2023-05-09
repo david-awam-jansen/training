@@ -2,7 +2,7 @@
 title: "David Jansen"
 about:
   template: jolla
-  image: ./figures/profile.jpg
+  image: profile.jpg
   links:
     - icon: github
       text: Github
