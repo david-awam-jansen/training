@@ -4,6 +4,8 @@ title: "Workshops"
 
 This is the index site of the workshops page.
 
+This has been updated.
+
 To learn more about Quarto websites vi<https://quarto.org/docs/websites>.
 
 ```{r}
