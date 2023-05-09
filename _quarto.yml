@@ -3,11 +3,13 @@ project:
   output-dir: docs
 
 website:
+  title: "Workshops"
   navbar:
-    menu:
-      - index.qmd
-      - nsted/nested.qmd
-
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - nested/nested.qmd
 
 format:
   html:
