@@ -2,6 +2,6 @@
 title: "Workshops"
 ---
 
-This is the index site of the workshops page.
+This is the index site of the workshops page. It will have multiple presentations about data management, data analysis and data visualizations.
 
-The site is created with Quarto (<https://quarto.org/docs/websites>).
+The site is created with Rstudio and Quarto (<https://quarto.org/docs/websites>).
