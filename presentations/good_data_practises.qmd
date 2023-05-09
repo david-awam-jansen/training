@@ -247,7 +247,7 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
 ![](figures/debugging.jpg){fig-align="center"}
 
-### How to deal with R (programming) errors
+## How to deal with R (programming) errors
 
 1.  don't get frustrated by error messages
 

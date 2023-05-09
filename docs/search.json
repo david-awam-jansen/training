@@ -100,8 +100,15 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Workshops",
     "section": "",
-    "text": "About this site and tainings\n\n1 + 1\n\n[1] 2\n\n\ngit add."
+    "text": "--- title: “David Jansen” about: template: jolla image: profile.jpg links:\nDavid Jansen is a data scientist at MCEVB."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Workshops",
+    "section": "Education",
+    "text": "Education\nUniversity of Zurich , Switzerland PhD in Animal communiction | Sept 2009 - Apr 2013"
   }
 ]

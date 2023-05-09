@@ -1,11 +1,18 @@
----
-title: "About"
----
+\-\--
+title: "David Jansen"
+about:
+template: jolla
+image: profile.jpg
+links:
 
-About this site and tainings
+ - icon: github
+text: Github
+href: https://github.com/david-awam-jansen
+\-\--
 
-```{r}
-1 + 1
-```
+David Jansen is a data scientist at MCEVB.
 
-git add.
+## Education
+
+University of Zurich , Switzerland
+PhD in Animal communiction \| Sept 2009 - Apr 2013
