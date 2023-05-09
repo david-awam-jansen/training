@@ -1,0 +1,247 @@
+---
+title: "Good data practices"
+date: last-modified
+date-format: "[Last Updated on] d MMMM, YYYY"
+author: "David Jansen"
+format:
+  revealjs: 
+    theme: sky
+    css: styles.css
+    reveal_plugins: notes
+    mathjax: NULL
+---
+
+# Content
+
+```{r}
+library(tidyverse)
+```
+
+-   Data management
+
+-   Naming structures
+
+## Data
+
+-   Keep an as raw as possible version
+
+    ![](raw_vegies.jpg)
+
+## Data
+
+-   Keep an as raw as possible version
+-   Consider making your original data file read-only
+
+::: nonincremental
+> -   keep in a 'save' format
+> -   Not excel format - transferring between platforms can cause an issue (e.g. dates)
+> -   csv, tsv, maybe text
+:::
+
+> -   Don't make changes to this raw data
+
+> -   create a README
+
+## Data {data-transition="convex"}
+
+-   Content of columns in correct data type and units
+
+    -   character (e.g, "a", "swc")
+
+    -   numeric (real or decimal) (e.g, 2, 2.0, pi)
+
+    -   logical (FALSE, TRUE)
+
+    -   integer (e.g, 2L, as.integer(3))
+
+    -   complex (e.g, 1 + 0i, 1 + 4i)
+
+::: aside
+R sees logical as 0/1 (FALSE/TRUE). This can be handy during coding.
+:::
+
+## Data
+
+-   Try to have content of columns in correct data type and units
+-   An example why this ~~can~~ is important
+
+```{r}
+tibble(species = c("elphant", "mouse", "cheetah"),
+       speed = c("24.0 mph", "8.1 mph", "74.6 mph"),
+       speed_mph = c(24, 8.1, 74.7)) %>% 
+    flextable::flextable() %>% 
+    flextable::colformat_double(digits = 1) %>%  
+    flextable::width(j = 2, 1, unit = "in")
+```
+
+. . .
+
+::: {,columns}
+::: {.column width="45%"}
+```{r}
+tibble(species = c("elphant", "mouse", "cheetah"),
+       speed = c("24.0 mph", "8.1 mph", "74.6 mph"),
+       speed_mph = c(24, 8.1, 74.7)) %>% 
+  ggplot(aes(x = species, y = speed)) +
+    geom_col() +
+    cowplot::theme_cowplot()
+
+```
+:::
+
+::: {.column width="45 %"}
+```{r}
+tibble(species = c("elphant", "mouse", "cheetah"),
+       speed = c("24.0 mph", "8.1 mph", "74.6 mph"),
+       speed_mph = c(24, 8.1, 74.7)) %>% 
+  ggplot(aes(x = species, y = speed_mph)) +
+    geom_col() +
+    cowplot::theme_cowplot() +
+     scale_y_continuous(expand = c(0, 0), breaks= scales::pretty_breaks()) +
+labs(y = "speed (mph)")
+```
+:::
+:::
+
+## Data
+
+-   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
+
+## Data
+
+-   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
+
+-   reproducible
+
+    ![](Print_%20Tofu%20Stir-Fry%20with%20Peanut%20Sauce%20_%20The%20Modern%20Proper1024_1.jpg)
+
+## Data {.smaller}
+
+-   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
+
+::: {.column width="35%"}
+![](IMG_20230504_135316059.jpg){fig-align="center"}
+:::
+
+::: {.column width="60%"}
+```{r}
+raw_data_wide <- tibble(day = c(1,2,3,4,5),
+               House_A = c(10, 10, 8, 4, 2),
+               House_B = c(2, 10, 9, 4, 2),
+               House_C = c(1, 12, 5, 4, 2),
+               House_D = c(11, 14, 6, 2, 4),
+               House_E = c(14, 2, 8, 11, 1))
+
+raw_data_wide %>% 
+   flextable::flextable() %>% 
+   flextable::colformat_double(digits = 1) 
+```
+:::
+
+> -   Keep this raw version safe !!!
+
+## Data {.smaller}
+
+-   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
+
+-   reproducible
+
+-   Lyric: "House E used pesticides and should be excluded for this study"
+
+```{r, echo=  TRUE}
+ raw_data_wide %>% 
+  select(-House_E) %>%    ## The owners used pesticides during the trials
+      flextable::flextable() %>% 
+      flextable::colformat_double(digits = 1)
+```
+
+> -   A few months later...
+>     -   Lyric: "I changed my mind about house_E"
+>     -   "Sorry I deleted that data" versus "Let me rerun code"
+
+## Wide format versus long format {.smaller}
+
+::: columns
+::: {.column width="70%"}
+```{r}
+raw_data_wide %>% 
+  flextable::flextable() %>% 
+  flextable::colformat_double(digits = 1)
+```
+
+-   wide often easier for recording
+-   long often required for analysis
+:::
+
+::: {.column width="30%"}
+```{r}
+raw_data_wide %>% 
+  pivot_longer(names_to = "houses",
+               values_to = "tick_count",
+               cols = -day) %>% 
+  slice(1:20) %>% 
+  flextable::flextable() %>% 
+  flextable::colformat_double(digits = 1)
+```
+:::
+:::
+
+## Naming
+
+-   Use descriptive names for folders, files and variables
+
+> -   Understandable but not to long
+>     -   m1 versus glm_count_full
+>     -   data versus tick_counts_EA
+> -   avoid special characters (\$, \@, \*)
+
+::: callout-tip
+While a computer will ultimately run your code, it'll be read by humans, so write code intended for humans!
+:::
+
+## Naming {.smaller}
+
+> -   Be aware on naming rules of programs
+>     -   R (and many other languages) names can't start with numbers and does not like spaces
+>     -   'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+
+::: nonincremental
+> -   styles
+>     -   camelCase\
+>     -   PascalCase
+>     -   snake_case
+:::
+
+> -   be consistent
+
+> -   avoid special characters (\$, \@, \*)
+> -   No spaces !!
+> -   case-sensitive (e.g. R) versus case insensitive (SQL)
+> -   No spaces !!
+
+# Take home
+
+> -   keep raw data raw
+> -   use code to clean data
+> -   document code and data
+> -   ***No Spaces :-)***
+
+## Bonus
+
+### How to deal with R (programming) errors
+
+1.  don't get frustrated by error messages
+
+2.  read the error message
+
+3.  google the error message
+
+4.  google solutions
+
+5.  trial and error
+
+    1.  it works --\> go back to your analysis
+
+        ![](good_data_practises_files/images/victory.png)
+
+    2.  error -\> go back to 1.

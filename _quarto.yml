@@ -9,7 +9,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: solor
     css: styles.css
     toc: true
 

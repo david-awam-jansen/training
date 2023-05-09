@@ -1,5 +1,180 @@
 [
   {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#data",
+    "href": "presentations/good_data_practises/good_data_practises.html#data",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nKeep an as raw as possible version"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#data-1",
+    "href": "presentations/good_data_practises/good_data_practises.html#data-1",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nKeep an as raw as possible version\nConsider making your original data file read-only\n\n\n\nkeep in a ‘save’ format\nNot excel format - transferring between platforms can cause an issue (e.g. dates)\ncsv, tsv, maybe text\n\n\n\nDon’t make changes to this raw data\n\n\ncreate a README"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#data-2",
+    "href": "presentations/good_data_practises/good_data_practises.html#data-2",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nContent of columns in correct data type and units\n\ncharacter (e.g, “a”, “swc”)\nnumeric (real or decimal) (e.g, 2, 2.0, pi)\nlogical (FALSE, TRUE)\ninteger (e.g, 2L, as.integer(3))\ncomplex (e.g, 1 + 0i, 1 + 4i)\n\n\n\n\nR sees logical as 0/1 (FALSE/TRUE). This can be handy during coding."
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#data-3",
+    "href": "presentations/good_data_practises/good_data_practises.html#data-3",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nTry to have content of columns in correct data type and units\nAn example why this can is important\n\n\n\n\nspeciesspeedspeed_mphelphant24.0 mph24.0mouse8.1 mph8.1cheetah74.6 mph74.7"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#data-4",
+    "href": "presentations/good_data_practises/good_data_practises.html#data-4",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#data-5",
+    "href": "presentations/good_data_practises/good_data_practises.html#data-5",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\nreproducible"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#data-6",
+    "href": "presentations/good_data_practises/good_data_practises.html#data-6",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\n\n\n\n\n\n\n\n\n\n\n\n\ndayHouse_AHouse_BHouse_CHouse_DHouse_E1.010.02.01.011.014.02.010.010.012.014.02.03.08.09.05.06.08.04.04.04.04.02.011.05.02.02.02.04.01.0\n\n\n\n\nKeep this raw version safe !!!"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#data-7",
+    "href": "presentations/good_data_practises/good_data_practises.html#data-7",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\nreproducible\nLyric: “House E used pesticides and should be excluded for this study”\n\n\n raw_data_wide %>% \n  select(-House_E) %>%    ## The owners used pesticides during the trials\n      flextable::flextable() %>% \n      flextable::colformat_double(digits = 1)\n\n\ndayHouse_AHouse_BHouse_CHouse_D1.010.02.01.011.02.010.010.012.014.03.08.09.05.06.04.04.04.04.02.05.02.02.02.04.0\n\n\n\nA few months later…\n\nLyric: “I changed my mind about house_E”\n“Sorry I deleted that data” versus “Let me rerun code”"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#wide-format-versus-long-format",
+    "href": "presentations/good_data_practises/good_data_practises.html#wide-format-versus-long-format",
+    "title": "Good data practices",
+    "section": "Wide format versus long format",
+    "text": "Wide format versus long format\n\n\n\n\n\ndayHouse_AHouse_BHouse_CHouse_DHouse_E1.010.02.01.011.014.02.010.010.012.014.02.03.08.09.05.06.08.04.04.04.04.02.011.05.02.02.02.04.01.0\n\n\n\nwide often easier for recording\nlong often required for analysis\n\n\n\n\n\ndayhousestick_count1.0House_A10.01.0House_B2.01.0House_C1.01.0House_D11.01.0House_E14.02.0House_A10.02.0House_B10.02.0House_C12.02.0House_D14.02.0House_E2.03.0House_A8.03.0House_B9.03.0House_C5.03.0House_D6.03.0House_E8.04.0House_A4.04.0House_B4.04.0House_C4.04.0House_D2.04.0House_E11.0"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#naming",
+    "href": "presentations/good_data_practises/good_data_practises.html#naming",
+    "title": "Good data practices",
+    "section": "Naming",
+    "text": "Naming\n\nUse descriptive names for folders, files and variables\n\n\nUnderstandable but not to long\n\nm1 versus glm_count_full\ndata versus tick_counts_EA\n\navoid special characters ($, @, *)\n\n\n\n\n\n\n\nTip\n\n\nWhile a computer will ultimately run your code, it’ll be read by humans, so write code intended for humans!"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#naming-1",
+    "href": "presentations/good_data_practises/good_data_practises.html#naming-1",
+    "title": "Good data practices",
+    "section": "Naming",
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’\n\n\n\n\nstyles\n\ncamelCase\n\nPascalCase\nsnake_case\n\n\n\n\nbe consistent\n\n\navoid special characters ($, @, *)\nNo spaces !!\ncase-sensitive (e.g. R) versus case insensitive (SQL)\nNo spaces !!"
+  },
+  {
+    "objectID": "presentations/good_data_practises/good_data_practises.html#bonus",
+    "href": "presentations/good_data_practises/good_data_practises.html#bonus",
+    "title": "Good data practices",
+    "section": "Bonus",
+    "text": "Bonus\nHow to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions\ntrial and error\n\nit works –> go back to your analysis\n\nerror -> go back to 1."
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#data",
+    "href": "presentations/good_data_practises.html#data",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nKeep an as raw as possible version"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#data-1",
+    "href": "presentations/good_data_practises.html#data-1",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nKeep an as raw as possible version\nConsider making your original data file read-only\n\n\n\nkeep in a ‘save’ format\nNot excel format - transferring between platforms can cause an issue (e.g. dates)\ncsv, tsv, maybe text\n\n\n\nDon’t make changes to this raw data\n\n\ncreate a README"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#data-2",
+    "href": "presentations/good_data_practises.html#data-2",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nContent of columns in correct data type and units\n\ncharacter (e.g, “a”, “swc”)\nnumeric (real or decimal) (e.g, 2, 2.0, pi)\nlogical (FALSE, TRUE)\ninteger (e.g, 2L, as.integer(3))\ncomplex (e.g, 1 + 0i, 1 + 4i)\n\n\n\n\nR sees logical as 0/1 (FALSE/TRUE). This can be handy during coding."
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#data-3",
+    "href": "presentations/good_data_practises.html#data-3",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nTry to have content of columns in correct data type and units\nAn example why this can is important\n\n\n\n\nspeciesspeedspeed_mphelphant24.0 mph24.0mouse8.1 mph8.1cheetah74.6 mph74.7"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#data-4",
+    "href": "presentations/good_data_practises.html#data-4",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#data-5",
+    "href": "presentations/good_data_practises.html#data-5",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\nreproducible"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#data-6",
+    "href": "presentations/good_data_practises.html#data-6",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\n\n\n\n\n\n\n\n\n\n\n\n\ndayHouse_AHouse_BHouse_CHouse_DHouse_E1.010.02.01.011.014.02.010.010.012.014.02.03.08.09.05.06.08.04.04.04.04.02.011.05.02.02.02.04.01.0\n\n\n\n\nKeep this raw version safe !!!"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#data-7",
+    "href": "presentations/good_data_practises.html#data-7",
+    "title": "Good data practices",
+    "section": "Data",
+    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\nreproducible\nLyric: “House E used pesticides and should be excluded for this study”\n\n\n raw_data_wide %>% \n  select(-House_E) %>%    ## The owners used pesticides during the trials\n      flextable::flextable() %>% \n      flextable::colformat_double(digits = 1)\n\n\ndayHouse_AHouse_BHouse_CHouse_D1.010.02.01.011.02.010.010.012.014.03.08.09.05.06.04.04.04.04.02.05.02.02.02.04.0\n\n\n\nA few months later…\n\nLyric: “I changed my mind about house_E”\n“Sorry I deleted that data” versus “Let me rerun code”"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#wide-format-versus-long-format",
+    "href": "presentations/good_data_practises.html#wide-format-versus-long-format",
+    "title": "Good data practices",
+    "section": "Wide format versus long format",
+    "text": "Wide format versus long format\n\n\n\n\n\ndayHouse_AHouse_BHouse_CHouse_DHouse_E1.010.02.01.011.014.02.010.010.012.014.02.03.08.09.05.06.08.04.04.04.04.02.011.05.02.02.02.04.01.0\n\n\n\nwide often easier for recording\nlong often required for analysis\n\n\n\n\n\ndayhousestick_count1.0House_A10.01.0House_B2.01.0House_C1.01.0House_D11.01.0House_E14.02.0House_A10.02.0House_B10.02.0House_C12.02.0House_D14.02.0House_E2.03.0House_A8.03.0House_B9.03.0House_C5.03.0House_D6.03.0House_E8.04.0House_A4.04.0House_B4.04.0House_C4.04.0House_D2.04.0House_E11.0"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#metadata",
+    "href": "presentations/good_data_practises.html#metadata",
+    "title": "Good data practices",
+    "section": "Metadata",
+    "text": "Metadata\n\nSpecial kind of data\nData about data"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#naming",
+    "href": "presentations/good_data_practises.html#naming",
+    "title": "Good data practices",
+    "section": "Naming",
+    "text": "Naming\n\nUse descriptive names for folders, files and variables\n\n\nUnderstandable but not to long\n\nm1 versus glm_count_full\ndata versus tick_counts_EA\n\navoid special characters ($, @, *)\n\n\n\n\n\n\n\nTip\n\n\nWhile a computer will ultimately run your code, it’ll be read by humans, so write code intended for humans!"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#naming-1",
+    "href": "presentations/good_data_practises.html#naming-1",
+    "title": "Good data practices",
+    "section": "Naming",
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’\n\n\n\n\nstyles\n\ncamelCase\n\nPascalCase\nsnake_case\n\n\n\n\nbe consistent\n\n\navoid special characters ($, @, *)\nNo spaces !!\ncase-sensitive (e.g. R) versus case insensitive (SQL)\nNo spaces !!"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#bonus",
+    "href": "presentations/good_data_practises.html#bonus",
+    "title": "Good data practices",
+    "section": "Bonus",
+    "text": "Bonus\nHow to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions\ntrial and error\n\nit works –> go back to your analysis\n\nerror -> go back to 1."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Workshops",
@@ -12,103 +187,5 @@
     "title": "About",
     "section": "",
     "text": "About this site and tainings\n\n1 + 1\n\n[1] 2\n\n\ngit add."
-  },
-  {
-    "objectID": "good_data_practises.html#data",
-    "href": "good_data_practises.html#data",
-    "title": "Good data practices",
-    "section": "Data",
-    "text": "Data\n\nKeep an as raw as possible version"
-  },
-  {
-    "objectID": "good_data_practises.html#data-1",
-    "href": "good_data_practises.html#data-1",
-    "title": "Good data practices",
-    "section": "Data",
-    "text": "Data\n\nKeep an as raw as possible version\nConsider making your original data file read-only\n\n\n\nkeep in a ‘save’ format\nNot excel format - transferring between platforms can cause an issue (e.g. dates)\ncsv, tsv, maybe text\n\n\n\nDon’t make changes to this raw data\n\n\ncreate a README"
-  },
-  {
-    "objectID": "good_data_practises.html#data-2",
-    "href": "good_data_practises.html#data-2",
-    "title": "Good data practices",
-    "section": "Data",
-    "text": "Data\n\nContent of columns in correct data type and units\n\ncharacter (e.g, “a”, “swc”)\nnumeric (real or decimal) (e.g, 2, 2.0, pi)\nlogical (FALSE, TRUE)\ninteger (e.g, 2L, as.integer(3))\ncomplex (e.g, 1 + 0i, 1 + 4i)\n\n\n\n\nR sees logical as 0/1 (FALSE/TRUE). This can be handy during coding."
-  },
-  {
-    "objectID": "good_data_practises.html#data-3",
-    "href": "good_data_practises.html#data-3",
-    "title": "Good data practices",
-    "section": "Data",
-    "text": "Data\n\nTry to have content of columns in correct data type and units\nAn example why this can is important\n\n\n\n\nspeciesspeedspeed_mphelphant24.0 mph24.0mouse8.1 mph8.1cheetah74.6 mph74.7"
-  },
-  {
-    "objectID": "good_data_practises.html#data-4",
-    "href": "good_data_practises.html#data-4",
-    "title": "Good data practices",
-    "section": "Data",
-    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling"
-  },
-  {
-    "objectID": "good_data_practises.html#data-5",
-    "href": "good_data_practises.html#data-5",
-    "title": "Good data practices",
-    "section": "Data",
-    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\nreproducible"
-  },
-  {
-    "objectID": "good_data_practises.html#data-6",
-    "href": "good_data_practises.html#data-6",
-    "title": "Good data practices",
-    "section": "Data",
-    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\n\n\n\n\n\n\n\n\n\n\n\n\ndayHouse_AHouse_BHouse_CHouse_DHouse_E1.010.02.01.011.014.02.010.010.012.014.02.03.08.09.05.06.08.04.04.04.04.02.011.05.02.02.02.04.01.0\n\n\n\n\nKeep this raw version safe !!!"
-  },
-  {
-    "objectID": "good_data_practises.html#data-7",
-    "href": "good_data_practises.html#data-7",
-    "title": "Good data practices",
-    "section": "Data",
-    "text": "Data\n\nUse a scripted program not only for analysis, but also for data cleaning and data wrangling\nreproducible\nLyric: “House E used pesticides and should be excluded for this study”\n\n\n raw_data_wide %>% \n  select(-House_E) %>%    ## The owners used pesticides during the trials\n      flextable::flextable() %>% \n      flextable::colformat_double(digits = 1)\n\n\ndayHouse_AHouse_BHouse_CHouse_D1.010.02.01.011.02.010.010.012.014.03.08.09.05.06.04.04.04.04.02.05.02.02.02.04.0\n\n\n\nA few months later…\n\nLyric: “I changed my mind about house_E”\n“Sorry I deleted that data” versus “Let me rerun code”"
-  },
-  {
-    "objectID": "good_data_practises.html#wide-format-versus-long-format",
-    "href": "good_data_practises.html#wide-format-versus-long-format",
-    "title": "Good data practices",
-    "section": "Wide format versus long format",
-    "text": "Wide format versus long format\n\n\n\n\n\ndayHouse_AHouse_BHouse_CHouse_DHouse_E1.010.02.01.011.014.02.010.010.012.014.02.03.08.09.05.06.08.04.04.04.04.02.011.05.02.02.02.04.01.0\n\n\n\nwide often easier for recording\nlong often required for analysis\n\n\n\n\n\ndayhousestick_count1.0House_A10.01.0House_B2.01.0House_C1.01.0House_D11.01.0House_E14.02.0House_A10.02.0House_B10.02.0House_C12.02.0House_D14.02.0House_E2.03.0House_A8.03.0House_B9.03.0House_C5.03.0House_D6.03.0House_E8.04.0House_A4.04.0House_B4.04.0House_C4.04.0House_D2.04.0House_E11.0"
-  },
-  {
-    "objectID": "good_data_practises.html#metadata",
-    "href": "good_data_practises.html#metadata",
-    "title": "Good data practices",
-    "section": "Metadata",
-    "text": "Metadata\n\nSpecial kind of data\nData about data"
-  },
-  {
-    "objectID": "good_data_practises.html#naming",
-    "href": "good_data_practises.html#naming",
-    "title": "Good data practices",
-    "section": "Naming",
-    "text": "Naming\n\nUse descriptive names for folders, files and variables\n\n\nUnderstandable but not to long\n\nm1 versus glm_count_full\ndata versus tick_counts_EA\n\navoid special characters ($, @, *)\n\n\n\n\n\n\n\nTip\n\n\nWhile a computer will ultimately run your code, it’ll be read by humans, so write code intended for humans!"
-  },
-  {
-    "objectID": "good_data_practises.html#naming-1",
-    "href": "good_data_practises.html#naming-1",
-    "title": "Good data practices",
-    "section": "Naming",
-    "text": "Naming\n\nBe aware on naming rules of programs\n\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’\n\n\n\n\nstyles\n\ncamelCase\n\nPascalCase\nsnake_case\n\n\n\n\nbe consistent\n\n\navoid special characters ($, @, *)\nNo spaces !!\ncase-sensitive (e.g. R) versus case insensitive (SQL)\nNo spaces !!"
-  },
-  {
-    "objectID": "good_data_practises.html#bonus",
-    "href": "good_data_practises.html#bonus",
-    "title": "Good data practices",
-    "section": "Bonus",
-    "text": "Bonus\nHow to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions\ntrial and error\n\nit works –> go back to your analysis\n\nerror -> go back to 1."
-  },
-  {
-    "objectID": "nested/nested.html",
-    "href": "nested/nested.html",
-    "title": "This is a nested page",
-    "section": "",
-    "text": "This is the index site of the workshops page.\nThis has been updated.\nThis was updated againlquarto\nTo learn more about Quarto websites vihttps://quarto.org/docs/websites.\n\n1 + 2\n\n[1] 3"
   }
 ]
