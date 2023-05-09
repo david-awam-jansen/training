@@ -5,13 +5,12 @@ project:
 website:
   title: "training_workshops"
   navbar:
-    background: primary
-    search: false
     left:
-      - text: "Home"
-        file: index.qmd
+      - href: index.qmd
+        text: Home
       - about.qmd
       - nested.qmd
+
 
 format:
   html:
