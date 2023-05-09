@@ -7,10 +7,8 @@ website:
     tools:
       - icon: github
         menu:
-          - text: Source Code
-            url:  index.qmd
-          - text: Report a Bug
-            url:  nested/nested.qmd
+          - index.qmd
+          - nsted/nested.qmd
 
 
 format:
