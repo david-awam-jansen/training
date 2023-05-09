@@ -40,9 +40,21 @@ library(tidyverse)
 
 > -   Don't make changes to this raw data
 
-> -   create a README
+## ![](figures/data_metadat.png)Data
 
-## Data {data-transition="convex"}
+-   README
+    -   one per dataset
+    -   provide a title for the dataset
+    -   brief description per column
+    -   publically available data may need more details
+
+::: nonincremental - Metadata - often 1 per study - information does generally not change - e.g. details on study sites -
+
+::: aside
+https://datadryad.org/stash/best_practices https://data.research.cornell.edu/content/readme
+:::
+
+> ## Data {data-transition="convex"}
 
 -   Content of columns in correct data type and units
 
