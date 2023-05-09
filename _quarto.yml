@@ -4,12 +4,8 @@ project:
 
 website:
   title: "Workshops"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-      - nested/nested.qmd
+  sidebar:
+    contents: auto
 
 format:
   html:
