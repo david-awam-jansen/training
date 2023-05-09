@@ -5,11 +5,16 @@ project:
 website:
   title: "training_workshops"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-      - good_data_practises.qmd
+    style: "docked"
+    search: true
+    contents:
+      - section: "Basics"
+        contents:
+          - index.qmd
+          - about.qmd
+      - section: "Layout"
+        contents:
+          - /nested/nested.qmd
 
 format:
   html:

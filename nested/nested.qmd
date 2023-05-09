@@ -1,0 +1,15 @@
+---
+title: "Workshops"
+---
+
+This is the index site of the workshops page.
+
+This has been updated.
+
+This was updated againlquarto
+
+To learn more about Quarto websites vi<https://quarto.org/docs/websites>.
+
+```{r}
+1 + 2
+```
