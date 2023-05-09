@@ -4,13 +4,18 @@ project:
 
 website:
   title: "Workshops"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-      - nested/nested.qmd
-
+sidebar:
+    style: "docked"
+    search: false
+    contents:
+      - section: "Basics"
+        contents:
+          - index.qmd
+          - about.qmd
+          - basics-jupyter.qmd
+      - section: "Layout"
+        contents:
+          - nested/nested.qmd
 
 format:
   html:
