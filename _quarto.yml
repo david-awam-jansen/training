@@ -4,11 +4,9 @@ project:
 
 website:
   navbar:
-    tools:
-      - icon: github
-        menu:
-          - index.qmd
-          - nsted/nested.qmd
+    menu:
+      - index.qmd
+      - nsted/nested.qmd
 
 
 format:

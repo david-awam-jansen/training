@@ -186,6 +186,13 @@ raw_data_wide %>%
 :::
 :::
 
+## Metadata
+
+- Special kind of data
+- Data about data
+
+
+
 ## Naming
 
 -   Use descriptive names for folders, files and variables
