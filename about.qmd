@@ -7,3 +7,5 @@ About this site and tainings
 ```{r}
 1 + 1
 ```
+
+git add.
