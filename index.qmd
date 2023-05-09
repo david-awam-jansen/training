@@ -4,14 +4,4 @@ title: "Workshops"
 
 This is the index site of the workshops page.
 
-This has been updated.
-
-This was updated again
-
-To learn more about Quarto websites vi<https://quarto.org/docs/websites>.
-
-```{r}
-1 + 2
-```
-
-Why is this not working
+The site is created with Quarto (<https://quarto.org/docs/websites>).
