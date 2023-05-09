@@ -3,19 +3,15 @@ project:
   output-dir: docs
 
 website:
-  title: "Workshops"
-sidebar:
-    style: "docked"
-    search: false
-    contents:
-      - section: "Basics"
-        contents:
-          - index.qmd
-          - about.qmd
-          - basics-jupyter.qmd
-      - section: "Layout"
-        contents:
-          - nested/nested.qmd
+  navbar:
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  index.qmd
+          - text: Report a Bug
+            url:  nested/nested.qmd
+
 
 format:
   html:
