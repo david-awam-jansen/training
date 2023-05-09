@@ -6,6 +6,9 @@ website:
   title: "Workshops"
   sidebar:
     contents: auto
+    tools:
+      - icon: github
+        href: https://github.com/
 
 format:
   html:

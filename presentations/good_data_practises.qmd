@@ -113,14 +113,14 @@ labs(y = "speed (mph)")
 
 -   reproducible
 
-    ![](Print_%20Tofu%20Stir-Fry%20with%20Peanut%20Sauce%20_%20The%20Modern%20Proper1024_1.jpg)
+    ![](./figures/Print_%20Tofu%20Stir-Fry%20with%20Peanut%20Sauce%20_%20The%20Modern%20Proper1024_1.jpg)
 
 ## Data {.smaller}
 
 -   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
 
 ::: {.column width="35%"}
-![](IMG_20230504_135316059.jpg){fig-align="center"}
+![](./figures/IMG_20230504_135316059.jpg){fig-align="center"}
 :::
 
 ::: {.column width="60%"}
@@ -188,10 +188,8 @@ raw_data_wide %>%
 
 ## Metadata
 
-- Special kind of data
-- Data about data
-
-
+-   Special kind of data
+-   Data about data
 
 ## Naming
 
@@ -235,6 +233,8 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
 ## Bonus
 
+![](figures/debugging.jpg){fig-align="center"}
+
 ### How to deal with R (programming) errors
 
 1.  don't get frustrated by error messages
@@ -249,6 +249,6 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
     1.  it works --\> go back to your analysis
 
-        ![](good_data_practises_files/images/victory.png)
+        ![](./figures/victory.png)
 
     2.  error -\> go back to 1.
