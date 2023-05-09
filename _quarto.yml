@@ -14,7 +14,7 @@ website:
           - about.qmd
       - section: "Layout"
         contents:
-          - /nested/nested.qmd
+          - nested.qmd
 
 format:
   html:
