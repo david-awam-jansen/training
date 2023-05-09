@@ -107,7 +107,7 @@
   {
     "objectID": "nested/nested.html",
     "href": "nested/nested.html",
-    "title": "Workshops",
+    "title": "This is a nested page",
     "section": "",
     "text": "This is the index site of the workshops page.\nThis has been updated.\nThis was updated againlquarto\nTo learn more about Quarto websites vihttps://quarto.org/docs/websites.\n\n1 + 2\n\n[1] 3"
   }
