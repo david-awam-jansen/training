@@ -1,16 +1,16 @@
-\-\--
+---
 title: "David Jansen"
 about:
-template: jolla
-image: profile.jpg
-links:
+  template: jolla
+  image: ./figures/profile.jpg
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/david-awam-jansen
+---
 
- - icon: github
-text: Github
-href: https://github.com/david-awam-jansen
-\-\--
 
-David Jansen is a data scientist at MCEVB.
+David Jansen is a data scientist at MCEVBD.
 
 ## Education
 

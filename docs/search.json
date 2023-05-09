@@ -88,7 +88,14 @@
     "href": "presentations/good_data_practises.html#bonus",
     "title": "Good data practices",
     "section": "Bonus",
-    "text": "Bonus\n\n\n\n\n\nHow to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions\ntrial and error\n\nit works –> go back to your analysis\n\nerror -> go back to 1."
+    "text": "Bonus"
+  },
+  {
+    "objectID": "presentations/good_data_practises.html#how-to-deal-with-r-programming-errors",
+    "href": "presentations/good_data_practises.html#how-to-deal-with-r-programming-errors",
+    "title": "Good data practices",
+    "section": "How to deal with R (programming) errors",
+    "text": "How to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions\ntrial and error\n\nit works –> go back to your analysis\n\nerror -> go back to 1."
   },
   {
     "objectID": "index.html",
@@ -100,14 +107,14 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "Workshops",
+    "title": "David Jansen",
     "section": "",
-    "text": "--- title: “David Jansen” about: template: jolla image: profile.jpg links:\nDavid Jansen is a data scientist at MCEVB."
+    "text": "David Jansen is a data scientist at MCEVBD."
   },
   {
     "objectID": "about.html#education",
     "href": "about.html#education",
-    "title": "Workshops",
+    "title": "David Jansen",
     "section": "Education",
     "text": "Education\nUniversity of Zurich , Switzerland PhD in Animal communiction | Sept 2009 - Apr 2013"
   }

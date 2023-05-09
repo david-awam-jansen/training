@@ -12,7 +12,7 @@ website:
 
 format:
   html:
-    theme: solor
+    theme: sketchy
     css: styles.css
     toc: true
 
