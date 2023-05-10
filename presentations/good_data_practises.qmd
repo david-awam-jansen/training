@@ -6,7 +6,7 @@ author: "David Jansen"
 format:
   revealjs: 
     theme: sky
-    css: styles.css
+    css: ../styles.css
     reveal_plugins: notes
     mathjax: NULL
 ---
@@ -21,17 +21,16 @@ library(tidyverse)
 
 -   Naming structures
 
-## Data
+## Data (1)
 
 -   Keep an as raw as possible version
 
-    ![](raw_vegies.jpg)
+    ![](./figures/raw_vegies.jpg)
 
-## Data
+## Data (1)
 
 -   Keep an as raw as possible version
 -   Consider making your original data file read-only
-
 ::: nonincremental
 > -   keep in a 'save' format
 > -   Not excel format - transferring between platforms can cause an issue (e.g. dates)
@@ -40,39 +39,25 @@ library(tidyverse)
 
 > -   Don't make changes to this raw data
 
-## ![](figures/data_metadat.png)Data
-
--   README
-    -   one per dataset
-    -   provide a title for the dataset
-    -   brief description per column
-    -   publically available data may need more details
-
-::: nonincremental - Metadata - often 1 per study - information does generally not change - e.g. details on study sites -
-
-::: aside
-https://datadryad.org/stash/best_practices https://data.research.cornell.edu/content/readme
-:::
-
-> ## Data {data-transition="convex"}
+## Data (2) {data-transition="convex"}
 
 -   Content of columns in correct data type and units
 
     -   character (e.g, "a", "swc")
 
-    -   numeric (real or decimal) (e.g, 2, 2.0, pi)
+    -   numeric (real or decimal) (e.g, 2, 2.0)
 
     -   logical (FALSE, TRUE)
 
     -   integer (e.g, 2L, as.integer(3))
 
-    -   complex (e.g, 1 + 0i, 1 + 4i)
+    -   complex (e.g, 1 + 0i, 1 + 4i) <- These can be annoying
 
 ::: aside
 R sees logical as 0/1 (FALSE/TRUE). This can be handy during coding.
 :::
 
-## Data
+## Data (3)
 
 -   Try to have content of columns in correct data type and units
 -   An example why this ~~can~~ is important
@@ -82,6 +67,7 @@ tibble(species = c("elphant", "mouse", "cheetah"),
        speed = c("24.0 mph", "8.1 mph", "74.6 mph"),
        speed_mph = c(24, 8.1, 74.7)) %>% 
     flextable::flextable() %>% 
+    flextable::fontsize(size = 14, part = "all") %>% 
     flextable::colformat_double(digits = 1) %>%  
     flextable::width(j = 2, 1, unit = "in")
 ```
@@ -115,21 +101,23 @@ labs(y = "speed (mph)")
 :::
 :::
 
-## Data
+## Data (4)
 
 -   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
 
-## Data
+## Data (4)
 
 -   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
 
 -   reproducible
 
-    ![](./figures/Print_%20Tofu%20Stir-Fry%20with%20Peanut%20Sauce%20_%20The%20Modern%20Proper1024_1.jpg)
+    ![](./figures/Print_%20Tofu%20Stir-Fry%20with%20Peanut%20Sauce%20_%20The%20Modern%20Proper1024_1.jpg){fig-align="center"}
 
-## Data {.smaller}
+## Data (4) {.smaller}
 
 -   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
+-   reproducible
+-   Keep raw version safe !!!
 
 ::: {.column width="35%"}
 ![](./figures/IMG_20230504_135316059.jpg){fig-align="center"}
@@ -150,13 +138,14 @@ raw_data_wide %>%
 ```
 :::
 
-> -   Keep this raw version safe !!!
 
-## Data {.smaller}
+## Data (4) {.smaller}
 
 -   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
 
 -   reproducible
+
+-   Keep raw version safe !!!
 
 -   Lyric: "House E used pesticides and should be excluded for this study"
 
@@ -167,9 +156,21 @@ raw_data_wide %>%
       flextable::colformat_double(digits = 1)
 ```
 
-> -   A few months later...
->     -   Lyric: "I changed my mind about house_E"
->     -   "Sorry I deleted that data" versus "Let me rerun code"
+## Data (4) {.smaller}
+
+- Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
+
+- reproducible
+
+- Keep raw version safe !!!
+
+- Lyric: "House E used pesticides and should be excluded for this study"
+
+- A few months later...  
+
+> - Lyric: "I changed my mind about house_E"
+
+> - "Sorry I deleted that data" versus "Let me rerun code"
 
 ## Wide format versus long format {.smaller}
 
@@ -198,43 +199,67 @@ raw_data_wide %>%
 :::
 :::
 
-## Metadata
+## Data documentation (1)
 
--   Special kind of data
--   Data about data
+![](figures/data_metadat.png){fig-align="center" width="600"}
+
+::: callout-tip
+You know details of project and data structure (at this moment), but what about future you or others.
+:::
+
+## Data documentation (2) {.smaller}
+
+-   README 
+    -   one per dataset
+    -   provide a title for the dataset
+    -   brief description per column
+    -   publicly available data may need more details
+-   Metadata
+    -   often 1 per study
+    -   information does generally not change
+        -   e.g. details on study sites
+    -   data about data
+
+::: aside
+https://datadryad.org/stash/best_practices https://data.research.cornell.edu/content/readme
+:::
 
 ## Naming
 
 -   Use descriptive names for folders, files and variables
 
-> -   Understandable but not to long
->     -   m1 versus glm_count_full
->     -   data versus tick_counts_EA
-> -   avoid special characters (\$, \@, \*)
+> - Understandable but not to long
+>   - m1 versus glm_count_full
+>   - data versus tick_counts_EA
 
 ::: callout-tip
 While a computer will ultimately run your code, it'll be read by humans, so write code intended for humans!
 :::
 
-## Naming {.smaller}
+## Naming{.smaller}
 
-> -   Be aware on naming rules of programs
->     -   R (and many other languages) names can't start with numbers and does not like spaces
->     -   'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+> - Be aware on naming rules of programs
+>   - Avoid special characters (\$, \@, \*)
+>   - No spaces !!
+>   - Case-sensitive (e.g. R) versus case insensitive (SQL)
+>   -  R (and many other languages) names can't start with numbers and does not like spaces
+>   - 'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
 
-::: nonincremental
-> -   styles
->     -   camelCase\
->     -   PascalCase
->     -   snake_case
-:::
+## Naming{.smaller}
+
+- Be aware on naming rules of programs
+  - Avoid special characters (\$, \@, \*)
+  - No spaces !!
+  - Case-sensitive (e.g. R) versus case insensitive (SQL)
+  -  R (and many other languages) names can't start with numbers and does not like spaces
+  - 'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+
+- styles
+  - camelCase
+  - PascalCase
+  - snake_case
 
 > -   be consistent
-
-> -   avoid special characters (\$, \@, \*)
-> -   No spaces !!
-> -   case-sensitive (e.g. R) versus case insensitive (SQL)
-> -   No spaces !!
 
 # Take home
 
@@ -247,7 +272,7 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
 ![](figures/debugging.jpg){fig-align="center"}
 
-## How to deal with R (programming) errors
+## How to deal with R (programming) errors{.smaller}
 
 1.  don't get frustrated by error messages
 
@@ -261,6 +286,6 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
     1.  it works --\> go back to your analysis
 
-        ![](./figures/victory.png)
+        ![](figures/1000_F_264248967_rZHfZJ3b7dfAzrippDMZ35pbjOAfanKH.jpg){width="100"}
 
     2.  error -\> go back to 1.
