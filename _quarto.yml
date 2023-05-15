@@ -5,11 +5,12 @@ project:
 website:
   title: "Workshops"
   sidebar:
-    contents: autot
-    tools:
-      - icon: github
-        href: https://github.com/
-
+    contents:
+      - text: "Home"
+        file: index.qmd
+      - "---"
+      - section: Presentations
+        contents: presentations
 format:
   html:
     theme: cosmo
