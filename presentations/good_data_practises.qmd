@@ -250,7 +250,7 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
 - Be aware on naming rules of programs
   - Avoid special characters (\$, \@, \*)
-  _ Avoid name of functions 
+  - Avoid name of functions 
   - No spaces !!
   - Case-sensitive (e.g. R) versus case insensitive (SQL)
   -  R (and many other languages) names can't start with numbers and does not like spaces
@@ -260,6 +260,7 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
 - Be aware on naming rules of programs
   - Avoid special characters (\$, \@, \*)
+  - Avoid name of functions 
   - No spaces !!
   - Case-sensitive (e.g. R) versus case insensitive (SQL)
   -  R (and many other languages) names can't start with numbers and does not like spaces
