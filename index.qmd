@@ -1,5 +1,7 @@
 ---
 title: "Workshops"
+author: "David Jansen"
+date: last-modified
 ---
 
 This is the index site of the workshops page. It will have multiple presentations about data management, data analysis and data visualizations.
