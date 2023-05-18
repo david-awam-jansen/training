@@ -30,6 +30,7 @@ library(tidyverse)
 
 -   Keep an as raw as possible version
 -   Consider making your original data file read-only
+
 ::: nonincremental
 > -   keep in a 'save' format
 > -   Not excel format - transferring between platforms can cause an issue (e.g. dates)
@@ -50,7 +51,7 @@ library(tidyverse)
 
     -   integer (e.g, 2L, as.integer(3))
 
-    -   complex (e.g, 1 + 0i, 1 + 4i) <- These can be annoying
+    -   complex (e.g, 1 + 0i, 1 + 4i) \<- These can be annoying
 
 ::: aside
 R sees logical as 0/1 (FALSE/TRUE). This can be handy during coding.
@@ -137,7 +138,6 @@ raw_data_wide %>%
 ```
 :::
 
-
 ## Data (4) {.smaller}
 
 -   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
@@ -157,19 +157,19 @@ raw_data_wide %>%
 
 ## Data (4) {.smaller}
 
-- Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
+-   Use a scripted program not only for analysis, but also for ***data cleaning*** and ***data wrangling***
 
-- reproducible
+-   reproducible
 
-- Keep raw version safe !!!
+-   Keep raw version safe !!!
 
-- Lyric: "House E used pesticides and should be excluded for this study"
+-   Lyric: "House E used pesticides and should be excluded for this study"
 
-- A few months later...  
+-   A few months later...
 
-> - Lyric: "I changed my mind about house_E"
+> -   Lyric: "I changed my mind about house_E"
 
-> - "Sorry I deleted that data" versus "Let me rerun code"
+> -   "Sorry I deleted that data" versus "Let me rerun code"
 
 ## Wide format versus long format {.smaller}
 
@@ -208,11 +208,12 @@ You know details of project and data structure (at this moment), but what about 
 
 ## Data documentation (2) {.smaller}
 
--   README 
+-   README
     -   one per dataset
     -   provide a title for the dataset
     -   brief description per column
     -   publicly available data may need more details
+    -   <https://guides.lib.uci.edu/datamanagement/readme>
 -   Metadata
     -   often 1 per study
     -   information does generally not change
@@ -227,48 +228,47 @@ https://datadryad.org/stash/best_practices https://data.research.cornell.edu/con
 
 -   Use descriptive names for folders, files and variables
 
-> - Understandable but not to long
->   - m1 versus glm_count_full
->   - data versus tick_counts_EA
+> -   Understandable but not to long
+>     -   m1 versus glm_count_full
+>     -   data versus tick_counts_EA
 
 ::: callout-tip
 While a computer will ultimately run your code, it'll be read by humans, so write code intended for humans!
 :::
 
-## Naming{.smaller}
+## Naming {.smaller}
 
-> - Be aware on naming rules of programs
->   - Avoid special characters (\$, \@, \*)
->   - No spaces !!
->   - Case-sensitive (e.g. R) versus case insensitive (SQL)
->   -  R (and many other languages) names can't start with numbers and does not like spaces
->   - 'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+> -   Be aware on naming rules of programs
+>     -   Avoid special characters (\$, \@, \*)
+>     -   Avoid name of functions
+>     -   No spaces !!
+>     -   Case-sensitive (e.g. R) versus case insensitive (SQL)
+>     -   R (and many other languages) names can't start with numbers and does not like spaces
+>     -   'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
 
+## Naming {.smaller}
 
-## Naming{.smaller}
+-   Be aware on naming rules of programs
+    -   Avoid special characters (\$, \@, \*)
+    -   Avoid name of functions
+    -   No spaces !!
+    -   Case-sensitive (e.g. R) versus case insensitive (SQL)
+    -   R (and many other languages) names can't start with numbers and does not like spaces
+    -   'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
 
-- Be aware on naming rules of programs
-  - Avoid special characters (\$, \@, \*)
-  - Avoid name of functions 
-  - No spaces !!
-  - Case-sensitive (e.g. R) versus case insensitive (SQL)
-  -  R (and many other languages) names can't start with numbers and does not like spaces
-  - 'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+## Naming {.smaller}
 
-## Naming{.smaller}
-
-- Be aware on naming rules of programs
-  - Avoid special characters (\$, \@, \*)
-  - Avoid name of functions 
-  - No spaces !!
-  - Case-sensitive (e.g. R) versus case insensitive (SQL)
-  -  R (and many other languages) names can't start with numbers and does not like spaces
-  - 'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
-
-- styles
-  - camelCase
-  - PascalCase
-  - snake_case
+-   Be aware on naming rules of programs
+    -   Avoid special characters (\$, \@, \*)
+    -   Avoid name of functions
+    -   No spaces !!
+    -   Case-sensitive (e.g. R) versus case insensitive (SQL)
+    -   R (and many other languages) names can't start with numbers and does not like spaces
+    -   'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+-   styles
+    -   camelCase
+    -   PascalCase
+    -   snake_case
 
 > -   be consistent
 
@@ -283,7 +283,7 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
 ![](figures/debugging.jpg){fig-align="center"}
 
-## How to deal with R (programming) errors{.smaller}
+## How to deal with R (programming) errors {.smaller}
 
 1.  don't get frustrated by error messages
 

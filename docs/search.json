@@ -11,7 +11,7 @@
     "href": "presentations/good_data_practises.html#data-1-1",
     "title": "Good data practices",
     "section": "Data (1)",
-    "text": "Data (1)\n\nKeep an as raw as possible version\nConsider making your original data file read-only ::: nonincremental > - keep in a ‘save’ format > - Not excel format - transferring between platforms can cause an issue (e.g. dates) > - csv, tsv, maybe text :::\n\n\nDon’t make changes to this raw data"
+    "text": "Data (1)\n\nKeep an as raw as possible version\nConsider making your original data file read-only\n\n\n\nkeep in a ‘save’ format\nNot excel format - transferring between platforms can cause an issue (e.g. dates)\ncsv, tsv, maybe text\n\n\n\nDon’t make changes to this raw data"
   },
   {
     "objectID": "presentations/good_data_practises.html#data-2",
@@ -81,7 +81,7 @@
     "href": "presentations/good_data_practises.html#data-documentation-2",
     "title": "Good data practices",
     "section": "Data documentation (2)",
-    "text": "Data documentation (2)\n\nREADME\n\none per dataset\nprovide a title for the dataset\nbrief description per column\npublicly available data may need more details\n\nMetadata\n\noften 1 per study\ninformation does generally not change\n\ne.g. details on study sites\n\ndata about data\n\n\n\n\nhttps://datadryad.org/stash/best_practices https://data.research.cornell.edu/content/readme"
+    "text": "Data documentation (2)\n\nREADME\n\none per dataset\nprovide a title for the dataset\nbrief description per column\npublicly available data may need more details\nhttps://guides.lib.uci.edu/datamanagement/readme\n\nMetadata\n\noften 1 per study\ninformation does generally not change\n\ne.g. details on study sites\n\ndata about data\n\n\n\n\nhttps://datadryad.org/stash/best_practices https://data.research.cornell.edu/content/readme"
   },
   {
     "objectID": "presentations/good_data_practises.html#naming",
@@ -95,7 +95,7 @@
     "href": "presentations/good_data_practises.html#naming-1",
     "title": "Good data practices",
     "section": "Naming",
-    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’"
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’"
   },
   {
     "objectID": "presentations/good_data_practises.html#naming-2",
