@@ -7,12 +7,9 @@ website:
     style: "docked"
     search: true
     contents:
-      - section: "Basics"
+      - index.qmd
+      - section: "Presentations"
         contents:
-          - index.qmd
-      - section: "Layout"
-        contents:
-          - good_data_practises.qmd
           - presentations/good_data_practises.qmd
 
 format:
