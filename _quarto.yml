@@ -10,7 +10,8 @@ website:
         file: index.qmd
       - "---"
       - section: Presentations
-      - file: presentations/good_data_practises.qmd
+      - contents:
+      - good_data_practises.qmd
 format:
   html:
     theme: cosmo
