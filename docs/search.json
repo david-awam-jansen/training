@@ -123,7 +123,7 @@
     "href": "presentations/good_data_practises.html#how-to-deal-with-r-programming-errors",
     "title": "Good data practices",
     "section": "How to deal with R (programming) errors",
-    "text": "How to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions\ntrial and error\n\nit works –> go back to your analysis\n\nerror -> go back to 1."
+    "text": "How to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions or use ChatGPT\ntrial and error\n\nit works –> go back to your analysis\n\nerror -> go back to 1."
   },
   {
     "objectID": "index.html",

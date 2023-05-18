@@ -291,7 +291,7 @@ While a computer will ultimately run your code, it'll be read by humans, so writ
 
 3.  google the error message
 
-4.  google solutions
+4.  google solutions or use ChatGPT
 
 5.  trial and error
 
