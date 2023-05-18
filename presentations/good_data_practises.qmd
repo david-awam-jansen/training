@@ -1,7 +1,6 @@
 ---
 title: "Good data practices"
 date: last-modified
-date-format: "[Last Updated on] d MMMM, YYYY"
 author: "David Jansen"
 format:
   revealjs: 
