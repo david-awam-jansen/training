@@ -3,15 +3,18 @@ project:
   output-dir: docs
 
 website:
-  title: "Workshops"
   sidebar:
+    style: "docked"
+    search: true
     contents:
-      - text: "Home"
-        file: index.qmd
-      - "---"
-      - section: Presentations
-      - contents:
-      - good_data_practises.qmd
+      - section: "Basics"
+        contents:
+          - index.qmd
+      - section: "Layout"
+        contents:
+          - good_data_practises.qmd
+          - presentations/good_data_practises.qmd
+
 format:
   html:
     theme: cosmo
