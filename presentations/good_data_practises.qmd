@@ -1,5 +1,6 @@
 ---
 title: "Good data practices"
+subtitle: "No spaces"
 date: last-modified
 author: "David Jansen"
 format:
