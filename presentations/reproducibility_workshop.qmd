@@ -1,0 +1,19 @@
+---
+title: "Research reproducibility"
+date: last-modified
+author: "David Jansen"
+format:
+  revealjs: 
+    theme: sky
+    css: ../styles.css
+    reveal_plugins: notes
+    mathjax: NULL
+---
+
+# Content
+
+```{r}
+library(tidyverse)
+```
+
+## Folder organization
