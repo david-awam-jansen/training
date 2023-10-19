@@ -144,6 +144,83 @@
     "href": "about.html#education",
     "title": "David Jansen",
     "section": "Education",
-    "text": "Education\nUniversity of Zurich , Switzerland PhD in Animal communiction | Sept 2009 - Apr 2013"
+    "text": "Education\nUniversity of Zurich , Switzerland PhD in Animal communication | Sept 2009 - Apr 2013\nResume"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html",
+    "href": "presentations/data_wragling_of_field_data.html",
+    "title": "Data wrangling with field data",
+    "section": "",
+    "text": "For the xxx project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet. On the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.\nThe rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 ecotones and every zone has 4 sections. So it total there were 4 * 4 * 2 * 3 = 96 counts per yard per visit.\nThe files would be saved with as a csv file with the housenumber, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment.\nThe aim of the code I was writing was to open all the files, extract both the metadate and teh count data and combine all of it into a large file.\nAn early test of the code on a few of the sheets went well and worked as expected.\nHere is the story of how it went."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#background",
+    "href": "presentations/data_wragling_of_field_data.html#background",
+    "title": "Data wrangling with field data",
+    "section": "Background",
+    "text": "Background\nFor the xxx project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet. On the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.\nThe rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 ecotones and every zone has 4 sections. So it total there were 4 * 4 * 2 * 3 = 96 counts per yard per visit.\nThe files would be saved with as a csv file with the housenumber, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment.\nThe aim of the code I was writing was to open all the files, extract both the metadate and teh count data and combine all of it into a large file.\nAn early test of the code on a few of the sheets went well and worked as expected.\nHere is the story of how it went."
+  },
+  {
+    "objectID": "presentations/git_version_control.html#what-is-version-control",
+    "href": "presentations/git_version_control.html#what-is-version-control",
+    "title": "Introduction into git",
+    "section": "What is version control",
+    "text": "What is version control"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#naming",
+    "href": "presentations/git_version_control.html#naming",
+    "title": "Introduction into git",
+    "section": "Naming",
+    "text": "Naming\n\nUse descriptive names for folders, files and variables\n\n\nUnderstandable but not to long\n\nm1 versus glm_count_full\ndata versus tick_counts_EA\n\n\n\n\n\n\n\n\nTip\n\n\nWhile a computer will ultimately run your code, it’ll be read by humans, so write code intended for humans!"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#naming-1",
+    "href": "presentations/git_version_control.html#naming-1",
+    "title": "Introduction into git",
+    "section": "Naming",
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#naming-2",
+    "href": "presentations/git_version_control.html#naming-2",
+    "title": "Introduction into git",
+    "section": "Naming",
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#naming-3",
+    "href": "presentations/git_version_control.html#naming-3",
+    "title": "Introduction into git",
+    "section": "Naming",
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’\n\nstyles\n\ncamelCase\nPascalCase\nsnake_case\n\n\n\nbe consistent"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#bonus",
+    "href": "presentations/git_version_control.html#bonus",
+    "title": "Introduction into git",
+    "section": "Bonus",
+    "text": "Bonus"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#how-to-deal-with-r-programming-errors",
+    "href": "presentations/git_version_control.html#how-to-deal-with-r-programming-errors",
+    "title": "Introduction into git",
+    "section": "How to deal with R (programming) errors",
+    "text": "How to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions or use ChatGPT\ntrial and error\n\nit works –&gt; go back to your analysis\n\nerror -&gt; go back to 1."
+  },
+  {
+    "objectID": "presentations/git_version_control.html#lets-have-some-fun",
+    "href": "presentations/git_version_control.html#lets-have-some-fun",
+    "title": "Introduction into git",
+    "section": "Let’s have some fun !!",
+    "text": "Let’s have some fun !!"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#lets-have-some-fun-1",
+    "href": "presentations/git_version_control.html#lets-have-some-fun-1",
+    "title": "Introduction into git",
+    "section": "Let’s have some fun",
+    "text": "Let’s have some fun\nSorry I forgot I am in an mosquito lab"
   }
 ]

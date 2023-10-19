@@ -8,9 +8,11 @@ website:
     search: true
     contents:
       - index.qmd
+      - about.qmd
       - section: "Presentations"
         contents:
           - presentations/good_data_practises.qmd
+          - presentations/git_version_control.qmd
 
 format:
   html:

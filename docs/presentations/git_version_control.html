@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.3.361">
 
   <meta name="author" content="David Jansen">
-  <meta name="dcterms.date" content="2023-08-25">
-  <title>Data wrangling with field data</title>
+  <meta name="dcterms.date" content="2023-10-18">
+  <title>Introduction into git</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,7 +327,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Data wrangling with field data</h1>
+  <h1 class="title">Introduction into git</h1>
+  <p class="subtitle">version control</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -337,21 +338,141 @@ David Jansen
 </div>
 </div>
 
-  <p class="date">2023-08-25</p>
+  <p class="date">2023-10-18</p>
 </section>
-<section id="background" class="slide level2">
-<h2>Background</h2>
-<p>For the xxx project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet. On the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.</p>
-<p>The rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 ecotones and every zone has 4 sections. So it total there were 4 * 4 * 2 * 3 = 96 counts per yard per visit.</p>
-<p>The files would be saved with as a csv file with the housenumber, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment.</p>
-<p>The aim of the code I was writing was to open all the files, extract both the metadate and teh count data and combine all of it into a large file.</p>
-<p>An early test of the code on a few of the sheets went well and worked as expected.</p>
-<p>Here is the story of how it went.</p>
+<section>
+<section id="content" class="title-slide slide level1 center">
+<h1>Content</h1>
+<ul>
+<li><p>Version control</p></li>
+<li><p>Github</p></li>
+<li><p>Git</p></li>
+<li><p>Naming of folders, files and scripts.</p></li>
+<li><p>MCEVBD github</p></li>
+</ul>
+</section>
+<section id="what-is-version-control" class="slide level2">
+<h2>What is version control</h2>
+
+<img data-src="..\presentations/figures/fun_version_control.gif" width="900" class="r-stretch quarto-figure-center"></section>
+<section id="lets-have-some-fun" class="slide level2">
+<h2>Let’s have some fun !!</h2>
+
+<img data-src="..\presentations/figures/spike-monkey-typing.gif" class="r-stretch"></section>
+<section id="lets-have-some-fun-1" class="slide level2">
+<h2>Let’s have some fun</h2>
+<p>Sorry I forgot I am in an mosquito lab</p>
+</section>
+<section id="naming" class="slide level2">
+<h2><img data-src="..\presentations/figures/mosquito_typing.jpg">Naming</h2>
+<ul>
+<li>Use descriptive names for folders, files and variables</li>
+</ul>
+<ul>
+<li class="fragment">Understandable but not to long
+<ul>
+<li class="fragment">m1 versus glm_count_full</li>
+<li class="fragment">data versus tick_counts_EA</li>
+</ul></li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>While a computer will ultimately run your code, it’ll be read by humans, so write code intended for humans!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="naming-1" class="slide level2 smaller">
+<h2>Naming</h2>
+<ul>
+<li class="fragment">Be aware on naming rules of programs
+<ul>
+<li class="fragment">Avoid special characters ($, @, *)</li>
+<li class="fragment">Avoid name of functions</li>
+<li class="fragment">No spaces !!</li>
+<li class="fragment">Case-sensitive (e.g.&nbsp;R) versus case insensitive (SQL)</li>
+<li class="fragment">R (and many other languages) names can’t start with numbers and does not like spaces</li>
+<li class="fragment">‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’</li>
+</ul></li>
+</ul>
+</section>
+<section id="naming-2" class="slide level2 smaller">
+<h2>Naming</h2>
+<ul>
+<li>Be aware on naming rules of programs
+<ul>
+<li>Avoid special characters ($, @, *)</li>
+<li>Avoid name of functions</li>
+<li>No spaces !!</li>
+<li>Case-sensitive (e.g.&nbsp;R) versus case insensitive (SQL)</li>
+<li>R (and many other languages) names can’t start with numbers and does not like spaces</li>
+<li>‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’</li>
+</ul></li>
+</ul>
+</section>
+<section id="naming-3" class="slide level2 smaller">
+<h2>Naming</h2>
+<ul>
+<li>Be aware on naming rules of programs
+<ul>
+<li>Avoid special characters ($, @, *)</li>
+<li>Avoid name of functions</li>
+<li>No spaces !!</li>
+<li>Case-sensitive (e.g.&nbsp;R) versus case insensitive (SQL)</li>
+<li>R (and many other languages) names can’t start with numbers and does not like spaces</li>
+<li>‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’</li>
+</ul></li>
+<li>styles
+<ul>
+<li>camelCase</li>
+<li>PascalCase</li>
+<li>snake_case</li>
+</ul></li>
+</ul>
+<ul>
+<li class="fragment">be consistent</li>
+</ul>
+</section></section>
+<section>
+<section id="take-home" class="title-slide slide level1 center">
+<h1>Take home</h1>
+<ul>
+<li class="fragment">keep raw data raw</li>
+<li class="fragment">use code to clean data</li>
+<li class="fragment">document code and data</li>
+<li class="fragment"><strong><em>No Spaces :-)</em></strong></li>
+</ul>
+</section>
+<section id="bonus" class="slide level2">
+<h2>Bonus</h2>
+
+<img data-src="figures/debugging.jpg" class="r-stretch quarto-figure-center"></section>
+<section id="how-to-deal-with-r-programming-errors" class="slide level2 smaller">
+<h2>How to deal with R (programming) errors</h2>
+<ol type="1">
+<li><p>don’t get frustrated by error messages</p></li>
+<li><p>read the error message</p></li>
+<li><p>google the error message</p></li>
+<li><p>google solutions or use ChatGPT</p></li>
+<li><p>trial and error</p>
+<ol type="1">
+<li><p>it works –&gt; go back to your analysis</p>
+<p><img data-src="figures/1000_F_264248967_rZHfZJ3b7dfAzrippDMZ35pbjOAfanKH.jpg" width="100"></p></li>
+<li><p>error -&gt; go back to 1.</p></li>
+</ol></li>
+</ol>
 
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -544,6 +665,44 @@ David Jansen
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

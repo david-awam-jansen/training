@@ -1,0 +1,129 @@
+---
+title: "Introduction into git"
+subtitle: "version control"
+date: last-modified
+author: "David Jansen"
+format:
+  revealjs: 
+    theme: sky
+    css: ../styles.css
+    reveal_plugins: notes
+    mathjax: NULL
+---
+
+# Content
+
+```{r}
+library(tidyverse)
+```
+
+-   Version control
+
+-   Github
+
+-   Git
+
+-   Naming of folders, files and scripts.
+
+-   MCEVBD github
+
+## What is version control
+
+![](/presentations/figures/fun_version_control.gif){fig-align="center" width="900"}
+
+## Let's have some fun !!
+
+![](/presentations/figures/spike-monkey-typing.gif)
+
+## Let's have some fun
+
+Sorry I forgot I am in an mosquito lab
+
+![](/presentations/figures/mosquito_typing.jpg)
+
+## Terminal
+
+- 'Easy' start with git bash
+
+https://education.github.com/git-cheat-sheet-education.pdf
+
+
+
+
+
+## Naming
+
+-   Use descriptive names for folders, files and variables
+
+> -   Understandable but not to long
+>     -   m1 versus glm_count_full
+>     -   data versus tick_counts_EA
+
+::: callout-tip
+While a computer will ultimately run your code, it'll be read by humans, so write code intended for humans!
+:::
+
+## Naming {.smaller}
+
+> -   Be aware on naming rules of programs
+>     -   Avoid special characters (\$, \@, \*)
+>     -   Avoid name of functions
+>     -   No spaces !!
+>     -   Case-sensitive (e.g. R) versus case insensitive (SQL)
+>     -   R (and many other languages) names can't start with numbers and does not like spaces
+>     -   'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+
+## Naming {.smaller}
+
+-   Be aware on naming rules of programs
+    -   Avoid special characters (\$, \@, \*)
+    -   Avoid name of functions
+    -   No spaces !!
+    -   Case-sensitive (e.g. R) versus case insensitive (SQL)
+    -   R (and many other languages) names can't start with numbers and does not like spaces
+    -   'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+
+## Naming {.smaller}
+
+-   Be aware on naming rules of programs
+    -   Avoid special characters (\$, \@, \*)
+    -   Avoid name of functions
+    -   No spaces !!
+    -   Case-sensitive (e.g. R) versus case insensitive (SQL)
+    -   R (and many other languages) names can't start with numbers and does not like spaces
+    -   'car speed in miles per hour' versus 'car speed (mph)' versus car_speed_mph'
+-   styles
+    -   camelCase
+    -   PascalCase
+    -   snake_case
+
+> -   be consistent
+
+# Take home
+
+> -   keep raw data raw
+> -   use code to clean data
+> -   document code and data
+> -   ***No Spaces :-)***
+
+## Bonus
+
+![](figures/debugging.jpg){fig-align="center"}
+
+## How to deal with R (programming) errors {.smaller}
+
+1.  don't get frustrated by error messages
+
+2.  read the error message
+
+3.  google the error message
+
+4.  google solutions or use ChatGPT
+
+5.  trial and error
+
+    1.  it works --\> go back to your analysis
+
+        ![](figures/1000_F_264248967_rZHfZJ3b7dfAzrippDMZ35pbjOAfanKH.jpg){width="100"}
+
+    2.  error -\> go back to 1.

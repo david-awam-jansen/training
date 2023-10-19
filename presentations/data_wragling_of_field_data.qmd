@@ -10,29 +10,16 @@ format:
     mathjax: NULL
 ---
 
-
 ## Background
 
-For the xxx project of Zack student collected tick count data in the the yard
-of peoples houses. This data was collected on a standardize datasheet.
-On the top of the datasheet there was a line for some metadata such 
-as date, time, weather and name of people collecting the data.
+For the xxx project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet. On the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.
 
-The rest of the form had space to note the counts of 2 tick species in 3 different life stages.
-There were 4 ecotones and every zone has 4 sections. So it total there were
-4 * 4 * 2 * 3 = 96 counts per yard per visit. 
+The rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 ecotones and every zone has 4 sections. So it total there were 4 \* 4 \* 2 \* 3 = 96 counts per yard per visit.
 
 The files would be saved with as a csv file with the housenumber, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment.
 
-The aim of the code I was writing was to open all the files, extract both the metadate and teh count data and combine all of it into a large file. 
+The aim of the code I was writing was to open all the files, extract both the metadate and teh count data and combine all of it into a large file.
 
-An early test of the code on a few of the sheets went well and worked as expected. 
+An early test of the code on a few of the sheets went well and worked as expected.
 
 Here is the story of how it went.
-
-
-
-
-
-
-
