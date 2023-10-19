@@ -19,9 +19,9 @@ library(tidyverse)
 
 -   Version control
 
--   Github
-
 -   Git
+
+-   Github
 
 -   Naming of folders, files and scripts.
 
@@ -30,6 +30,40 @@ library(tidyverse)
 ## What is version control
 
 ![](/presentations/figures/fun_version_control.gif){fig-align="center" width="900"}
+
+## What is version control
+
+-   Keep track and saves all you changes to code
+
+-   Good backup source
+
+-   Easier to fix mistakes
+
+-   Code is open and easy to share
+
+-   Multiple people working on the same code
+
+## What is Git
+
+-   Git is a version control system that allows developers to track changes in their code
+-   installed on your own computer
+-   controlled through mostly terminal
+    -   but e.g. Rstudio have systems to make it easier
+-   there are alternatives but git is most common (at least in science)
+
+## What is GitHub
+
+-   GitHub is a web-based hosting service for git repositories.
+
+-   Enables you to store and share code for different projects
+
+-   More advanced
+
+    -   Github actions
+
+    -   Github pages
+
+    -   Together they can e.g. build and host a webpage (e.g. this presentation).
 
 ## Let's have some fun !!
 
@@ -41,14 +75,59 @@ Sorry I forgot I am in an mosquito lab
 
 ![](/presentations/figures/mosquito_typing.jpg)
 
+## First steps
+
+-   Make an account
+    -   https://github.com/signup
+-   Install git
+    -   https://github.com/git-guides/install-git
+-   [Github student account](https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-students/apply-to-github-global-campus-as-a-student)
+-   private repositories
+
+## Make a repository
+
+-   Method 1 (easy)
+    -   Create repository on github
+    -   <https://github.com>
+-   Method 2 (harder)
+    -   use [Git Repo](https://gerrit.googlesource.com/git-repo)
+        -    Create a repository from command line
+        -   Not today
+
 ## Terminal
 
-- 'Easy' start with git bash
+-   'Easy' start with git bash
 
-https://education.github.com/git-cheat-sheet-education.pdf
+[<https://education.github.com/git-cheat-sheet-education.pdf>]{style="font-size: 30px"}
+
+Let's go to the terminal.
+
+## Terminal
+
+```       
+echo "# training_repo" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:david-awam-jansen/training_repo.git
+git push -u origin main
+```
 
 
+## Terminal 
 
+```
+git status
+git add
+git commit
+
+```
+
+## Rstudio examples
+
+- terminal
+- build-in
 
 
 ## Naming

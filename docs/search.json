@@ -431,7 +431,7 @@
     "href": "presentations/data_wragling_of_field_data.html#are-these-all-0-or-are-the-not-sampled",
     "title": "Data wrangling with field data",
     "section": "are these all 0 or are the not sampled?",
-    "text": "are these all 0 or are the not sampled?\n\nlist.files()\n\n[1] \"data_wraggling_with_field_data_to_be_deleted.R\"\n[2] \"data_wragling_of_field_data.qmd\"               \n[3] \"data_wragling_of_field_data.rmarkdown\"         \n[4] \"data_wragling_of_field_data_files\"             \n[5] \"figures\"                                       \n[6] \"git_version_control.qmd\"                       \n[7] \"good_data_practises.qmd\"                       \n[8] \"pdf\"                                           \n[9] \"reproducibility_workshop.qmd\""
+    "text": "are these all 0 or are the not sampled?\n\nlist.files()\n\n [1] \"data_wraggling_with_field_data_to_be_deleted.R\"\n [2] \"data_wragling_of_field_data.qmd\"               \n [3] \"data_wragling_of_field_data.rmarkdown\"         \n [4] \"data_wragling_of_field_data_files\"             \n [5] \"figures\"                                       \n [6] \"git_version_control.qmd\"                       \n [7] \"good_data_practises.qmd\"                       \n [8] \"MCEVBD_interview\"                              \n [9] \"MCEVBD_interview.qmd\"                          \n[10] \"pdf\"                                           \n[11] \"reproducibility_workshop.qmd\""
   },
   {
     "objectID": "presentations/git_version_control.html#what-is-version-control",
@@ -439,6 +439,27 @@
     "title": "Introduction into git",
     "section": "What is version control",
     "text": "What is version control"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#what-is-version-control-1",
+    "href": "presentations/git_version_control.html#what-is-version-control-1",
+    "title": "Introduction into git",
+    "section": "What is version control",
+    "text": "What is version control\n\nKeep track and saves all you changes to code\nGood backup source\nEasier to fix mistakes\nCode is open and easy to share\nMultiple people working on the same code"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#what-is-git",
+    "href": "presentations/git_version_control.html#what-is-git",
+    "title": "Introduction into git",
+    "section": "What is Git",
+    "text": "What is Git\n\nGit is a version control system that allows developers to track changes in their code\ninstalled on your own computer\ncontrolled through mostly terminal\n\nbut e.g. Rstudio have systems to make it easier\n\nthere are alternatives but git is most common (at least in science)"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#what-is-github",
+    "href": "presentations/git_version_control.html#what-is-github",
+    "title": "Introduction into git",
+    "section": "What is GitHub",
+    "text": "What is GitHub\n\nGitHub is a web-based hosting service for git repositories.\nEnables you to store and share code for different projects\nMore advanced\n\nGithub actions\nGithub pages\nTogether they can e.g. build and host a webpage (e.g. this presentation)."
   },
   {
     "objectID": "presentations/git_version_control.html#lets-have-some-fun",
@@ -455,11 +476,46 @@
     "text": "Let’s have some fun\nSorry I forgot I am in an mosquito lab"
   },
   {
+    "objectID": "presentations/git_version_control.html#first-steps",
+    "href": "presentations/git_version_control.html#first-steps",
+    "title": "Introduction into git",
+    "section": "First steps",
+    "text": "First steps\n\nMake an account\n\nhttps://github.com/signup\n\nInstall git\n\nhttps://github.com/git-guides/install-git\n\nGithub student account\nprivate repositories"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#make-a-repository",
+    "href": "presentations/git_version_control.html#make-a-repository",
+    "title": "Introduction into git",
+    "section": "Make a repository",
+    "text": "Make a repository\n\nMethod 1 (easy)\n\nCreate repository on github\nhttps://github.com\n\nMethod 2 (harder)\n\nuse Git Repo\n\nCreate a repository from command line\nNot today"
+  },
+  {
     "objectID": "presentations/git_version_control.html#terminal",
     "href": "presentations/git_version_control.html#terminal",
     "title": "Introduction into git",
     "section": "Terminal",
-    "text": "Terminal\n\n‘Easy’ start with git bash\n\nhttps://education.github.com/git-cheat-sheet-education.pdf"
+    "text": "Terminal\n\n‘Easy’ start with git bash\n\nhttps://education.github.com/git-cheat-sheet-education.pdf\nLet’s go to the terminal."
+  },
+  {
+    "objectID": "presentations/git_version_control.html#terminal-1",
+    "href": "presentations/git_version_control.html#terminal-1",
+    "title": "Introduction into git",
+    "section": "Terminal",
+    "text": "Terminal\necho \"# training_repo\" &gt;&gt; README.md\ngit init\ngit add README.md\ngit commit -m \"first commit\"\ngit branch -M main\ngit remote add origin git@github.com:david-awam-jansen/training_repo.git\ngit push -u origin main"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#terminal-2",
+    "href": "presentations/git_version_control.html#terminal-2",
+    "title": "Introduction into git",
+    "section": "Terminal",
+    "text": "Terminal\ngit status\ngit add\ngit commit"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#rstudio-examples",
+    "href": "presentations/git_version_control.html#rstudio-examples",
+    "title": "Introduction into git",
+    "section": "Rstudio examples",
+    "text": "Rstudio examples\n\nterminal\nbuild-in"
   },
   {
     "objectID": "presentations/git_version_control.html#naming",

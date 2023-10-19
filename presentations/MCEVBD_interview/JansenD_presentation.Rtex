@@ -1,0 +1,420 @@
+
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{listings}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[MCEVBD job interview]{Examples of data analysis projects} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{David Jansen} % Your name
+\institute[University of Notre Dame] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Archie Lab \\
+Biological Sciences \\ % Your institution for the title page
+\medskip
+\textit{david.awam.jansen@gmail.com} % Your email address
+}
+\date{January 19th 2023} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+%\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+%\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Background}
+\begin{itemize}
+\item Research scientist in the Archie Lab at Notre Dame
+\begin{itemize}
+\item Large coding projects for the ABRP
+\item Manage large volumes of data and samples
+\item Independent research 
+\item Help graduate students with analysis
+\item 'Quick' coding projects
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Background}
+\begin{itemize}
+\item Amboseli Baboon Research Project
+  \begin{itemize}
+  \item Long-term (40+ years) field site in Kenya
+  \item Studies wild habituated baboons
+  \item Data in a very large relational database
+  \item Collaboration between multiple universities
+\end{itemize}
+\end{itemize}
+\\~\\
+\\~\\
+\centering
+\includegraphics{fernando_campos_20190107_109.jpg}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Type of coding and analysis}
+\begin{itemize}
+\item Mainly R
+\begin{itemize}
+\item Tidyverse
+\item Rmarkdown
+\item Writing functions
+\item Parallel coding for cluster computing
+\end{itemize}
+\item PostgreSQL
+\item \LaTeX
+\item Some bash
+\end{itemize}
+
+\begin{itemize}
+\item (Generalized) Linear mixed models
+\item Survival analysis
+\item Ordination
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example of some projects}
+\textbf{1. Elo ranking :} Develop an automated system of dominance rank assignment\\~\\
+
+\textbf{2. Large microbiome project :} (1) Coordinate project from start to finish,  (2) Create database structure, and (3) Help with analysis \\~\\
+\textbf{3. Sociality indexes:} (1) Recreate code in R for a method described in a paper, (2) Create a version for juveniles, and (3) find unusual patterns.  \\~\\
+\end{frame}
+
+
+
+
+%------------------------------------------------
+\section{Elo ranking} 
+
+\begin{frame}
+\frametitle{Elo ranking}
+\begin{itemize}
+\item Linear dominance hierarchies structure in baboons  
+\item Based on agonistic interactions
+
+\item Currently rank assignment is done manual through matrix optimization
+\end{itemize}
+\centering
+\includegraphics[width=0.7\linewidth]{Female_Aggression_Vio_AS_Viv.jpg}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Elo ranking}
+\begin{itemize}
+\item Elo rating system is a method for calculating the relative skill levels of players in zero-sum games such as chess
+\begin{itemize}
+\item Increasingly used in animal behavior
+\item Can mostly be automated
+\item Current R packages did not fit project data and needs
+\end{itemize}
+\item Created new code from scratch
+\item Tested how well the Elo-based compared to the matrix-based
+\begin{itemize}
+\item Rerun models from papers that have rank-related measures
+\item Visualize some traits that are known to be correlated with rank.
+\end{itemize}
+\end{itemize}
+\\~\\
+\\~\\
+\Large \href{https://github.com/ArchieLab/ABRP-Elo-based-ranks/tree/main/code}{\beamergotobutton{GitHub code for Elo based ordinal dominance rank}}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Elo ranking - compare models}
+
+\scriptsize
+\begin{verbatim}
+model_compare_setup <- 
+  tibble(study_nr = c(1, 2, 2, .... 14),
+         study =  c("Alberts et al 2006"                                                       , c("Gesquiere et al 2011 (T)"))) %>% 
+  mutate(Modfor = c(
+    c("lm(formula = prophrs ~ rank_measure, data = df)")
+  , c('glmmTMB(formula = logT~ season+temperature+age+rank_measure +(1|sname), 
+               data=df, family="gaussian")'))) %>% 
+   mutate(filename = c(c("./data/Alberts_et_al2006.csv")          
+                      , c("./data/Gesquiere_et_al_2011_T.csv"))) %>%  
+    mutate(dataset = map(filename,  ~ read.csv(file = .))) %>% 
+    mutate(models = map2(.x = ModFor, .y = dataset, .f = run_models)) %>%
+    unnest(cols = c(models)) 
+
+run_models <- function(model_formula, dataset) {
+  df = dataset
+  tibble(rank_measures = c("1", "adult_rank",
+                           "overall_rank", "elo_rank", "elo_adult_rank")) %>%
+    mutate(ModFor = str_replace(string = model_formula,
+                                       pattern = "rank_measure",
+                                       replacement = rank_measures))  %>%
+    mutate(model_formula = str_replace_all(ModFor, "I\\(1\\^2\\)", "1")) %>%
+    mutate(model = map(.x = model_formula, ~ eval(rlang::parse_expr(.x)))) %>%
+    select(rank_measures, model)}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Elo ranking - compare models}
+
+\scriptsize
+\begin{verbatim}
+get_estimates <- function(rank_measures, model) {
+  broom.mixed::tidy(x = model) %>%
+    filter(rank_measures == term)}
+    
+get_confidence <- function(rank_measures, model) {
+  broom.mixed::tidy(x = model, conf.int = TRUE, conf.level = 0.95) %>%
+    filter(rank_measures == term) %>%
+    select(contains("conf"))}
+
+model_compare <- model_compare_setup %>% 
+  mutate(AIC = map_dbl(.x = model, .f = get_AIC),
+         estimate= map2(.x = rank_measures, .y =model, .f = get_estimates),
+         tidy_results= map2(.x = rank_measures, .y =model, .f = get_confidence)) %>%
+  unnest(cols = c(estimate, tidy_results)) %>%
+   mutate(standard_estimate = estimate/std.error) 
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Elo ranking}
+\begin{figure}
+\centering
+  \includegraphics[scale=.65]{effect_size_plot.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Elo ranking}
+\begin{figure}
+\centering
+  \includegraphics[width=1.1\linewidth]{Male_dominance_rank_predict_mating_success.jpg}
+\end{figure}
+\end{frame}
+
+\section{Large sequencing project}
+
+\begin{frame}{Gut microbe project}
+  \begin{overlayarea}{\textwidth}{.9\textheight}
+\begin{itemize}
+\item Over 20.000 freeze-dried fecal samples 
+\item Sequenced to get data on the gut microbiome of baboons
+\end{itemize}
+
+\begin{figure}
+\centering
+ \includegraphics[width=.35\linewidth]{Beth_grant_21MAY20_no_kids-1.jpg}
+\end{figure}
+ \end{overlayarea} 
+\end{frame}
+
+
+\begin{frame}{EMP sequencing project}
+  \begin{overlayarea}{\textwidth}{.6\textheight}
+\begin{itemize}
+\item Responsible for the development of methods and coordinating lab work
+\item Created database structure and documentation
+\begin{itemize}
+\item Tables for the various stages of the pipeline
+\item Support tables for quality of samples
+\item Links to the full project database as well as downstream analysis results
+\end{itemize}
+\item Lots of work on cluster computers moving large volumes of data and linking datatype
+\item Assisted with analyses and visualizations of multiple papers
+
+\end{itemize}
+ \end{overlayarea}
+\end{frame}
+
+
+\begin{frame}{EMP sequencing project}
+\centering
+  \includegraphics[width=.79\linewidth]{Bjork_et_al_2022.pdf}
+\end{frame}
+  
+\begin{frame}{EMP sequencing project }
+\begin{figure}
+%\begin{center}
+  \includegraphics[width=1\linewidth]{emp_dag_v2.png}
+%  \end{center}
+\end{figure}
+\end{frame}
+
+\section{Sociality indexes}
+
+\begin{frame}{Social connectedness index}
+  \begin{overlayarea}{\textwidth}{.6\textheight}
+\begin{itemize}
+   \item Measures of how socially connected individuals are
+   \item Being socially isolated is bad for your survival/fitness
+   \item Based on grooming behaviors
+\end{itemize}
+
+\begin{figure}
+%\begin{center}
+  \includegraphics[width=1\linewidth]{grooming.jpg} 
+%  \end{center}
+\end{figure}
+\end{overlayarea}
+\end{frame}
+
+\begin{frame}{Social connectedness index}
+  \begin{overlayarea}{\textwidth}{.6\textheight}
+\begin{itemize}
+   \item ‘composite’ indices of social connectedness
+   \item Problem of observer effort and social group sizes. 
+\end{itemize}
+
+\begin{figure}
+%\begin{center}
+  \includegraphics[width=.7\linewidth]{OE_effort.png}
+
+%  \end{center}
+\end{figure}
+\end{overlayarea}
+\end{frame}
+
+\begin{frame}{Social connectedness index}
+  \begin{overlayarea}{\textwidth}{.6\textheight}
+\begin{itemize}
+ \item Original code was mostly 'lost'.  
+ \item Reconstruct code from methods in paper
+    \item Test code by comparing results with results from paper
+        \begin{itemize}
+          \item Lots of base R and the datatable and reshape packages
+        \end{itemize}
+    \item In collaboration with a post-doc this was later turned into an R package
+    \begin{itemize}
+      \item Started to use Tidyverse and parallel coding
+      \item Added dyadic interaction (on-on-one) strengths 
+      \end{itemize}
+    \end{itemize}
+\end{overlayarea}
+\end{frame}
+
+ \begin{frame}{Social connectedness index}
+\begin{overlayarea}{\textwidth}{1\textheight}   
+\begin{itemize}
+      \item Initially only for adults 
+      \item I alter code to create indexes for juveniles
+\end{itemize}
+
+\begin{figure}
+%\begin{center}
+  \includegraphics[width=0.9\linewidth]{dag_of_ea_analysis.png}
+%  \end{center}
+\end{figure}
+
+\end{overlayarea}
+\end{frame}
+
+
+\begin{frame}{Effect of male interactions with juvenile females}
+\begin{itemize}
+    \item Found that strong bonds with fathers increase adult survival
+    \item Strong bonds with dads may mitigate  effects of early adversities
+\end{itemize}
+\begin{figure}
+%\begin{center}
+  \includegraphics[width=.9\linewidth]{survival_plot.jpeg}
+%  \end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Effect of male interactions with juvenile females}
+\begin{figure}
+%\begin{center}
+  \includegraphics[width=.7\linewidth]{example_table.png}
+%  \end{center}
+\end{figure}
+\end{frame}
+
+
+\end{document}

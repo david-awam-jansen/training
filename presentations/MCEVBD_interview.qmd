@@ -1,0 +1,11 @@
+---
+title: "MCEVBD job interview"
+author: "David Jansen"
+format: revealjs
+---
+
+::: {#fig-RefCardR}
+
+<!-- <iframe width="100%" height="600" src="./MCEVBD_interview/MCEVBD_presentation.pdf"></iframe> -->
+{{< pdf ./MCEVBD_interview/MCEVBD_presentation.pdf >}}
+:::

@@ -9,11 +9,19 @@ website:
     contents:
       - index.qmd
       - about.qmd
+      - section: "Workshops"
+        contents:
+          - presentations/good_data_practises.qmd
+          - text: Data Wrangling
+            url: presentations/data_wragling_of_field_data.qmd
+          - presentations/git_version_control.qmd
       - section: "Presentations"
         contents:
           - presentations/good_data_practises.qmd
-          - presentations/data_wragling_of_field_data.qmd
+          - text: Data Wrangling
+            url: presentations/data_wragling_of_field_data.qmd
           - presentations/git_version_control.qmd
+
 
 format:
   html:

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.361">
 
   <meta name="author" content="David Jansen">
-  <meta name="dcterms.date" content="2023-10-18">
+  <meta name="dcterms.date" content="2023-10-19">
   <title>Introduction into git</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -338,15 +338,15 @@ David Jansen
 </div>
 </div>
 
-  <p class="date">2023-10-18</p>
+  <p class="date">2023-10-19</p>
 </section>
 <section>
 <section id="content" class="title-slide slide level1 center">
 <h1>Content</h1>
 <ul>
 <li><p>Version control</p></li>
-<li><p>Github</p></li>
 <li><p>Git</p></li>
+<li><p>Github</p></li>
 <li><p>Naming of folders, files and scripts.</p></li>
 <li><p>MCEVBD github</p></li>
 </ul>
@@ -355,6 +355,41 @@ David Jansen
 <h2>What is version control</h2>
 
 <img data-src="..\presentations/figures/fun_version_control.gif" width="900" class="r-stretch quarto-figure-center"></section>
+<section id="what-is-version-control-1" class="slide level2">
+<h2>What is version control</h2>
+<ul>
+<li><p>Keep track and saves all you changes to code</p></li>
+<li><p>Good backup source</p></li>
+<li><p>Easier to fix mistakes</p></li>
+<li><p>Code is open and easy to share</p></li>
+<li><p>Multiple people working on the same code</p></li>
+</ul>
+</section>
+<section id="what-is-git" class="slide level2">
+<h2>What is Git</h2>
+<ul>
+<li>Git is a version control system that allows developers to track changes in their code</li>
+<li>installed on your own computer</li>
+<li>controlled through mostly terminal
+<ul>
+<li>but e.g.&nbsp;Rstudio have systems to make it easier</li>
+</ul></li>
+<li>there are alternatives but git is most common (at least in science)</li>
+</ul>
+</section>
+<section id="what-is-github" class="slide level2">
+<h2>What is GitHub</h2>
+<ul>
+<li><p>GitHub is a web-based hosting service for git repositories.</p></li>
+<li><p>Enables you to store and share code for different projects</p></li>
+<li><p>More advanced</p>
+<ul>
+<li><p>Github actions</p></li>
+<li><p>Github pages</p></li>
+<li><p>Together they can e.g.&nbsp;build and host a webpage (e.g.&nbsp;this presentation).</p></li>
+</ul></li>
+</ul>
+</section>
 <section id="lets-have-some-fun" class="slide level2">
 <h2>Let’s have some fun !!</h2>
 
@@ -364,12 +399,70 @@ David Jansen
 <p>Sorry I forgot I am in an mosquito lab</p>
 
 <img data-src="..\presentations/figures/mosquito_typing.jpg" class="r-stretch"></section>
+<section id="first-steps" class="slide level2">
+<h2>First steps</h2>
+<ul>
+<li>Make an account
+<ul>
+<li>https://github.com/signup</li>
+</ul></li>
+<li>Install git
+<ul>
+<li>https://github.com/git-guides/install-git</li>
+</ul></li>
+<li><a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-students/apply-to-github-global-campus-as-a-student">Github student account</a></li>
+<li>private repositories</li>
+</ul>
+</section>
+<section id="make-a-repository" class="slide level2">
+<h2>Make a repository</h2>
+<ul>
+<li>Method 1 (easy)
+<ul>
+<li>Create repository on github</li>
+<li><a href="https://github.com" class="uri">https://github.com</a></li>
+</ul></li>
+<li>Method 2 (harder)
+<ul>
+<li>use <a href="https://gerrit.googlesource.com/git-repo">Git Repo</a>
+<ul>
+<li>Create a repository from command line</li>
+<li>Not today</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
 <section id="terminal" class="slide level2">
 <h2>Terminal</h2>
 <ul>
 <li>‘Easy’ start with git bash</li>
 </ul>
-<p>https://education.github.com/git-cheat-sheet-education.pdf</p>
+<p><span style="font-size: 30px"><a href="https://education.github.com/git-cheat-sheet-education.pdf" class="uri">https://education.github.com/git-cheat-sheet-education.pdf</a></span></p>
+<p>Let’s go to the terminal.</p>
+</section>
+<section id="terminal-1" class="slide level2">
+<h2>Terminal</h2>
+<pre><code>echo "# training_repo" &gt;&gt; README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:david-awam-jansen/training_repo.git
+git push -u origin main</code></pre>
+</section>
+<section id="terminal-2" class="slide level2">
+<h2>Terminal</h2>
+<pre><code>git status
+git add
+git commit
+</code></pre>
+</section>
+<section id="rstudio-examples" class="slide level2">
+<h2>Rstudio examples</h2>
+<ul>
+<li>terminal</li>
+<li>build-in</li>
+</ul>
 </section>
 <section id="naming" class="slide level2">
 <h2>Naming</h2>
