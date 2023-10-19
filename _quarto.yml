@@ -9,6 +9,7 @@ website:
     contents:
       - index.qmd
       - about.qmd
+      - CV.qmd
       - section: "Workshops"
         contents:
           - presentations/good_data_practises.qmd

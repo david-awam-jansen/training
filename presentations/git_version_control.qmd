@@ -1,6 +1,6 @@
 ---
 title: "Introduction into git"
-subtitle: "version control"
+subtitle: "version control is control"
 date: last-modified
 author: "David Jansen"
 format:
