@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.361">
 
   <meta name="author" content="David Jansen">
-  <meta name="dcterms.date" content="2023-10-18">
+  <meta name="dcterms.date" content="2023-10-19">
   <title>Data wrangling with field data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../styles.css">
@@ -321,6 +386,8 @@
       margin-right: 0; 
     }
   </style>
+  <link href="../site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+  <script src="../site_libs/tabwid-1.1.3/tabwid.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -337,21 +404,1288 @@ David Jansen
 </div>
 </div>
 
-  <p class="date">2023-10-18</p>
+  <p class="date">2023-10-19</p>
 </section>
 <section id="background" class="slide level2">
 <h2>Background</h2>
-<p>For the xxx project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet. On the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.</p>
-<p>The rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 ecotones and every zone has 4 sections. So it total there were 4 * 4 * 2 * 3 = 96 counts per yard per visit.</p>
-<p>The files would be saved with as a csv file with the housenumber, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment.</p>
-<p>The aim of the code I was writing was to open all the files, extract both the metadate and teh count data and combine all of it into a large file.</p>
+<p>For the Terminix project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet.</p>
+</section>
+<section id="background-1" class="slide level2">
+<h2>Background</h2>
+
+<img data-src="figures/empty_sheet_Page_1.jpg" class="r-stretch quarto-figure-center"></section>
+<section id="background-2" class="slide level2">
+<h2>Background</h2>
+<p>On the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.</p>
+<p>The rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 transects and every zone has 4 sections. So it total there were 4 * 4 * 2 * 3 = 96 counts per yard per visit.</p>
+<p>The files would be saved with as a csv file with the house number, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment.</p>
+</section>
+<section id="background-of-code" class="slide level2">
+<h2>Background of code</h2>
+<p>The aim of the code I was writing was to open all the files, extract both the metadata and the count data and combine all of it into a large file.</p>
 <p>An early test of the code on a few of the sheets went well and worked as expected.</p>
-<p>Here is the story of how it went.</p>
+</section>
+<section id="the-fun-begins" class="slide level2">
+<h2>The fun begins</h2>
+<ul>
+<li>get R setup</li>
+<li>slightly complicated way of opening packages</li>
+<li>makes sharing code easier</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="do">## Code to open the datasheets of the project</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>              , <span class="st">"cellranger"</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>              , <span class="st">"data.table"</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>              , <span class="st">"janitor"</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>              , <span class="st">"purrr"</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>              , <span class="st">"readxl"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="do">## install packages if needed and open libraries</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">setdiff</span>(packages, <span class="fu">rownames</span>(<span class="fu">installed.packages</span>()))) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">install.packages</span>(<span class="fu">setdiff</span>(packages, <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())), </span>
+<span id="cb1-12"><a href="#cb1-12"></a>                   <span class="at">dependencies =</span> <span class="cn">TRUE</span>)}  </span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-15"><a href="#cb1-15"></a>                 <span class="at">warn.conflicts =</span> <span class="cn">TRUE</span>, <span class="at">quietly =</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="find-files" class="slide level2">
+<h2>find files</h2>
+<ul>
+<li>Spaces in the path :-(</li>
+<li>Remember <strong><em>No Spaces :-)</em></strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="do">## all the datasheets are in a folder on Box</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="do">## on my computer this is at </span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="do">## C:\Users\dajansen3\Box\All data sheet entries EC 2023</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="do">## adapt to your path</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>sheet_folder <span class="ot">=</span> <span class="st">"C://Users//dajansen3//Box//All data sheet entries EC 2023//"</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-importance-of-consistency" class="slide level2">
+<h2>The importance of consistency</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">tibble</span>(<span class="at">filename =</span> <span class="fu">list.files</span>(<span class="at">path =</span> sheet_folder)[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">164</span>, <span class="dv">876</span>, <span class="dv">992</span>,  <span class="dv">200</span>)]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+  filename                         
+  &lt;chr&gt;                            
+1 001_062623_posttreatment3.csv    
+2 013_072823_posttreatment2.csv    
+3 055_6_15_23_PostTreatment1.csv   
+4 063_06.22.2023_PostTreatment2.csv
+5 015_7_19_23.csv                  </code></pre>
+</div>
+</div>
+<ul>
+<li><p>dates are in many formats</p></li>
+<li><p>this makes writing general code hard</p></li>
+<li><p>For now I’ll work with these, but all fix (manually by Zack)</p></li>
+</ul>
+</section>
+<section id="lets-open-some-data-1" class="slide level2">
+<h2>Lets open some data (1)</h2>
+<ul>
+<li><p>The files have a few lines with metadata.</p></li>
+<li><p>These should not be loaded for count data</p></li>
+<li><p>Using the skip option to exclude the first 4 lines</p></li>
+<li><p>For the count data the first column is also not need.</p></li>
+<li><p>Only the 2nd to 6th column contain data on tick counts</p></li>
+</ul>
+</section>
+<section id="lets-open-some-data-2" class="slide level2">
+<h2>Lets open some data (2)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">read_csv</span>(<span class="fu">list.files</span>(<span class="at">path =</span> sheet_folder, <span class="at">full.names =</span> <span class="cn">TRUE</span>)[<span class="dv">2</span>], </span>
+<span id="cb5-2"><a href="#cb5-2"></a>         <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">col_select =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 5
+   transect section tick_species tick_stage tick_count
+   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;           &lt;dbl&gt;
+ 1 wood     a       Ix           A                   0
+ 2 wood     a       Ix           N                   0
+ 3 wood     a       Ix           L                   0
+ 4 wood     b       Ix           A                   0
+ 5 wood     b       Ix           N                   0
+ 6 wood     b       Ix           L                   0
+ 7 wood     c       Ix           A                   0
+ 8 wood     c       Ix           N                   0
+ 9 wood     c       Ix           L                   0
+10 wood     d       Ix           A                   0
+# ℹ 86 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>yeah that looks good, but…</li>
+</ul>
+</section>
+<section id="lets-open-some-data-3" class="slide level2">
+<h2>Lets open some data (3)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">read_csv</span>(<span class="fu">list.files</span>(<span class="at">path =</span> sheet_folder, <span class="at">full.names =</span> <span class="cn">TRUE</span>)[<span class="dv">3</span>], </span>
+<span id="cb7-2"><a href="#cb7-2"></a>         <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">col_select =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 98 × 5
+   ...2     ...3    ...4         ...5       ...6      
+   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     
+ 1 &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;      
+ 2 transect section tick_species tick_stage tick_count
+ 3 wood     a       Ix           A          0         
+ 4 wood     a       Ix           N          0         
+ 5 wood     a       Ix           L          0         
+ 6 wood     b       Ix           A          N/A       
+ 7 wood     b       Ix           N          N/A       
+ 8 wood     b       Ix           L          N/A       
+ 9 wood     c       Ix           A          N/A       
+10 wood     c       Ix           N          N/A       
+# ℹ 88 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>what is happening here?</li>
+<li>extra lines of white space?</li>
+</ul>
+<ul>
+<li class="fragment">Some troubleshooting will be needed</li>
+</ul>
+</section>
+<section id="metadata" class="slide level2">
+<h2>Metadata</h2>
+<p>Looking at the metadata for the same two files</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">read_csv</span>(<span class="fu">list.files</span>(<span class="at">path =</span> sheet_folder, <span class="at">full.names =</span> <span class="cn">TRUE</span>)[<span class="dv">2</span>], <span class="at">n_max =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  house date   start_time end_time mowed temp     VMC   cloud_cover w_person
+  &lt;dbl&gt; &lt;chr&gt;  &lt;time&gt;     &lt;time&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;   
+1     1 6/1523 09:05      09:24    No    58 (air) 21%   Cloudy      SA      
+# ℹ 3 more variables: we_person &lt;chr&gt;, `le-person` &lt;chr&gt;, l_person &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">read_csv</span>(<span class="fu">list.files</span>(<span class="at">path =</span> sheet_folder, <span class="at">full.names =</span> <span class="cn">TRUE</span>)[<span class="dv">3</span>], <span class="at">n_max =</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  house date   start_time end_time mowed  temp   VMC cloud_cover w_person
+  &lt;dbl&gt; &lt;chr&gt;  &lt;time&gt;     &lt;time&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;   
+1     1 6/5/23 09:10      09:40    N        50    11 cloudy      ML      
+# ℹ 3 more variables: we_person &lt;chr&gt;, `le-person` &lt;chr&gt;, l_person &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Looks ok and we will get back to the metadata later</p>
+</section>
+<section id="open-all-datafiles" class="slide level2">
+<h2>Open all datafiles</h2>
+<ul>
+<li>Aim: all datasheets and combine into one data file.</li>
+<li>We are going to make a function to read the data</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>all_datasheets <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> sheet_folder) </span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>read_data_v1 <span class="ot">=</span> <span class="cf">function</span>(filepath) {     <span class="do">## hint v1 is suggesting there are going to be more :-)</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="co">#print(filepath) ## can help to find issues</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">read_csv</span>(filepath, <span class="do">## path to specific file,</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>           <span class="at">skip =</span> <span class="dv">4</span>, <span class="do">## skip first 4 rows</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>           <span class="at">col_select =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>),  <span class="do">## select column 2 to 6</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>           <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="do">## don't show the message,,</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>           <span class="at">name_repair =</span> <span class="st">"minimal"</span> <span class="do">## don't try and repair names</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>           )</span>
+<span id="cb13-11"><a href="#cb13-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reading-data-v1" class="slide level2">
+<h2>Reading data (v1)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="do">## lest first try it 2</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(<span class="at">.x =</span> path_to_sheet, <span class="at">.f =</span> read_data_v1)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">select</span>(<span class="sc">-</span>path_to_sheet) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="do">## counting lines as a quick check</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  datasheet          data              nr_rows_in_tibble
+  &lt;chr&gt;              &lt;list&gt;                        &lt;dbl&gt;
+1 001 07_07_2023.csv &lt;tibble [96 × 5]&gt;                96
+2 001 6_15_23.csv    &lt;tibble [96 × 5]&gt;                96</code></pre>
+</div>
+</div>
+<p>!!! Yeah that worked !!!</p>
+</section>
+<section id="reading-data-v1-1" class="slide level2">
+<h2>Reading data (v1)</h2>
+<p>Now on all of them.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span>    </span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(<span class="at">.x =</span> path_to_sheet, <span class="at">.f =</span> read_data_v1)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `mutate()`:
+ℹ In argument: `data = map(.x = path_to_sheet, .f = read_data_v1)`.
+Caused by error in `map()`:
+ℹ In index: 3.
+Caused by error:
+! Names can't be empty.
+✖ Empty names found at locations 1, 2, 3, 4, and 5.</code></pre>
+</div>
+</div>
+<p>Boo an error</p>
+</section>
+<section id="troubleshooting-1a" class="slide level2">
+<h2>Troubleshooting (1a)</h2>
+<ul>
+<li>What is happening?</li>
+<li>Troubleshooting code/data
+<ul>
+<li>Errors stop the running of code. This can make troubleshooting hard.</li>
+<li>The purrr package has a function that can keep code running.</li>
+<li>Temporarily give an alternative outcome.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="do">## purrr function</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="do">## give the function to run and an alternative answer in case of error</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>read_data_possibly_v1 <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(<span class="at">.f =</span> read_data_v1,  </span>
+<span id="cb18-4"><a href="#cb18-4"></a>                                         <span class="at">otherwise =</span> <span class="fu">tibble</span>())  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="troubleshooting-1b" class="slide level2">
+<h2>Troubleshooting (1b)</h2>
+<ul>
+<li>rerun code</li>
+<li>problem sheets have an empty tibble and 0 rows</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(<span class="at">.x =</span> path_to_sheet, <span class="at">.f =</span> read_data_possibly_v1)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">select</span>(<span class="sc">-</span>path_to_sheet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   datasheet                      data              nr_rows_in_tibble
+   &lt;chr&gt;                          &lt;list&gt;                        &lt;dbl&gt;
+ 1 001 07_07_2023.csv             &lt;tibble [96 × 5]&gt;                96
+ 2 001 6_15_23.csv                &lt;tibble [96 × 5]&gt;                96
+ 3 001_060523_pretreatment.csv    &lt;tibble [0 × 0]&gt;                  0
+ 4 001_062623_posttreatment3.csv  &lt;tibble [0 × 0]&gt;                  0
+ 5 001_071423_posttreatment1.csv  &lt;tibble [0 × 0]&gt;                  0
+ 6 001_071923_posttreatment2.csv  &lt;tibble [0 × 0]&gt;                  0
+ 7 001_072823_posttreatment3.csv  &lt;tibble [0 × 0]&gt;                  0
+ 8 001_080323_posttreatment8.csv  &lt;tibble [0 × 0]&gt;                  0
+ 9 001_6_15_23_posttreatment1.csv &lt;tibble [96 × 5]&gt;                96
+10 001_6_22_23_PostTreatment2.csv &lt;tibble [0 × 0]&gt;                  0</code></pre>
+</div>
+</div>
+</section>
+<section id="troubleshooting-1c" class="slide level2">
+<h2>Troubleshooting (1c)</h2>
+<ul>
+<li>All the ones with 0 have a problem</li>
+<li>Let’s have a look at on of them.</li>
+</ul>
+</section>
+<section id="troubleshooting-1b-1" class="slide level2">
+<h2>Troubleshooting (1b)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">slice</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">pull</span>(path_to_sheet) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">shell.exec</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="https://uwmadison.box.com/s/7tfrmpuhn5rex3sdes0j9uc73zpr9wiv" title="Example problem file">Open an example problem filel</a></p>
+<ul>
+<li>extra lines of white space</li>
+<li>need to update the read function to deal with this</li>
+<li>after a lot of trial and error, I found the fread function from the data.table package could deal with this</li>
+</ul>
+</section>
+<section id="troubleshooting-1d" class="slide level2">
+<h2>Troubleshooting (1d)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>read_data_v2 <span class="ot">=</span> <span class="cf">function</span>(filepath) { </span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="do">## hint v2 is suggesting there are going to be more :-)</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">fread</span>(filepath </span>
+<span id="cb22-4"><a href="#cb22-4"></a>        , <span class="at">header =</span> <span class="cn">TRUE</span> </span>
+<span id="cb22-5"><a href="#cb22-5"></a>        , <span class="at">skip =</span> <span class="st">"transect"</span>  <span class="do">## only start reading file after transect</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>        , <span class="at">select =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>  <span class="do">## selected columns</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>        , <span class="at">blank.lines.skip =</span> <span class="cn">TRUE</span> <span class="do">## skip and empty lines</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-9"><a href="#cb22-9"></a>    <span class="fu">as_tibble</span>() </span>
+<span id="cb22-10"><a href="#cb22-10"></a>}</span>
+<span id="cb22-11"><a href="#cb22-11"></a></span>
+<span id="cb22-12"><a href="#cb22-12"></a>read_data_possibly_v2 <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(<span class="at">.f =</span> read_data_v2, <span class="at">otherwise =</span> <span class="fu">tibble</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="troubleshooting-1e" class="slide level2">
+<h2>Troubleshooting (1e)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(<span class="at">.x =</span> path_to_sheet, <span class="at">.f =</span> read_data_possibly_v2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 4
+   datasheet                      path_to_sheet       data     nr_rows_in_tibble
+   &lt;chr&gt;                          &lt;chr&gt;               &lt;list&gt;               &lt;dbl&gt;
+ 1 001 07_07_2023.csv             C://Users//dajanse… &lt;tibble&gt;                96
+ 2 001 6_15_23.csv                C://Users//dajanse… &lt;tibble&gt;                96
+ 3 001_060523_pretreatment.csv    C://Users//dajanse… &lt;tibble&gt;                96
+ 4 001_062623_posttreatment3.csv  C://Users//dajanse… &lt;tibble&gt;                96
+ 5 001_071423_posttreatment1.csv  C://Users//dajanse… &lt;tibble&gt;                96
+ 6 001_071923_posttreatment2.csv  C://Users//dajanse… &lt;tibble&gt;                96
+ 7 001_072823_posttreatment3.csv  C://Users//dajanse… &lt;tibble&gt;                96
+ 8 001_080323_posttreatment8.csv  C://Users//dajanse… &lt;tibble&gt;                96
+ 9 001_6_15_23_posttreatment1.csv C://Users//dajanse… &lt;tibble&gt;                96
+10 001_6_22_23_PostTreatment2.csv C://Users//dajanse… &lt;tibble&gt;                 0</code></pre>
+</div>
+</div>
+<ul>
+<li>better but there is still an problem</li>
+</ul>
+</section>
+<section id="troubleshooting-2a" class="slide level2">
+<h2>Troubleshooting (2a)</h2>
+<ul>
+<li>all files should be csv</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(<span class="at">.x =</span> path_to_sheet, <span class="at">.f =</span> read_data_possibly_v2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="fu">filter</span>(nr_rows_in_tibble <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">select</span>(path_to_sheet) <span class="sc">%&gt;%</span>  <span class="fu">pull</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb25-8"><a href="#cb25-8"></a>  <span class="fu">read_lines</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "&lt;?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?&gt;"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+[2] "&lt;Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"&gt;&lt;Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/&gt;&lt;Default Extension=\"xml\" ContentType=\"application/xml\"/&gt;&lt;Override PartName=\"/xl/workbook.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml\"/&gt;&lt;Override PartName=\"/docProps/core.xml\" ContentType=\"application/vnd.openxmlformats-package.core-properties+xml\"/&gt;&lt;Override PartName=\"/docProps/app.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.extended-properties+xml\"/&gt;&lt;Override PartName=\"/xl/worksheets/sheet1.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml\"/&gt;&lt;Override PartName=\"/xl/theme/theme1.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.theme+xml\"/&gt;&lt;Override PartName=\"/xl/styles.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml\"/&gt;&lt;Override PartName=\"/xl/sharedStrings.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml\"/&gt;&lt;/Types&gt;"</code></pre>
+</div>
+</div>
+<ul>
+<li>but this looks like an excel file?</li>
+</ul>
+</section>
+<section id="troubleshooting-2a-1" class="slide level2">
+<h2>Troubleshooting (2a)</h2>
+
+<img data-src="figures/frustrated_coder.jpg" class="r-stretch quarto-figure-center"></section>
+<section id="troubleshooting-2b" class="slide level2">
+<h2>Troubleshooting (2b)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">shell.exec</span>(<span class="fu">paste0</span>(sheet_folder, <span class="st">"001_6_22_23_PostTreatment2.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="https://uwmadison.box.com/s/cje1y0nietw7hqz7ntibj4dn70x0s75f" title="Example excel sheet">Open 001_6_22_23_PostTreatment2.csv in excel</a></p>
+</section>
+<section id="troubleshooting-2c" class="slide level2">
+<h2>Troubleshooting (2c)</h2>
+<ul>
+<li>Lets open it as an excel file</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">read_excel</span>(<span class="fu">paste0</span>(sheet_folder, <span class="st">"001_6_22_23_PostTreatment2.csv"</span>), <span class="at">skip =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 7
+   transect section tick_species tick_stage tick_count ...6  ...7 
+   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;      &lt;lgl&gt; &lt;lgl&gt;
+ 1 wood     a       Ix           A          NA         NA    NA   
+ 2 wood     a       Ix           N          NA         NA    NA   
+ 3 wood     a       Ix           L          NA         NA    NA   
+ 4 wood     b       Ix           A          NA         NA    NA   
+ 5 wood     b       Ix           N          NA         NA    NA   
+ 6 wood     b       Ix           L          NA         NA    NA   
+ 7 wood     c       Ix           A          0          NA    NA   
+ 8 wood     c       Ix           N          0          NA    NA   
+ 9 wood     c       Ix           L          0          NA    NA   
+10 wood     d       Ix           A          0          NA    NA   
+# ℹ 86 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li class="fragment">fun!! we have Excel files with a csv extension</li>
+<li class="fragment">I’ll also share now that there are real Excel files with an xlsx extension</li>
+</ul>
+</section>
+<section id="troubleshooting-2d" class="slide level2">
+<h2>Troubleshooting (2d)</h2>
+<div>
+<ul>
+<li>To solve it we first need to know which files are:</li>
+</ul>
+<ol type="1">
+<li>real csv</li>
+<li>real excel files</li>
+<li>excel files with csv extension</li>
+</ol>
+</div>
+<ul>
+<li class="fragment">We can use the purrr possible from earlier.</li>
+</ul>
+</section>
+<section id="troubleshooting-2e" class="slide level2">
+<h2>Troubleshooting (2e)</h2>
+<ul>
+<li>With files are ‘fake’ csv files</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>excel_files_with_csv_extension <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(<span class="at">.x =</span> path_to_sheet, <span class="at">.f =</span> read_data_possibly_v2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="do">## filter all the ones with 0s as these are mistakes</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">filter</span>(nr_rows_in_tibble <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">select</span>(datasheet) <span class="sc">%&gt;%</span> <span class="do">## select only the datasheet names  </span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">pull</span>() <span class="do">## and pull these into a vector</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a></span>
+<span id="cb30-10"><a href="#cb30-10"></a>excel_files_with_csv_extension[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "001_6_22_23_PostTreatment2.csv"     "001_6_5_23_PreTreatment.csv"       
+ [3] "001_7_14_23_PostTreatment5.csv"     "001_7_7_23_PostTreatment4.csv"     
+ [5] "002_6_22_23_PostTreatment2.csv"     "002_6_5_23_PreTreatment.csv"       
+ [7] "002_7_14_23_2ndposttreatment1.xlsx" "002_7_14_23_PostTreatment5.csv"    
+ [9] "002_7_28_23_ControlWeek8.csv"       "002_7_7_23_PostTreatment4.csv"     </code></pre>
+</div>
+</div>
+<p>There are 362 csv files that actually are excel files.</p>
+</section>
+<section id="troubleshooting-2f" class="slide level2">
+<h2>Troubleshooting (2f)</h2>
+<ul>
+<li>Updates to the function to also load excel files</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>read_data_v3 <span class="ot">=</span> <span class="cf">function</span>(filetype, filepath) { </span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="cf">if</span>(filetype <span class="sc">==</span> <span class="st">"csv"</span>) { </span>
+<span id="cb32-3"><a href="#cb32-3"></a>    data.table<span class="sc">::</span><span class="fu">fread</span>(filepath</span>
+<span id="cb32-4"><a href="#cb32-4"></a>                      , <span class="at">header =</span> <span class="cn">TRUE</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>                      , <span class="at">skip =</span> <span class="st">"transect"</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>                      , <span class="at">select =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>                      , <span class="at">blank.lines.skip =</span> <span class="cn">TRUE</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>                      ) </span>
+<span id="cb32-9"><a href="#cb32-9"></a>    } <span class="cf">else</span> { </span>
+<span id="cb32-10"><a href="#cb32-10"></a>      <span class="fu">read_excel</span>(filepath, <span class="at">skip =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-11"><a href="#cb32-11"></a>        <span class="fu">select</span>(transect, section, tick_species, tick_stage, tick_count)</span>
+<span id="cb32-12"><a href="#cb32-12"></a>    } <span class="do">## end of else </span></span>
+<span id="cb32-13"><a href="#cb32-13"></a>  } <span class="do">## end of function</span></span>
+<span id="cb32-14"><a href="#cb32-14"></a></span>
+<span id="cb32-15"><a href="#cb32-15"></a>read_data_possibly_v3 <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(<span class="at">.f =</span> read_data_v3, <span class="at">otherwise =</span> <span class="fu">tibble</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="troubleshooting-2d-1" class="slide level2">
+<h2>Troubleshooting (2d)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">mutate</span>(<span class="at">filetype =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(datasheet, <span class="st">"csv"</span>), <span class="st">"csv"</span>, <span class="st">"xlsx"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="do">## if a file is part of the 'fake' list change the extension</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">mutate</span>(<span class="at">real_filetype =</span> <span class="fu">if_else</span>(<span class="at">condition =</span>datasheet <span class="sc">%in%</span> excel_files_with_csv_extension</span>
+<span id="cb33-7"><a href="#cb33-7"></a>                                 , <span class="at">true  =</span> <span class="st">'xlsx'</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a>                                 , <span class="at">false =</span> filetype)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-9"><a href="#cb33-9"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map2</span>(<span class="at">.x =</span> real_filetype,  <span class="do">## map2 needs two inputs</span></span>
+<span id="cb33-10"><a href="#cb33-10"></a>                     <span class="at">.y =</span> path_to_sheet, </span>
+<span id="cb33-11"><a href="#cb33-11"></a>                     <span class="at">.f =</span> read_data_possibly_v3)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-12"><a href="#cb33-12"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-13"><a href="#cb33-13"></a>  <span class="fu">select</span>(<span class="sc">-</span> path_to_sheet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 5
+   datasheet                   filetype real_filetype data     nr_rows_in_tibble
+   &lt;chr&gt;                       &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;               &lt;dbl&gt;
+ 1 001 07_07_2023.csv          csv      csv           &lt;dt&gt;                    96
+ 2 001 6_15_23.csv             csv      csv           &lt;dt&gt;                    96
+ 3 001_060523_pretreatment.csv csv      csv           &lt;dt&gt;                    96
+ 4 001_062623_posttreatment3.… csv      csv           &lt;dt&gt;                    96
+ 5 001_071423_posttreatment1.… csv      csv           &lt;dt&gt;                    96
+ 6 001_071923_posttreatment2.… csv      csv           &lt;dt&gt;                    96
+ 7 001_072823_posttreatment3.… csv      csv           &lt;dt&gt;                    96
+ 8 001_080323_posttreatment8.… csv      csv           &lt;dt&gt;                    96
+ 9 001_6_15_23_posttreatment1… csv      csv           &lt;dt&gt;                    96
+10 001_6_22_23_PostTreatment2… csv      xlsx          &lt;tibble&gt;                96</code></pre>
+</div>
+</div>
+</section>
+<section id="troubleshooting-2e-1" class="slide level2">
+<h2>Troubleshooting (2e)</h2>
+<ul>
+<li>Looks like we are getting somewhere</li>
+<li>Next step is to combine all the sheets</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>combined_sheets <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">mutate</span>(<span class="at">filetype =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(datasheet, <span class="st">"csv"</span>), <span class="st">"csv"</span>, <span class="st">"xlsx"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="fu">mutate</span>(<span class="at">real_filetype =</span> <span class="fu">if_else</span>(datasheet <span class="sc">%in%</span> excel_files_with_csv_extension, </span>
+<span id="cb35-5"><a href="#cb35-5"></a>                                 <span class="st">'xlsx'</span>, filetype)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-6"><a href="#cb35-6"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map2</span>(<span class="at">.x =</span> real_filetype, <span class="at">.y =</span> path_to_sheet, </span>
+<span id="cb35-7"><a href="#cb35-7"></a>                     <span class="at">.f =</span> read_data_possibly_v3)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-8"><a href="#cb35-8"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- ## Troubleshooting (2f) -->
+<!-- - On every sheets with should have 4 zones with 4 sections and data on 2 tick species with 3 life stages; -->
+<!-- `4 * 4 * 2 * 3 = 96` -->
+<!-- ```{r} -->
+<!-- combined_sheets %>% filter(nr_rows_in_tibble != 96)  -->
+<!-- ``` -->
+<!-- Ok there will be 2 files that will need checking -->
+<!-- ```{r} -->
+<!-- combined_sheets %>%  -->
+<!--   filter(nr_rows_in_tibble == 95) %>%  -->
+<!--   unnest(cols = c(data)) %>%   -->
+<!--   group_by(transect) %>%  -->
+<!--   summarise(n())  -->
+<!-- ``` -->
+<!-- - More manually checks (go back to data sheets) -->
+</section>
+<section id="are-we-there" class="slide level2">
+<h2>Are we there?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>combined_sheets <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `list_unchop()`:
+! Can't combine `x[[1]]$tick_count` &lt;integer&gt; and `x[[3]]$tick_count` &lt;character&gt;.</code></pre>
+</div>
+</div>
+<ul>
+<li>Unfortunately we have another sigh moment.</li>
+<li>Reason is that we have two data types in one column.</li>
+</ul>
+</section>
+<section id="quick-reminder" class="slide level2">
+<h2>Quick reminder</h2>
+<ul>
+<li><p>The full content of columns in R need to be in same data type and units</p>
+<ul>
+<li><p>character (e.g, “a”, “swc”)</p></li>
+<li><p>numeric (real or decimal) (e.g, 2, 2.0)</p></li>
+<li><p>logical (FALSE, TRUE)</p></li>
+<li><p>integer (e.g, 2L, as.integer(3))</p></li>
+<li><p>complex (e.g, 1 + 0i, 1 + 4i) &lt;- These can be annoying</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="troubleshooting-3a" class="slide level2">
+<h2>Troubleshooting (3a)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>combined_sheets_temp <span class="ot">&lt;-</span> combined_sheets <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">mutate</span>(<span class="at">temp_data =</span> <span class="fu">map</span>(<span class="at">.x =</span> data, </span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="do">## turn all the columns to character                         </span></span>
+<span id="cb38-4"><a href="#cb38-4"></a>                         <span class="at">.f =</span> mutate_all, as.character)) </span>
+<span id="cb38-5"><a href="#cb38-5"></a></span>
+<span id="cb38-6"><a href="#cb38-6"></a>combined_sheets_temp <span class="sc">%&gt;%</span> </span>
+<span id="cb38-7"><a href="#cb38-7"></a>  <span class="fu">select</span>(datasheet, temp_data) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-8"><a href="#cb38-8"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(temp_data)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-9"><a href="#cb38-9"></a>  <span class="do">## turn the tick count column back to numeric</span></span>
+<span id="cb38-10"><a href="#cb38-10"></a>  <span class="do">## if this doesn't work the cell will turn into NA</span></span>
+<span id="cb38-11"><a href="#cb38-11"></a>  <span class="fu">mutate</span>(<span class="at">temp_count =</span> <span class="fu">as.numeric</span>(tick_count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-12"><a href="#cb38-12"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(tick_count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-13"><a href="#cb38-13"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(temp_count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7,105 × 7
+   datasheet      transect section tick_species tick_stage tick_count temp_count
+   &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+ 1 001_060523_pr… wood     b       Ix           A          N/A                NA
+ 2 001_060523_pr… wood     b       Ix           N          N/A                NA
+ 3 001_060523_pr… wood     b       Ix           L          N/A                NA
+ 4 001_060523_pr… wood     c       Ix           A          N/A                NA
+ 5 001_060523_pr… wood     c       Ix           N          N/A                NA
+ 6 001_060523_pr… wood     c       Ix           L          N/A                NA
+ 7 001_060523_pr… wood     d       Ix           A          N/A                NA
+ 8 001_060523_pr… wood     d       Ix           N          N/A                NA
+ 9 001_060523_pr… wood     d       Ix           L          N/A                NA
+10 001_060523_pr… wood-ec… b       Ix           A          N/A                NA
+# ℹ 7,095 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="troubleshooting-3a-1" class="slide level2">
+<h2>Troubleshooting (3a)</h2>
+<p>What are the non-numeric values?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="do">## ok there are cells that have different values then NA or a number</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>combined_sheets_temp <span class="sc">%&gt;%</span> </span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">select</span>(datasheet, temp_data) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-4"><a href="#cb40-4"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(temp_data)) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-5"><a href="#cb40-5"></a>  <span class="fu">mutate</span>(<span class="at">temp_count =</span> <span class="fu">as.numeric</span>(tick_count)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(temp_count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">select</span>(tick_count) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] NA      "N/A"   "NA"    "Na"    "20+"   "nA"    "N.A"   "1(M)"  "1(F)" 
+[10] "1 (F)" "1pm"  </code></pre>
+</div>
+</div>
+</section>
+<section id="troubleshooting-3b" class="slide level2">
+<h2>Troubleshooting (3b)</h2>
+<ul>
+<li>Multiple NA values</li>
+<li>Tell R about these NA values</li>
+<li>We could use mutate, but better to adapt function.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>read_data_v4 <span class="ot">=</span> <span class="cf">function</span>(filetype, filepath) {</span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="cf">if</span>(filetype <span class="sc">==</span> <span class="st">"csv"</span>) {</span>
+<span id="cb42-3"><a href="#cb42-3"></a>    data.table<span class="sc">::</span><span class="fu">fread</span>(filepath , <span class="at">header =</span> <span class="cn">TRUE</span> , <span class="at">skip =</span> <span class="st">"transect"</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a>                      , <span class="at">select =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">blank.lines.skip =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb42-5"><a href="#cb42-5"></a>                      <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">"N/A"</span>, <span class="st">"NA"</span>, <span class="st">"Na"</span>, <span class="st">"nA"</span>, <span class="st">"N.A"</span>)) </span>
+<span id="cb42-6"><a href="#cb42-6"></a>    } <span class="cf">else</span> { </span>
+<span id="cb42-7"><a href="#cb42-7"></a>      <span class="fu">read_excel</span>(filepath , <span class="at">skip =</span> <span class="dv">4</span> , </span>
+<span id="cb42-8"><a href="#cb42-8"></a>                 <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"N/A"</span>, <span class="st">"NA"</span>, <span class="st">"Na"</span>, <span class="st">"nA"</span>, <span class="st">"N.A"</span>), </span>
+<span id="cb42-9"><a href="#cb42-9"></a>                 <span class="at">.name_repair =</span> <span class="st">"unique_quiet"</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-10"><a href="#cb42-10"></a>        <span class="fu">select</span>(transect, section, tick_species, tick_stage, tick_count) </span>
+<span id="cb42-11"><a href="#cb42-11"></a>    }</span>
+<span id="cb42-12"><a href="#cb42-12"></a>}</span>
+<span id="cb42-13"><a href="#cb42-13"></a>  </span>
+<span id="cb42-14"><a href="#cb42-14"></a>read_data_possibly_v4 <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(<span class="at">.f =</span> read_data_v4, </span>
+<span id="cb42-15"><a href="#cb42-15"></a>                                         <span class="at">otherwise =</span> <span class="fu">tibble</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="troubleshooting-3c" class="slide level2">
+<h2>Troubleshooting (3c)</h2>
+<p>Lets look at the other values?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>combined_sheets_temp <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">select</span>(datasheet, temp_data) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(temp_data)) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-4"><a href="#cb43-4"></a>  <span class="fu">filter</span>(tick_count <span class="sc">%in%</span> (<span class="fu">c</span>(<span class="st">"20+"</span>, <span class="st">"1(M)"</span>, <span class="st">"1(F)"</span>, <span class="st">"1 (F)"</span>, <span class="st">"1pm"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 6
+   datasheet                 transect section tick_species tick_stage tick_count
+   &lt;chr&gt;                     &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     
+ 1 009_072823_posttreatment… wood     b       Ix           L          20+       
+ 2 026 06_06_2023.csv        lawn-ec… d       De           A          1(M)      
+ 3 030 06_06_2023 Pre_Treat… wood     b       De           A          1(F)      
+ 4 031 06_06_2023 Pre_Treat… wood-ec… a       De           A          1(M)      
+ 5 048 6_12_23.csv           wood     a       Ix           A          1 (F)     
+ 6 048 6_6_23.csv            lawn-ec… a       Ix           A          1 (F)     
+ 7 049 6_6_23.csv            lawn-ec… c       Ix           A          1(M)      
+ 8 051_7_18_23.csv           wood     a       Ix           L          1pm       
+ 9 065 6_12_23.csv           wood     b       Ix           A          1 (F)     
+10 067 6_12_23.csv           wood     d       Ix           A          1 (F)     </code></pre>
+</div>
+</div>
+</section>
+<section id="troubleshooting-3c-tbd" class="slide level2">
+<h2>Troubleshooting (3c) tbd</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>temp_exclude <span class="ot">&lt;-</span> combined_sheets_temp <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">select</span>(datasheet, temp_data) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(temp_data)) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">filter</span>(tick_count <span class="sc">%in%</span> (<span class="fu">c</span>(<span class="st">"20+"</span>, <span class="st">"1(M)"</span>, <span class="st">"1(F)"</span>, <span class="st">"1 (F)"</span>, <span class="st">"1pm"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-5"><a href="#cb45-5"></a>  <span class="fu">select</span>(datasheet) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-6"><a href="#cb45-6"></a>  <span class="fu">pull</span>()</span>
+<span id="cb45-7"><a href="#cb45-7"></a></span>
+<span id="cb45-8"><a href="#cb45-8"></a>temp_exclude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "009_072823_posttreatment3.csv"    "026 06_06_2023.csv"              
+ [3] "030 06_06_2023 Pre_Treatment.csv" "031 06_06_2023 Pre_Treatment.csv"
+ [5] "048 6_12_23.csv"                  "048 6_6_23.csv"                  
+ [7] "049 6_6_23.csv"                   "051_7_18_23.csv"                 
+ [9] "065 6_12_23.csv"                  "067 6_12_23.csv"                 </code></pre>
+</div>
+</div>
+<p>Since there are just a few, it probably is easiest/best to fix by hand. To be save make a comment or keep a raw raw version.</p>
+</section>
+<section id="troubleshooting-3d" class="slide level2">
+<h2>Troubleshooting (3d)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>combined_sheets <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(datasheet <span class="sc">%in%</span> temp_exclude)) <span class="sc">%&gt;%</span> <span class="do">## temp excluding the problem sheets</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 103,872 × 10
+   datasheet  path_to_sheet filetype real_filetype transect section tick_species
+   &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;       
+ 1 001 07_07… C://Users//d… csv      csv           wood     a       Ix          
+ 2 001 07_07… C://Users//d… csv      csv           wood     a       Ix          
+ 3 001 07_07… C://Users//d… csv      csv           wood     a       Ix          
+ 4 001 07_07… C://Users//d… csv      csv           wood     b       Ix          
+ 5 001 07_07… C://Users//d… csv      csv           wood     b       Ix          
+ 6 001 07_07… C://Users//d… csv      csv           wood     b       Ix          
+ 7 001 07_07… C://Users//d… csv      csv           wood     c       Ix          
+ 8 001 07_07… C://Users//d… csv      csv           wood     c       Ix          
+ 9 001 07_07… C://Users//d… csv      csv           wood     c       Ix          
+10 001 07_07… C://Users//d… csv      csv           wood     d       Ix          
+# ℹ 103,862 more rows
+# ℹ 3 more variables: tick_stage &lt;chr&gt;, tick_count &lt;dbl&gt;,
+#   nr_rows_in_tibble &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>So after we fix the alternative numbers it should work.</p>
+</section>
+<section id="final-function" class="slide level2">
+<h2>Final function</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="do">## final function</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>read_data_coundata <span class="ot">=</span> <span class="cf">function</span>(filetype, filepath) {</span>
+<span id="cb49-3"><a href="#cb49-3"></a>  <span class="cf">if</span>(filetype <span class="sc">==</span> <span class="st">"csv"</span>) {</span>
+<span id="cb49-4"><a href="#cb49-4"></a>    data.table<span class="sc">::</span><span class="fu">fread</span>(filepath , <span class="at">header =</span> <span class="cn">TRUE</span> , <span class="at">skip =</span> <span class="st">"transect"</span></span>
+<span id="cb49-5"><a href="#cb49-5"></a>                      , <span class="at">select =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">blank.lines.skip =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb49-6"><a href="#cb49-6"></a>                      , <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">"N/A"</span>, <span class="st">"NA"</span>, <span class="st">"Na"</span>, <span class="st">"nA"</span>, <span class="st">"N.A"</span>))</span>
+<span id="cb49-7"><a href="#cb49-7"></a>    } <span class="cf">else</span> {</span>
+<span id="cb49-8"><a href="#cb49-8"></a>      <span class="fu">read_excel</span>(filepath, <span class="at">skip =</span> <span class="dv">4</span>,</span>
+<span id="cb49-9"><a href="#cb49-9"></a>                 <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"N/A"</span>, <span class="st">"NA"</span>, <span class="st">"Na"</span>, <span class="st">"nA"</span>, <span class="st">"N.A"</span>), </span>
+<span id="cb49-10"><a href="#cb49-10"></a>                 <span class="at">.name_repair =</span> <span class="st">"unique_quiet"</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-11"><a href="#cb49-11"></a>        <span class="fu">select</span>(transect, section, tick_species, tick_stage, tick_count)</span>
+<span id="cb49-12"><a href="#cb49-12"></a>    }</span>
+<span id="cb49-13"><a href="#cb49-13"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section>
+<section id="metadata-1" class="title-slide slide level1 center">
+<h1>Metadata</h1>
+
+</section>
+<section id="metadata-2" class="slide level2">
+<h2>Metadata</h2>
+<ul>
+<li>first two lines contain metadata regarding the houses</li>
+<li>besides the header row there is only 1 line of data</li>
+<li>as a reminder</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">read_csv</span>(<span class="fu">list.files</span>(<span class="at">path =</span> sheet_folder, <span class="at">full.names =</span> <span class="cn">TRUE</span>)[<span class="dv">2</span>], <span class="at">n_max =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  house date   start_time end_time mowed temp     VMC   cloud_cover w_person
+  &lt;dbl&gt; &lt;chr&gt;  &lt;time&gt;     &lt;time&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;   
+1     1 6/1523 09:05      09:24    No    58 (air) 21%   Cloudy      SA      
+# ℹ 3 more variables: we_person &lt;chr&gt;, `le-person` &lt;chr&gt;, l_person &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="metadata-3" class="slide level2">
+<h2>Metadata</h2>
+<ul>
+<li>so only one row of data and we have need all 12 column</li>
+<li>we know now that not all files are simply csv with a fixed structure</li>
+<li>lets see if we can adapt the last version of the read_data function</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>read_metadata_v1 <span class="ot">=</span> <span class="cf">function</span>(filetype, filepath) { <span class="do">## can we do it with 1 version? </span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>  <span class="cf">if</span>(filetype <span class="sc">==</span> <span class="st">"csv"</span>) {</span>
+<span id="cb52-3"><a href="#cb52-3"></a>    data.table<span class="sc">::</span><span class="fu">fread</span>(filepath,  <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">blank.lines.skip =</span> <span class="cn">TRUE</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a>                      , <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">"N/A"</span>, <span class="st">"NA"</span>, <span class="st">"Na"</span>, <span class="st">"nA"</span>, <span class="st">"N.A"</span>)</span>
+<span id="cb52-5"><a href="#cb52-5"></a>                      <span class="co">#, .name_repair = "unique_quiet",</span></span>
+<span id="cb52-6"><a href="#cb52-6"></a>                      , <span class="at">check.names =</span> <span class="cn">TRUE</span></span>
+<span id="cb52-7"><a href="#cb52-7"></a>                      , <span class="at">nrows =</span> <span class="dv">1</span>) <span class="do">## besides the header we only want 1 row</span></span>
+<span id="cb52-8"><a href="#cb52-8"></a>    } <span class="cf">else</span> { <span class="fu">read_excel</span>(filepath </span>
+<span id="cb52-9"><a href="#cb52-9"></a>                        , <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"N/A"</span>, <span class="st">"NA"</span>, <span class="st">"Na"</span>, <span class="st">"nA"</span>, <span class="st">"N.A"</span>) </span>
+<span id="cb52-10"><a href="#cb52-10"></a>                        , <span class="at">n_max =</span> <span class="dv">1</span> )</span>
+<span id="cb52-11"><a href="#cb52-11"></a>    }</span>
+<span id="cb52-12"><a href="#cb52-12"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="metadata-4" class="slide level2">
+<h2>Metadata</h2>
+<ul>
+<li>first with a few</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>temp_metadata <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-3"><a href="#cb53-3"></a>  <span class="fu">mutate</span>(<span class="at">filetype =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(datasheet, <span class="st">"csv"</span>), <span class="st">"csv"</span>, <span class="st">"xlsx"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-4"><a href="#cb53-4"></a>  <span class="fu">mutate</span>(<span class="at">real_filetype =</span> <span class="fu">if_else</span>(datasheet <span class="sc">%in%</span> excel_files_with_csv_extension, </span>
+<span id="cb53-5"><a href="#cb53-5"></a>                                 <span class="st">'xlsx'</span>, filetype)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-6"><a href="#cb53-6"></a>  <span class="fu">mutate</span>(<span class="at">metadata =</span> <span class="fu">map2</span>(<span class="at">.x =</span> real_filetype, <span class="at">.y =</span> path_to_sheet, </span>
+<span id="cb53-7"><a href="#cb53-7"></a>                         <span class="at">.f =</span> read_metadata_v1))  </span>
+<span id="cb53-8"><a href="#cb53-8"></a>  </span>
+<span id="cb53-9"><a href="#cb53-9"></a>temp_metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb53-10"><a href="#cb53-10"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-11"><a href="#cb53-11"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(metadata))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `list_unchop()`:
+! Can't combine `x[[1]]$temp` &lt;integer&gt; and `x[[2]]$temp` &lt;character&gt;.</code></pre>
+</div>
+</div>
+<p>Again a conflict between datatypes in a column</p>
+</section>
+<section id="troubleshooting-3b-1" class="slide level2">
+<h2>Troubleshooting (3b)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>temp_metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-3"><a href="#cb55-3"></a>  <span class="fu">mutate</span>(<span class="at">temp_metadata =</span> <span class="fu">map</span>(<span class="at">.x =</span> metadata, <span class="at">.f =</span> mutate_all, as.character)) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-4"><a href="#cb55-4"></a>  <span class="fu">select</span>(datasheet, temp_metadata) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-5"><a href="#cb55-5"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(temp_metadata))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="troubleshooting-3b-2" class="slide level2">
+<h2>Troubleshooting (3b)</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="tabwid"><style>.cl-f7d11dd8{}.cl-f7c048c8{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-f7cbcff4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f7cbe61a{width:0.75in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f7cbe61b{width:0.75in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f7cbe624{width:0.75in;background-color:rgba(255, 0, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f7cbe62e{width:0.75in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-f7d11dd8"><thead><tr style="overflow-wrap:break-word;"><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">house</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">date</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">start_time</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">end_time</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">mowed</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">temp</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">VMC</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">cloud_cover</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">w_person</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">we_person</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">le.person</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">l_person</span></p></th><th class="cl-f7cbe61a"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">le-person</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">7/7/2023</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">10:19</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">10:24</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">No</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">80</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">29%</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">Sunny</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">6/1523</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">9:05</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">9:24</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">No</span></p></td><td class="cl-f7cbe624"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">58 (air)</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">21%</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">Cloudy</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">SA</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">XL</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">6/5/23</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">9:10</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">9:40</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">N</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">50</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">11</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">cloudy</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">ML</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">AP</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">ZS</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">6/26/23</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">9:47</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">10:00</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">N</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">71</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">44</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">cloudy</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">TZ</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">ML</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">7/14/23</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1:15</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1:20</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">N</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">88</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">25</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">sunny</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">ZS</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">ZS</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">TZ</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">TZ</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">7/19/23</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">2:20</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">2:30</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">88</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">36</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">ZS</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">EO</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">7/28/23</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">3:00</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">3:05</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">N</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">88</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">18</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">sunny</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">TZ</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">TZ</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">TZ</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">DC</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">8/3/23</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">12:15</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">12:23</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">N</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">73</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">25</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">sunny</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">ZS</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">ZS</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">6/15/23</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">9:05</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">9:24</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">N</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">58</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">21</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">Cloudy</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">SA</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">XL</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">CM</span></p></td><td class="cl-f7cbe61b"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">2023-06-22</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1899-12-31 11:20:00</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">1899-12-31 11:30:00</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">N</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">89</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">30</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">Sunny</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">TZ</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">AD</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8"></span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">EO</span></p></td><td class="cl-f7cbe62e"><p class="cl-f7cbcff4"><span class="cl-f7c048c8">EO</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<ul>
+<li>it only complained about temp, but I also see issues in other variables</li>
+<li>Any suggestions on what they are ?</li>
+</ul>
+</section>
+<section id="troubleshooting-3c-1" class="slide level2">
+<h2>Troubleshooting (3c)</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="tabwid"><style>.cl-f7f2d2f2{}.cl-f7eafbea{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-f7edc32a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f7edd23e{width:0.75in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f7edd248{width:0.75in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f7edd249{width:0.75in;background-color:rgba(255, 0, 0, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f7edd252{width:0.75in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f7edd253{width:0.75in;background-color:rgba(255, 0, 0, 1.00);vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-f7f2d2f2"><thead><tr style="overflow-wrap:break-word;"><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">house</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">date</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">start_time</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">end_time</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">mowed</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">temp</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">VMC</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">cloud_cover</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">w_person</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">we_person</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">le.person</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">l_person</span></p></th><th class="cl-f7edd23e"><p class="cl-f7edc32a"><span class="cl-f7eafbea">le-person</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">7/7/2023</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">10:19</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">10:24</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">No</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">80</span></p></td><td class="cl-f7edd249"><p class="cl-f7edc32a"><span class="cl-f7eafbea">29%</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">Sunny</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd249"><p class="cl-f7edc32a"><span class="cl-f7eafbea">6/1523</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">9:05</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">9:24</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">No</span></p></td><td class="cl-f7edd249"><p class="cl-f7edc32a"><span class="cl-f7eafbea">58 (air)</span></p></td><td class="cl-f7edd249"><p class="cl-f7edc32a"><span class="cl-f7eafbea">21%</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">Cloudy</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">SA</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">XL</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">6/5/23</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">9:10</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">9:40</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">N</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">50</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">11</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">cloudy</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">ML</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">AP</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">ZS</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">6/26/23</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">9:47</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">10:00</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">N</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">71</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">44</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">cloudy</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">TZ</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">ML</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">7/14/23</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1:15</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1:20</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">N</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">88</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">25</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">sunny</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">ZS</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">ZS</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">TZ</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">TZ</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">7/19/23</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">2:20</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">2:30</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">88</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">36</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">ZS</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">EO</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">7/28/23</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">3:00</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">3:05</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">N</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">88</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">18</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">sunny</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">TZ</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">TZ</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">TZ</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">DC</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">8/3/23</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">12:15</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">12:23</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">N</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">73</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">25</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">sunny</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">ZS</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">ZS</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">6/15/23</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">9:05</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">9:24</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">N</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">58</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">21</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">Cloudy</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">SA</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">XL</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea">CM</span></p></td><td class="cl-f7edd248"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1</span></p></td><td class="cl-f7edd253"><p class="cl-f7edc32a"><span class="cl-f7eafbea">2023-06-22</span></p></td><td class="cl-f7edd253"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1899-12-31 11:20:00</span></p></td><td class="cl-f7edd253"><p class="cl-f7edc32a"><span class="cl-f7eafbea">1899-12-31 11:30:00</span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">N</span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">89</span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">30</span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">Sunny</span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">TZ</span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">AD</span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea"></span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">EO</span></p></td><td class="cl-f7edd252"><p class="cl-f7edc32a"><span class="cl-f7eafbea">EO</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+</section>
+<section id="troubleshooting-3d-1" class="slide level2">
+<h2>Troubleshooting (3d)</h2>
+<ul>
+<li>lets go ahead and run open all the data
+<ul>
+<li>data is still all character</li>
+<li>do we have big issues?</li>
+<li>or just a few that we can fix manually</li>
+</ul></li>
+</ul>
+<p>First it seem to have 2 extra columns lets check those first</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>check_metadata <span class="sc">%&gt;%</span>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 20
+  datasheet path_to_sheet filetype real_filetype metadata house date  start_time
+  &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     
+1 001 07_0… C://Users//d… csv      csv           &lt;dt&gt;     1     7/7/… 10:19     
+2 001 6_15… C://Users//d… csv      csv           &lt;dt&gt;     1     6/15… 9:05      
+3 001_0605… C://Users//d… csv      csv           &lt;dt&gt;     1     6/5/… 9:10      
+4 001_0626… C://Users//d… csv      csv           &lt;dt&gt;     1     6/26… 9:47      
+5 001_0714… C://Users//d… csv      csv           &lt;dt&gt;     1     7/14… 1:15      
+# ℹ 12 more variables: end_time &lt;chr&gt;, mowed &lt;chr&gt;, temp &lt;chr&gt;, VMC &lt;chr&gt;,
+#   cloud_cover &lt;chr&gt;, w_person &lt;chr&gt;, we_person &lt;chr&gt;, le.person &lt;chr&gt;,
+#   l_person &lt;chr&gt;, `le-person` &lt;chr&gt;, Temp &lt;chr&gt;, ...1 &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="troubleshooting-3e" class="slide level2">
+<h2>Troubleshooting (3e)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>check_metadata <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Temp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2"><a href="#cb58-2"></a>  <span class="fu">select</span>(datasheet, house, temp, Temp) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  datasheet                      house temp  Temp 
+  &lt;chr&gt;                          &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 018_6_16_23_posttreatment1.csv 18    &lt;NA&gt;  81   </code></pre>
+</div>
+</div>
+<p>Ok, so Temp is temp, lets fix it</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>step1 <span class="ot">&lt;-</span> check_metadata <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">temp =</span> <span class="fu">if_else</span>(<span class="at">condition =</span> <span class="fu">is.na</span>(temp)</span>
+<span id="cb60-2"><a href="#cb60-2"></a>                                                  , <span class="at">true =</span> Temp</span>
+<span id="cb60-3"><a href="#cb60-3"></a>                                                  , <span class="at">false =</span> temp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-4"><a href="#cb60-4"></a>  <span class="fu">select</span>(<span class="sc">-</span>Temp) <span class="do">## remove the extra column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="troubleshooting-3f" class="slide level2">
+<h2>Troubleshooting (3f)</h2>
+<p>Now the checking …1 and fixing it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>step1 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(...<span class="dv">1</span>))   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 19
+  datasheet path_to_sheet filetype real_filetype metadata house date  start_time
+  &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     
+1 022_6_22… C://Users//d… xlsx     xlsx          &lt;tibble&gt; &lt;NA&gt;  6_22… 1899-12-3…
+2 024_6_23… C://Users//d… xlsx     xlsx          &lt;tibble&gt; &lt;NA&gt;  6_23… 1899-12-3…
+3 026_6_22… C://Users//d… xlsx     xlsx          &lt;tibble&gt; &lt;NA&gt;  6_22… 1899-12-3…
+4 027_6_22… C://Users//d… xlsx     xlsx          &lt;tibble&gt; &lt;NA&gt;  6_22… 1899-12-3…
+# ℹ 11 more variables: end_time &lt;chr&gt;, mowed &lt;chr&gt;, temp &lt;chr&gt;, VMC &lt;chr&gt;,
+#   cloud_cover &lt;chr&gt;, w_person &lt;chr&gt;, we_person &lt;chr&gt;, le.person &lt;chr&gt;,
+#   l_person &lt;chr&gt;, `le-person` &lt;chr&gt;, ...1 &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>step1 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(...<span class="dv">1</span>))  <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">select</span>(datasheet, house, ...<span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  datasheet                       house ...1 
+  &lt;chr&gt;                           &lt;chr&gt; &lt;chr&gt;
+1 022_6_22_23_posttreatment2.xlsx &lt;NA&gt;  22   
+2 024_6_23_23_posttreatment2.xlsx &lt;NA&gt;  24   
+3 026_6_22_23_posttreatment2.xlsx &lt;NA&gt;  26   
+4 027_6_22_23_posttreatment2.xlsx &lt;NA&gt;  27   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>step2 <span class="ot">&lt;-</span> step1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">house =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(house), ...<span class="dv">1</span>, house)) <span class="sc">%&gt;%</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>  <span class="fu">select</span>(<span class="sc">-</span>...<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="troubleshooting-3g" class="slide level2">
+<h2>Troubleshooting (3g)</h2>
+<ul>
+<li>Next we check why not all temp is numeric</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>step2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">temp_numeric =</span> <span class="fu">as.numeric</span>(temp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `mutate()`:
+ℹ In argument: `temp_numeric = as.numeric(temp)`.
+Caused by error:
+! invalid multibyte string at '&lt;a1&gt; F'</code></pre>
+</div>
+</div>
+<ul>
+<li>I had no idea what that means</li>
+<li>has something to do with a non standard character (thanks Google)</li>
+<li>you can find them by looking at character length</li>
+</ul>
+</section>
+<section id="troubleshooting-3g-1" class="slide level2">
+<h2>Troubleshooting (3g)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>as.numeric_possible <span class="ot">&lt;-</span> <span class="fu">possibly</span>(<span class="at">.f =</span> as.numeric, <span class="at">otherwise =</span> <span class="dv">999</span>)</span>
+<span id="cb68-2"><a href="#cb68-2"></a></span>
+<span id="cb68-3"><a href="#cb68-3"></a>step2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">temporal_temp =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> temp, <span class="at">.f =</span> as.numeric_possible)) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-4"><a href="#cb68-4"></a>  <span class="fu">select</span>(datasheet, house, temp, temporal_temp) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-5"><a href="#cb68-5"></a>  <span class="fu">filter</span>(temporal_temp <span class="sc">==</span> <span class="dv">999</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 45 × 4
+   datasheet                         house temp  temporal_temp
+   &lt;chr&gt;                             &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt;
+ 1 029_06.27.2023_PostTreatment3.csv 29    83� F           999
+ 2 033_06.27.2023_PostTreatment3.csv 33    82� F           999
+ 3 034_06.22.2023_PostTreatment2.csv 34    84� F           999
+ 4 035_06.22.2023_PostTreatment2.csv 35    81� F           999
+ 5 036_06.22.2023_PostTreatment2.csv 36    83� F           999
+ 6 037_06.22.2023_PostTreatment2.csv 37    81� F           999
+ 7 038_06.22.2023_PostTreatment2.csv 38    81� F           999
+ 8 039_06.22.2023_PostTreatment2.csv 39    88� F           999
+ 9 040_06.21.2023_PostTreatment2.csv 40    75� F           999
+10 041_06.21.2023_PostTreatment2.csv 41    77� F           999
+# ℹ 35 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>The question mark is a subscript i.</li>
+<li>This is a tricky one to solve unless you go into all those datasheets and fix it,</li>
+</ul>
+</section>
+<section id="troubleshooting-3h" class="slide level2">
+<h2>Troubleshooting (3h)</h2>
+<ul>
+<li>ut I noticed (using View) that none of the temperatures in the problem sheets were above 99.</li>
+<li>So we could just take the first 2 digits</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>step2 <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="#cb70-2"></a>  <span class="fu">mutate</span>(<span class="at">temporal_temp =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> temp, <span class="at">.f =</span> as.numeric_possible)) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-3"><a href="#cb70-3"></a>  <span class="fu">select</span>(datasheet, house, temp, temporal_temp) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-4"><a href="#cb70-4"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(temp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-5"><a href="#cb70-5"></a>  <span class="fu">filter</span>(temporal_temp <span class="sc">==</span> <span class="dv">999</span> <span class="sc">|</span> <span class="fu">is.na</span>(temporal_temp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-6"><a href="#cb70-6"></a>  <span class="fu">mutate</span>(<span class="at">temp_numeric =</span> <span class="fu">as.numeric</span>(<span class="fu">if_else</span>(<span class="at">condition =</span> temporal_temp <span class="sc">==</span> <span class="dv">999</span> <span class="sc">|</span> <span class="fu">is.na</span>(temporal_temp), </span>
+<span id="cb70-7"><a href="#cb70-7"></a>                                       <span class="at">true =</span> <span class="fu">str_sub</span>(<span class="at">string =</span> temp, <span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb70-8"><a href="#cb70-8"></a>                                       <span class="at">false =</span> temp))) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-9"><a href="#cb70-9"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 5
+   datasheet                         house temp      temporal_temp temp_numeric
+   &lt;chr&gt;                             &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;
+ 1 001 6_15_23.csv                   1     58 (air)             NA           58
+ 2 019 07_07_2023.csv                19    Sunny                NA           NA
+ 3 024_06.29.2023_PostTreatment3.csv 24    81° F                NA           81
+ 4 025_06.29.2023_PostTreatment3.csv 25    85° F                NA           85
+ 5 028_6_16_23_posttreatment1.csv    28    Pt Cloudy            NA           NA
+ 6 029_06.27.2023_PostTreatment3.csv 29    83� F               999           83
+ 7 033_06.27.2023_PostTreatment3.csv 33    82� F               999           82
+ 8 034 06_06_2023 Pre_Treatment .csv 34    81-86                NA           81
+ 9 034_06.22.2023_PostTreatment2.csv 34    84� F               999           84
+10 034_06.29.2023_PostTreatment3.csv 34    88° F                NA           88</code></pre>
+</div>
+</div>
+</section>
+<section id="next-vmc" class="slide level2">
+<h2>Next VMC</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>step3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">VMC_numeric =</span> <span class="fu">as.numeric</span>(VMC)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(VMC_numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 282 × 22
+   datasheet          path_to_sheet  filetype real_filetype metadata house date 
+   &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;   &lt;chr&gt; &lt;chr&gt;
+ 1 001 07_07_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     1     7/7/…
+ 2 001 6_15_23.csv    C://Users//da… csv      csv           &lt;dt&gt;     1     6/15…
+ 3 002 07_07_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     2     7/7/…
+ 4 002 6_15_23.csv    C://Users//da… csv      csv           &lt;dt&gt;     2     6/15…
+ 5 004 07_07_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     4     7/7/…
+ 6 006 07_06_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     6     7/6/…
+ 7 006 07_18_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     6     7/18…
+ 8 007 07_07_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     7     7/7/…
+ 9 008 07_06_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     8     7/6/…
+10 008 07_18_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     8     7/18…
+# ℹ 272 more rows
+# ℹ 15 more variables: start_time &lt;chr&gt;, end_time &lt;chr&gt;, mowed &lt;chr&gt;,
+#   temp &lt;chr&gt;, VMC &lt;chr&gt;, cloud_cover &lt;chr&gt;, w_person &lt;chr&gt;, we_person &lt;chr&gt;,
+#   le.person &lt;chr&gt;, l_person &lt;chr&gt;, `le-person` &lt;chr&gt;, temporal_temp &lt;dbl&gt;,
+#   temp_numeric &lt;dbl&gt;, temp_C &lt;dbl&gt;, VMC_numeric &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="do">## see if we remove % sign we fix the issue</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a></span>
+<span id="cb74-3"><a href="#cb74-3"></a>step3 <span class="sc">%&gt;%</span> </span>
+<span id="cb74-4"><a href="#cb74-4"></a>  <span class="fu">mutate</span>(<span class="at">VMC_numeric =</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove_all</span>(<span class="at">string =</span> VMC, <span class="at">pattern =</span> <span class="st">"%"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb74-5"><a href="#cb74-5"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(VMC) <span class="sc">&amp;</span> <span class="fu">is.na</span>(VMC_numeric)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(datasheet, <span class="fu">contains</span>(<span class="st">"VMC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  datasheet                   VMC                 VMC_numeric
+  &lt;chr&gt;                       &lt;chr&gt;                     &lt;dbl&gt;
+1 057 06_07_2023.csv          14:R 42:L                    NA
+2 057 6_7_23.csv              14 (R) 42 (L)                NA
+3 057_060723_pretreatment.csv 14% right, 42% left          NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="do">## almost </span></span>
+<span id="cb76-2"><a href="#cb76-2"></a><span class="do">## fix last few manually</span></span>
+<span id="cb76-3"><a href="#cb76-3"></a></span>
+<span id="cb76-4"><a href="#cb76-4"></a>step4 <span class="ot">&lt;-</span> step3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">VMC_numeric =</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove_all</span>(<span class="at">string =</span> VMC, <span class="at">pattern =</span> <span class="st">"%"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="finally-dates-and-times" class="slide level2">
+<h2>Finally dates and times</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>step4 <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href="#cb77-2"></a>  <span class="fu">select</span>(datasheet, date) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-3"><a href="#cb77-3"></a>  <span class="fu">mutate</span>(<span class="at">date_ymd =</span> <span class="fu">mdy</span>(date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-4"><a href="#cb77-4"></a>  <span class="fu">mutate</span>(<span class="at">date_ymd =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(date_ymd), <span class="fu">ymd</span>(date), date_ymd)) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-5"><a href="#cb77-5"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(date_ymd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  datasheet                         date        date_ymd
+  &lt;chr&gt;                             &lt;chr&gt;       &lt;date&gt;  
+1 001 6_15_23.csv                   6/1523      NA      
+2 037_06.15.2023_PostTreatment1.csv 06/15/20223 NA      
+3 055 6_7_23.csv                    7-Jun       NA      
+4 060 06_12_2023.csv                12-Jun      NA      </code></pre>
+</div>
+</div>
+<ul>
+<li>Few left that would be easiest fix mannually.</li>
+<li>Almost there. Just times left</li>
+</ul>
+</section>
+<section id="fixing-times-1" class="slide level2">
+<h2>Fixing Times (1)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>(step4a <span class="ot">&lt;-</span> step4 <span class="sc">%&gt;%</span> </span>
+<span id="cb79-2"><a href="#cb79-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(start_time) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.na</span>(end_time)) <span class="sc">%&gt;%</span> </span>
+<span id="cb79-3"><a href="#cb79-3"></a>  <span class="fu">select</span>(datasheet, start_time, end_time) <span class="sc">%&gt;%</span> </span>
+<span id="cb79-4"><a href="#cb79-4"></a>  <span class="fu">mutate</span>(<span class="at">start_time_hm =</span> <span class="fu">hm</span>(start_time), </span>
+<span id="cb79-5"><a href="#cb79-5"></a>         <span class="at">end_time_hm =</span> <span class="fu">hm</span>(end_time)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,080 × 5
+   datasheet                      start_time  end_time start_time_hm end_time_hm
+   &lt;chr&gt;                          &lt;chr&gt;       &lt;chr&gt;    &lt;Period&gt;      &lt;Period&gt;   
+ 1 001 07_07_2023.csv             10:19       10:24    10H 19M 0S    10H 24M 0S 
+ 2 001 6_15_23.csv                9:05        9:24     9H 5M 0S      9H 24M 0S  
+ 3 001_060523_pretreatment.csv    9:10        9:40     9H 10M 0S     9H 40M 0S  
+ 4 001_062623_posttreatment3.csv  9:47        10:00    9H 47M 0S     10H 0M 0S  
+ 5 001_071423_posttreatment1.csv  1:15        1:20     1H 15M 0S     1H 20M 0S  
+ 6 001_071923_posttreatment2.csv  2:20        2:30     2H 20M 0S     2H 30M 0S  
+ 7 001_072823_posttreatment3.csv  3:00        3:05     3H 0M 0S      3H 5M 0S   
+ 8 001_080323_posttreatment8.csv  12:15       12:23    12H 15M 0S    12H 23M 0S 
+ 9 001_6_15_23_posttreatment1.csv 9:05        9:24     9H 5M 0S      9H 24M 0S  
+10 001_6_22_23_PostTreatment2.csv 1899-12-31… 1899-12… NA            NA         
+# ℹ 1,070 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="fixing-times-2" class="slide level2">
+<h2>Fixing Times (2)</h2>
+<ul>
+<li>some issues left</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>step4 <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href="#cb81-2"></a>  <span class="fu">select</span>(datasheet, start_time, end_time) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-3"><a href="#cb81-3"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"time_group"</span>, <span class="at">values_to =</span> <span class="st">"time"</span>, <span class="at">cols =</span> <span class="fu">c</span>(start_time<span class="sc">:</span>end_time)) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-4"><a href="#cb81-4"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(time)) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-5"><a href="#cb81-5"></a>  <span class="fu">mutate</span>(<span class="at">time_hm =</span> <span class="fu">hm</span>(time)) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-6"><a href="#cb81-6"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(time_hm)) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-7"><a href="#cb81-7"></a>  <span class="fu">mutate</span>(<span class="at">time_hm =</span> <span class="fu">if_else</span>(<span class="sc">!</span><span class="fu">is.na</span>(time_hm), time_hm, <span class="fu">hms</span>(<span class="fu">str_remove</span>(time, <span class="st">"1899-12-31"</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-8"><a href="#cb81-8"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(time_hm)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  datasheet                       time_group time  time_hm 
+  &lt;chr&gt;                           &lt;chr&gt;      &lt;chr&gt; &lt;Period&gt;
+1 043_6_15_23_posttreatment1.xlsx start_time 11    NA      
+2 056_6_15_23_posttreatment1.xlsx end_time   1     NA      </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a>step4a <span class="sc">%&gt;%</span> </span>
+<span id="cb83-2"><a href="#cb83-2"></a>   <span class="fu">mutate</span>(<span class="at">start_time_hm =</span> <span class="fu">hms</span>(<span class="fu">str_remove</span>(start_time, <span class="st">"1899-12-31"</span>)), </span>
+<span id="cb83-3"><a href="#cb83-3"></a>          <span class="at">end_time_hm =</span> <span class="fu">hms</span>(<span class="fu">str_remove</span>(end_time, <span class="st">"1899-12-31"</span>))) </span>
+<span id="cb83-4"><a href="#cb83-4"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(start_time) <span class="sc">&amp;</span> <span class="fu">is.na</span>(start_time_hm))</span>
+<span id="cb83-5"><a href="#cb83-5"></a>        <span class="co">#!is.na(end_time) &amp; is.na(end_time_hm)))</span></span>
+<span id="cb83-6"><a href="#cb83-6"></a></span>
+<span id="cb83-7"><a href="#cb83-7"></a><span class="do">## fix these by hand</span></span>
+<span id="cb83-8"><a href="#cb83-8"></a></span>
+<span id="cb83-9"><a href="#cb83-9"></a><span class="co"># final_metadata &lt;- step5 %&gt;% mutate(start_time_hm = hm(start_time), end_time_hm = hm(end_time)) %&gt;% mutate(start = str_remove(start_time, "1899-12-31"), end = str_remove(end_time, "1899-12-31")) %&gt;% mutate(start_time_hm = if_else(is.na(start_time_hm), hms(start),start_time_hm), end_time_hm = if_else(is.na(end_time_hm), hms(end),end_time_hm))</span></span>
+<span id="cb83-10"><a href="#cb83-10"></a></span>
+<span id="cb83-11"><a href="#cb83-11"></a><span class="do">## need to fix some of the column names</span></span>
+<span id="cb83-12"><a href="#cb83-12"></a></span>
+<span id="cb83-13"><a href="#cb83-13"></a><span class="co">#full_count_dataset %&gt;% inner_join(final_metadata) \## this won't work, because the errors that are still in the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="use-cleaned-up-dataset" class="title-slide slide level1 center">
+<h1>Use cleaned up dataset</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a>updated_sheet_folder <span class="ot">=</span> <span class="st">"C://Users//dajansen3//Box//EC 2023 data by housecode//"</span> </span>
+<span id="cb84-2"><a href="#cb84-2"></a></span>
+<span id="cb84-3"><a href="#cb84-3"></a>all_datasheets_cleaned <span class="ot">&lt;-</span> <span class="fu">list.files</span>(updated_sheet_folder, <span class="at">all.files =</span> <span class="cn">TRUE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">"csv"</span>)</span>
+<span id="cb84-4"><a href="#cb84-4"></a></span>
+<span id="cb84-5"><a href="#cb84-5"></a>excel_files_with_csv_extension <span class="ot">&lt;-</span><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets_cleaned) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-6"><a href="#cb84-6"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(updated_sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-7"><a href="#cb84-7"></a>  <span class="fu">mutate</span>(<span class="at">filetype =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(datasheet, <span class="st">"csv"</span>), <span class="st">"csv"</span>, <span class="st">"xlsx"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb84-8"><a href="#cb84-8"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(<span class="at">.x =</span> path_to_sheet, <span class="at">.f =</span> read_data_possibly_v2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-9"><a href="#cb84-9"></a>  <span class="fu">mutate</span>(<span class="at">nr_rows_in_tibble =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-10"><a href="#cb84-10"></a>  <span class="fu">filter</span>(nr_rows_in_tibble <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-11"><a href="#cb84-11"></a>  <span class="fu">select</span>(datasheet) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-12"><a href="#cb84-12"></a>  <span class="fu">pull</span>()</span>
+<span id="cb84-13"><a href="#cb84-13"></a></span>
+<span id="cb84-14"><a href="#cb84-14"></a>combined_cleaned_sheets <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets_cleaned) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-15"><a href="#cb84-15"></a>  <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">175</span>, <span class="dv">190</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-16"><a href="#cb84-16"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(updated_sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-17"><a href="#cb84-17"></a>  <span class="fu">mutate</span>(<span class="at">filetype =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(datasheet, <span class="st">"csv"</span>), <span class="st">"csv"</span>, <span class="st">"xlsx"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb84-18"><a href="#cb84-18"></a>  <span class="fu">mutate</span>(<span class="at">real_filetype =</span> <span class="fu">if_else</span>(datasheet <span class="sc">%in%</span> excel_files_with_csv_extension, <span class="st">'xlsx'</span>, filetype)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-19"><a href="#cb84-19"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map2</span>(<span class="at">.x =</span> real_filetype, <span class="at">.y =</span> path_to_sheet, <span class="at">.f =</span> read_data_possibly_v4)) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-20"><a href="#cb84-20"></a>  <span class="fu">mutate</span>(<span class="at">nr_row_on_sheet =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow))</span>
+<span id="cb84-21"><a href="#cb84-21"></a></span>
+<span id="cb84-22"><a href="#cb84-22"></a>full_count_dataset <span class="ot">&lt;-</span> combined_cleaned_sheets <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(data))</span>
+<span id="cb84-23"><a href="#cb84-23"></a>full_count_dataset <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(tick_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 1
+  tick_count
+       &lt;dbl&gt;
+1         NA
+2          0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets_cleaned) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-2"><a href="#cb86-2"></a>  <span class="fu">mutate</span>(<span class="at">path_to_sheet =</span> <span class="fu">paste0</span>(updated_sheet_folder, datasheet)) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-3"><a href="#cb86-3"></a>  <span class="fu">mutate</span>(<span class="at">filetype =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(datasheet, <span class="st">"csv"</span>), <span class="st">"csv"</span>, <span class="st">"xlsx"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb86-4"><a href="#cb86-4"></a>  <span class="fu">mutate</span>(<span class="at">real_filetype =</span> <span class="fu">if_else</span>(datasheet <span class="sc">%in%</span> excel_files_with_csv_extension, <span class="st">'xlsx'</span>, filetype)) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-5"><a href="#cb86-5"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map2</span>(<span class="at">.x =</span> real_filetype, <span class="at">.y =</span> path_to_sheet, <span class="at">.f =</span> read_metadata_v1)) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-6"><a href="#cb86-6"></a>  <span class="fu">mutate</span>(<span class="at">nr_row_on_sheet =</span> <span class="fu">map_dbl</span>(<span class="at">.x =</span> data, <span class="at">.f =</span> nrow))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 555 × 6
+   datasheet       path_to_sheet filetype real_filetype data     nr_row_on_sheet
+   &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;             &lt;dbl&gt;
+ 1 001/001_2023_0… C://Users//d… csv      xlsx          &lt;tibble&gt;               1
+ 2 001/001_2023_0… C://Users//d… csv      csv           &lt;dt&gt;                   1
+ 3 001/001_2023_0… C://Users//d… csv      xlsx          &lt;tibble&gt;               1
+ 4 001/001_2023_0… C://Users//d… csv      csv           &lt;dt&gt;                   1
+ 5 001/001_2023_0… C://Users//d… csv      csv           &lt;dt&gt;                   1
+ 6 001/001_2023_0… C://Users//d… csv      xlsx          &lt;tibble&gt;               1
+ 7 001/001_2023_0… C://Users//d… csv      csv           &lt;dt&gt;                   1
+ 8 001/001_2023_0… C://Users//d… csv      csv           &lt;dt&gt;                   1
+ 9 001/001_2023_0… C://Users//d… csv      csv           &lt;dt&gt;                   1
+10 002/002_2023_0… C://Users//d… csv      csv           &lt;dt&gt;                   1
+# ℹ 545 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="data-control" class="slide level2">
+<h2>Data control</h2>
+<ul>
+<li>there should be 68 houses * 20 sheets = 1360</li>
+<li>filenames contains some info
+<ul>
+<li>house</li>
+<li>data</li>
+<li>treatment</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="do">## before dealing with all these problems we should check if we have all the data.</span></span>
+<span id="cb88-2"><a href="#cb88-2"></a>house_sheet_info <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">datasheet =</span> all_datasheets_cleaned) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-3"><a href="#cb88-3"></a>  <span class="fu">mutate</span>(<span class="at">info =</span> <span class="fu">str_remove_all</span>(datasheet, <span class="at">pattern =</span> <span class="st">'.csv|.xlsx'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-4"><a href="#cb88-4"></a>  <span class="fu">mutate</span>(<span class="at">info =</span> <span class="fu">str_remove_all</span>(info, <span class="at">pattern =</span> <span class="st">'</span><span class="sc">\\</span><span class="st">(.*'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-5"><a href="#cb88-5"></a>  <span class="fu">mutate</span>(<span class="at">info =</span> <span class="fu">str_squish</span>(info)) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-6"><a href="#cb88-6"></a>  <span class="fu">separate</span>(info, <span class="at">into =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">"house"</span>, <span class="st">"year"</span>, <span class="st">"month"</span>, <span class="st">"day"</span>, <span class="st">"treatment"</span>), <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-7"><a href="#cb88-7"></a>  <span class="fu">mutate</span>(<span class="at">completed =</span> <span class="fu">complete.cases</span>(.)) </span>
+<span id="cb88-8"><a href="#cb88-8"></a></span>
+<span id="cb88-9"><a href="#cb88-9"></a>house_sheet_info <span class="sc">%&gt;%</span> </span>
+<span id="cb88-10"><a href="#cb88-10"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">ymd</span>(<span class="fu">paste</span>(year, month, day, <span class="at">sep =</span> <span class="st">"-"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-11"><a href="#cb88-11"></a>  <span class="fu">group_by</span>(house, date) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-12"><a href="#cb88-12"></a>  <span class="fu">summarise</span>(<span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 554 × 3
+# Groups:   house [66]
+   house date       `n()`
+   &lt;chr&gt; &lt;date&gt;     &lt;int&gt;
+ 1 001   2023-06-05     1
+ 2 001   2023-06-15     1
+ 3 001   2023-06-22     1
+ 4 001   2023-06-26     1
+ 5 001   2023-07-07     1
+ 6 001   2023-07-14     1
+ 7 001   2023-07-19     1
+ 8 001   2023-07-28     1
+ 9 001   2023-08-03     1
+10 002   2023-06-05     1
+# ℹ 544 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>house_sheet_info <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="#cb90-2"></a>  <span class="fu">group_by</span>(house, treatment)  <span class="sc">%&gt;%</span> </span>
+<span id="cb90-3"><a href="#cb90-3"></a>  <span class="fu">summarise</span>(<span class="at">nr_sheets =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-4"><a href="#cb90-4"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb90-5"><a href="#cb90-5"></a>  <span class="fu">complete</span>(house, treatment) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-6"><a href="#cb90-6"></a>  <span class="fu">mutate</span>(<span class="at">treatment =</span> forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(treatment, <span class="st">"pretreatment"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-7"><a href="#cb90-7"></a>  <span class="fu">mutate</span>(<span class="at">nr_sheets =</span> <span class="fu">as_factor</span>(nr_sheets)) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-8"><a href="#cb90-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>treatment, <span class="at">y =</span> house, <span class="at">fill =</span> nr_sheets)) <span class="sc">+</span></span>
+<span id="cb90-9"><a href="#cb90-9"></a>    <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb90-10"><a href="#cb90-10"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#fdae61"</span>, <span class="st">"#fee08b"</span>, <span class="st">"#e6f598"</span>, <span class="st">"#abdda4"</span>), <span class="at">na.value =</span> <span class="st">"grey90"</span>) <span class="sc">+</span></span>
+<span id="cb90-11"><a href="#cb90-11"></a>    cowplot<span class="sc">::</span><span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb90-12"><a href="#cb90-12"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">45</span>,<span class="at">hjust=</span><span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="data_wragling_of_field_data_files/figure-revealjs/unnamed-chunk-53-1.png" width="960" class="r-stretch"><p>#But we have length(list.files(path = sheet_folder)) (68 * 20) - length(list.files(path = sheet_folder)) ## are missing</p>
+<p>tibble(filename = list.files(path = sheet_folder)) %&gt;% mutate(house = as.numeric(str_sub(filename, 1, 3))) %&gt;%<br>
+group_by(house) %&gt;% summarise(nr_sheets = n()) %&gt;% summarise(max_nr_sheets = max(nr_sheets), min_nr_sheets = min(nr_sheets), median_nr_sheets = median(nr_sheets))</p>
+</section>
+<section id="the-warning-is-because-naming-was-not-consistent" class="slide level2">
+<h2>the warning is because naming was not consistent</h2>
+<p>tibble(filename = list.files(path = sheet_folder)) %&gt;% mutate(house = as.numeric(str_sub(filename, 1, 3))) %&gt;%<br>
+group_by(house) %&gt;% summarise(nr_sheets = n()) %&gt;% group_by(nr_sheets) %&gt;% summarise(nr_houses = n()) %&gt;% arrange(-nr_sheets)</p>
+</section>
+<section id="quick-side-step" class="slide level2">
+<h2>quick side step</h2>
+</section>
+<section id="note-that-here-there-are-na-values-because-the-tick-count-was-not-filled-out" class="slide level2">
+<h2>note that here there are NA values, because the tick count was not filled out</h2>
+</section>
+<section id="are-these-all-0-or-are-the-not-sampled" class="slide level2">
+<h2>are these all 0 or are the not sampled?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a><span class="fu">list.files</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data_wraggling_with_field_data_to_be_deleted.R"
+[2] "data_wragling_of_field_data.qmd"               
+[3] "data_wragling_of_field_data.rmarkdown"         
+[4] "data_wragling_of_field_data_files"             
+[5] "figures"                                       
+[6] "git_version_control.qmd"                       
+[7] "good_data_practises.qmd"                       
+[8] "pdf"                                           
+[9] "reproducibility_workshop.qmd"                  </code></pre>
+</div>
+</div>
 
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -544,6 +1878,44 @@ David Jansen
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

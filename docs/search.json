@@ -1,5 +1,509 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "David Jansen",
+    "section": "",
+    "text": "David Jansen is a data scientist at MCEVBD."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "David Jansen",
+    "section": "Education",
+    "text": "Education\nUniversity of Zurich , Switzerland PhD in Animal communication | Sept 2009 - Apr 2013\nClick here for my Resume or CV"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Workshops",
+    "section": "",
+    "text": "This is the index site of the workshops page. It will have multiple presentations about data management, data analysis and data visualizations.\nThe site is created with Rstudio and Quarto (https://quarto.org/docs/websites)."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#background",
+    "href": "presentations/data_wragling_of_field_data.html#background",
+    "title": "Data wrangling with field data",
+    "section": "Background",
+    "text": "Background\nFor the Terminix project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#background-1",
+    "href": "presentations/data_wragling_of_field_data.html#background-1",
+    "title": "Data wrangling with field data",
+    "section": "Background",
+    "text": "Background"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#background-2",
+    "href": "presentations/data_wragling_of_field_data.html#background-2",
+    "title": "Data wrangling with field data",
+    "section": "Background",
+    "text": "Background\nOn the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.\nThe rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 transects and every zone has 4 sections. So it total there were 4 * 4 * 2 * 3 = 96 counts per yard per visit.\nThe files would be saved with as a csv file with the house number, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#background-of-code",
+    "href": "presentations/data_wragling_of_field_data.html#background-of-code",
+    "title": "Data wrangling with field data",
+    "section": "Background of code",
+    "text": "Background of code\nThe aim of the code I was writing was to open all the files, extract both the metadata and the count data and combine all of it into a large file.\nAn early test of the code on a few of the sheets went well and worked as expected."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#the-fun-begins",
+    "href": "presentations/data_wragling_of_field_data.html#the-fun-begins",
+    "title": "Data wrangling with field data",
+    "section": "The fun begins",
+    "text": "The fun begins\n\nget R setup\nslightly complicated way of opening packages\nmakes sharing code easier\n\n\n## Code to open the datasheets of the project\npackages &lt;- c(\"tidyverse\"\n              , \"cellranger\"\n              , \"data.table\"\n              , \"janitor\"\n              , \"purrr\"\n              , \"readxl\")\n\n## install packages if needed and open libraries\nif (length(setdiff(packages, rownames(installed.packages()))) &gt; 0) {\n  install.packages(setdiff(packages, rownames(installed.packages())), \n                   dependencies = TRUE)}  \n\ninvisible(lapply(packages, library, character.only = TRUE, \n                 warn.conflicts = TRUE, quietly =TRUE))"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#find-files",
+    "href": "presentations/data_wragling_of_field_data.html#find-files",
+    "title": "Data wrangling with field data",
+    "section": "find files",
+    "text": "find files\n\nSpaces in the path :-(\nRemember No Spaces :-)\n\n\n## all the datasheets are in a folder on Box\n## on my computer this is at \n## C:\\Users\\dajansen3\\Box\\All data sheet entries EC 2023\n## adapt to your path\n\nsheet_folder = \"C://Users//dajansen3//Box//All data sheet entries EC 2023//\""
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#the-importance-of-consistency",
+    "href": "presentations/data_wragling_of_field_data.html#the-importance-of-consistency",
+    "title": "Data wrangling with field data",
+    "section": "The importance of consistency",
+    "text": "The importance of consistency\n\ntibble(filename = list.files(path = sheet_folder)[c(4, 164, 876, 992,  200)]) \n\n# A tibble: 5 × 1\n  filename                         \n  &lt;chr&gt;                            \n1 001_062623_posttreatment3.csv    \n2 013_072823_posttreatment2.csv    \n3 055_6_15_23_PostTreatment1.csv   \n4 063_06.22.2023_PostTreatment2.csv\n5 015_7_19_23.csv                  \n\n\n\ndates are in many formats\nthis makes writing general code hard\nFor now I’ll work with these, but all fix (manually by Zack)"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#lets-open-some-data-1",
+    "href": "presentations/data_wragling_of_field_data.html#lets-open-some-data-1",
+    "title": "Data wrangling with field data",
+    "section": "Lets open some data (1)",
+    "text": "Lets open some data (1)\n\nThe files have a few lines with metadata.\nThese should not be loaded for count data\nUsing the skip option to exclude the first 4 lines\nFor the count data the first column is also not need.\nOnly the 2nd to 6th column contain data on tick counts"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#lets-open-some-data-2",
+    "href": "presentations/data_wragling_of_field_data.html#lets-open-some-data-2",
+    "title": "Data wrangling with field data",
+    "section": "Lets open some data (2)",
+    "text": "Lets open some data (2)\n\nread_csv(list.files(path = sheet_folder, full.names = TRUE)[2], \n         skip = 4, col_select = c(2:6))\n\n# A tibble: 96 × 5\n   transect section tick_species tick_stage tick_count\n   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;           &lt;dbl&gt;\n 1 wood     a       Ix           A                   0\n 2 wood     a       Ix           N                   0\n 3 wood     a       Ix           L                   0\n 4 wood     b       Ix           A                   0\n 5 wood     b       Ix           N                   0\n 6 wood     b       Ix           L                   0\n 7 wood     c       Ix           A                   0\n 8 wood     c       Ix           N                   0\n 9 wood     c       Ix           L                   0\n10 wood     d       Ix           A                   0\n# ℹ 86 more rows\n\n\n\nyeah that looks good, but…"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#lets-open-some-data-3",
+    "href": "presentations/data_wragling_of_field_data.html#lets-open-some-data-3",
+    "title": "Data wrangling with field data",
+    "section": "Lets open some data (3)",
+    "text": "Lets open some data (3)\n\nread_csv(list.files(path = sheet_folder, full.names = TRUE)[3], \n         skip = 4, col_select = c(2:6))\n\n# A tibble: 98 × 5\n   ...2     ...3    ...4         ...5       ...6      \n   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     \n 1 &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;      \n 2 transect section tick_species tick_stage tick_count\n 3 wood     a       Ix           A          0         \n 4 wood     a       Ix           N          0         \n 5 wood     a       Ix           L          0         \n 6 wood     b       Ix           A          N/A       \n 7 wood     b       Ix           N          N/A       \n 8 wood     b       Ix           L          N/A       \n 9 wood     c       Ix           A          N/A       \n10 wood     c       Ix           N          N/A       \n# ℹ 88 more rows\n\n\n\nwhat is happening here?\nextra lines of white space?\n\n\nSome troubleshooting will be needed"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#metadata",
+    "href": "presentations/data_wragling_of_field_data.html#metadata",
+    "title": "Data wrangling with field data",
+    "section": "Metadata",
+    "text": "Metadata\nLooking at the metadata for the same two files\n\nread_csv(list.files(path = sheet_folder, full.names = TRUE)[2], n_max = 1)\n\n# A tibble: 1 × 12\n  house date   start_time end_time mowed temp     VMC   cloud_cover w_person\n  &lt;dbl&gt; &lt;chr&gt;  &lt;time&gt;     &lt;time&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;   \n1     1 6/1523 09:05      09:24    No    58 (air) 21%   Cloudy      SA      \n# ℹ 3 more variables: we_person &lt;chr&gt;, `le-person` &lt;chr&gt;, l_person &lt;chr&gt;"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#open-all-datafiles",
+    "href": "presentations/data_wragling_of_field_data.html#open-all-datafiles",
+    "title": "Data wrangling with field data",
+    "section": "Open all datafiles",
+    "text": "Open all datafiles\n\nAim: all datasheets and combine into one data file.\nWe are going to make a function to read the data\n\n\nall_datasheets &lt;- list.files(path = sheet_folder) \n\nread_data_v1 = function(filepath) {     ## hint v1 is suggesting there are going to be more :-)\n  #print(filepath) ## can help to find issues\n  read_csv(filepath, ## path to specific file,\n           skip = 4, ## skip first 4 rows\n           col_select = c(2:6),  ## select column 2 to 6\n           show_col_types = FALSE, ## don't show the message,,\n           name_repair = \"minimal\" ## don't try and repair names\n           )\n}"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#reading-data-v1",
+    "href": "presentations/data_wragling_of_field_data.html#reading-data-v1",
+    "title": "Data wrangling with field data",
+    "section": "Reading data (v1)",
+    "text": "Reading data (v1)\n\ntibble(datasheet = all_datasheets) %&gt;%\n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  slice(c(1:2)) %&gt;% ## lest first try it 2\n  mutate(data = map(.x = path_to_sheet, .f = read_data_v1)) %&gt;% \n  select(-path_to_sheet) %&gt;% \n  ## counting lines as a quick check\n  mutate(nr_rows_in_tibble = map_dbl(.x = data, .f = nrow)) \n\n# A tibble: 2 × 3\n  datasheet          data              nr_rows_in_tibble\n  &lt;chr&gt;              &lt;list&gt;                        &lt;dbl&gt;\n1 001 07_07_2023.csv &lt;tibble [96 × 5]&gt;                96\n2 001 6_15_23.csv    &lt;tibble [96 × 5]&gt;                96\n\n\n!!! Yeah that worked !!!"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#reading-data-v1-1",
+    "href": "presentations/data_wragling_of_field_data.html#reading-data-v1-1",
+    "title": "Data wrangling with field data",
+    "section": "Reading data (v1)",
+    "text": "Reading data (v1)\nNow on all of them.\n\ntibble(datasheet = all_datasheets) %&gt;%\n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;%    \n  mutate(data = map(.x = path_to_sheet, .f = read_data_v1)) %&gt;% \n  mutate(nr_rows_in_tibble = map_dbl(.x = data, .f = nrow)) \n\nError in `mutate()`:\nℹ In argument: `data = map(.x = path_to_sheet, .f = read_data_v1)`.\nCaused by error in `map()`:\nℹ In index: 3.\nCaused by error:\n! Names can't be empty.\n✖ Empty names found at locations 1, 2, 3, 4, and 5.\n\n\nBoo an error"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-1a",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-1a",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (1a)",
+    "text": "Troubleshooting (1a)\n\nWhat is happening?\nTroubleshooting code/data\n\nErrors stop the running of code. This can make troubleshooting hard.\nThe purrr package has a function that can keep code running.\nTemporarily give an alternative outcome.\n\n\n\n## purrr function\n## give the function to run and an alternative answer in case of error\nread_data_possibly_v1 &lt;- purrr::possibly(.f = read_data_v1,  \n                                         otherwise = tibble())"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-1b",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-1b",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (1b)",
+    "text": "Troubleshooting (1b)\n\nrerun code\nproblem sheets have an empty tibble and 0 rows\n\n\ntibble(datasheet = all_datasheets) %&gt;%\n  slice(1:10) %&gt;% \n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  mutate(data = map(.x = path_to_sheet, .f = read_data_possibly_v1)) %&gt;% \n  mutate(nr_rows_in_tibble = map_dbl(.x = data, .f = nrow)) %&gt;% \n  select(-path_to_sheet)\n\n# A tibble: 10 × 3\n   datasheet                      data              nr_rows_in_tibble\n   &lt;chr&gt;                          &lt;list&gt;                        &lt;dbl&gt;\n 1 001 07_07_2023.csv             &lt;tibble [96 × 5]&gt;                96\n 2 001 6_15_23.csv                &lt;tibble [96 × 5]&gt;                96\n 3 001_060523_pretreatment.csv    &lt;tibble [0 × 0]&gt;                  0\n 4 001_062623_posttreatment3.csv  &lt;tibble [0 × 0]&gt;                  0\n 5 001_071423_posttreatment1.csv  &lt;tibble [0 × 0]&gt;                  0\n 6 001_071923_posttreatment2.csv  &lt;tibble [0 × 0]&gt;                  0\n 7 001_072823_posttreatment3.csv  &lt;tibble [0 × 0]&gt;                  0\n 8 001_080323_posttreatment8.csv  &lt;tibble [0 × 0]&gt;                  0\n 9 001_6_15_23_posttreatment1.csv &lt;tibble [96 × 5]&gt;                96\n10 001_6_22_23_PostTreatment2.csv &lt;tibble [0 × 0]&gt;                  0"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-1c",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-1c",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (1c)",
+    "text": "Troubleshooting (1c)\n\nAll the ones with 0 have a problem\nLet’s have a look at on of them."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-1b-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-1b-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (1b)",
+    "text": "Troubleshooting (1b)\n\ntibble(datasheet = all_datasheets) %&gt;% \n  slice(3) %&gt;% \n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  pull(path_to_sheet) %&gt;% \n  shell.exec()\n\nOpen an example problem filel\n\nextra lines of white space\nneed to update the read function to deal with this\nafter a lot of trial and error, I found the fread function from the data.table package could deal with this"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-1d",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-1d",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (1d)",
+    "text": "Troubleshooting (1d)\n\nread_data_v2 = function(filepath) { \n  ## hint v2 is suggesting there are going to be more :-)\n  fread(filepath \n        , header = TRUE \n        , skip = \"transect\"  ## only start reading file after transect\n        , select = 2:6  ## selected columns\n        , blank.lines.skip = TRUE ## skip and empty lines\n  ) %&gt;% \n    as_tibble() \n}\n\nread_data_possibly_v2 &lt;- purrr::possibly(.f = read_data_v2, otherwise = tibble())"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-1e",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-1e",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (1e)",
+    "text": "Troubleshooting (1e)\n\ntibble(datasheet = all_datasheets) %&gt;% \n  slice(1:10) %&gt;% \n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  mutate(data = map(.x = path_to_sheet, .f = read_data_possibly_v2)) %&gt;% \n  mutate(nr_rows_in_tibble = map_dbl(.x = data, .f = nrow))\n\n# A tibble: 10 × 4\n   datasheet                      path_to_sheet       data     nr_rows_in_tibble\n   &lt;chr&gt;                          &lt;chr&gt;               &lt;list&gt;               &lt;dbl&gt;\n 1 001 07_07_2023.csv             C://Users//dajanse… &lt;tibble&gt;                96\n 2 001 6_15_23.csv                C://Users//dajanse… &lt;tibble&gt;                96\n 3 001_060523_pretreatment.csv    C://Users//dajanse… &lt;tibble&gt;                96\n 4 001_062623_posttreatment3.csv  C://Users//dajanse… &lt;tibble&gt;                96\n 5 001_071423_posttreatment1.csv  C://Users//dajanse… &lt;tibble&gt;                96\n 6 001_071923_posttreatment2.csv  C://Users//dajanse… &lt;tibble&gt;                96\n 7 001_072823_posttreatment3.csv  C://Users//dajanse… &lt;tibble&gt;                96\n 8 001_080323_posttreatment8.csv  C://Users//dajanse… &lt;tibble&gt;                96\n 9 001_6_15_23_posttreatment1.csv C://Users//dajanse… &lt;tibble&gt;                96\n10 001_6_22_23_PostTreatment2.csv C://Users//dajanse… &lt;tibble&gt;                 0\n\n\n\nbetter but there is still an problem"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2a",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2a",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2a)",
+    "text": "Troubleshooting (2a)\n\nall files should be csv\n\n\ntibble(datasheet = all_datasheets) %&gt;% \n  slice(1:10) %&gt;% \n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  mutate(data = map(.x = path_to_sheet, .f = read_data_possibly_v2)) %&gt;% \n  mutate(nr_rows_in_tibble = map_dbl(.x = data, .f = nrow)) %&gt;% \n  filter(nr_rows_in_tibble == 0) %&gt;% \n  select(path_to_sheet) %&gt;%  pull() %&gt;% \n  read_lines()\n\n[1] \"&lt;?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\"?&gt;\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \n[2] \"&lt;Types xmlns=\\\"http://schemas.openxmlformats.org/package/2006/content-types\\\"&gt;&lt;Default Extension=\\\"rels\\\" ContentType=\\\"application/vnd.openxmlformats-package.relationships+xml\\\"/&gt;&lt;Default Extension=\\\"xml\\\" ContentType=\\\"application/xml\\\"/&gt;&lt;Override PartName=\\\"/xl/workbook.xml\\\" ContentType=\\\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml\\\"/&gt;&lt;Override PartName=\\\"/docProps/core.xml\\\" ContentType=\\\"application/vnd.openxmlformats-package.core-properties+xml\\\"/&gt;&lt;Override PartName=\\\"/docProps/app.xml\\\" ContentType=\\\"application/vnd.openxmlformats-officedocument.extended-properties+xml\\\"/&gt;&lt;Override PartName=\\\"/xl/worksheets/sheet1.xml\\\" ContentType=\\\"application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml\\\"/&gt;&lt;Override PartName=\\\"/xl/theme/theme1.xml\\\" ContentType=\\\"application/vnd.openxmlformats-officedocument.theme+xml\\\"/&gt;&lt;Override PartName=\\\"/xl/styles.xml\\\" ContentType=\\\"application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml\\\"/&gt;&lt;Override PartName=\\\"/xl/sharedStrings.xml\\\" ContentType=\\\"application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml\\\"/&gt;&lt;/Types&gt;\"\n\n\n\nbut this looks like an excel file?"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2a-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2a-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2a)",
+    "text": "Troubleshooting (2a)"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2b",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2b",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2b)",
+    "text": "Troubleshooting (2b)\n\nshell.exec(paste0(sheet_folder, \"001_6_22_23_PostTreatment2.csv\"))\n\nOpen 001_6_22_23_PostTreatment2.csv in excel"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2c",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2c",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2c)",
+    "text": "Troubleshooting (2c)\n\nLets open it as an excel file\n\n\nread_excel(paste0(sheet_folder, \"001_6_22_23_PostTreatment2.csv\"), skip = 4)\n\n# A tibble: 96 × 7\n   transect section tick_species tick_stage tick_count ...6  ...7 \n   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;      &lt;lgl&gt; &lt;lgl&gt;\n 1 wood     a       Ix           A          NA         NA    NA   \n 2 wood     a       Ix           N          NA         NA    NA   \n 3 wood     a       Ix           L          NA         NA    NA   \n 4 wood     b       Ix           A          NA         NA    NA   \n 5 wood     b       Ix           N          NA         NA    NA   \n 6 wood     b       Ix           L          NA         NA    NA   \n 7 wood     c       Ix           A          0          NA    NA   \n 8 wood     c       Ix           N          0          NA    NA   \n 9 wood     c       Ix           L          0          NA    NA   \n10 wood     d       Ix           A          0          NA    NA   \n# ℹ 86 more rows\n\n\n\nfun!! we have Excel files with a csv extension\nI’ll also share now that there are real Excel files with an xlsx extension"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2d",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2d",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2d)",
+    "text": "Troubleshooting (2d)\n\n\nTo solve it we first need to know which files are:\n\n\nreal csv\nreal excel files\nexcel files with csv extension\n\n\n\nWe can use the purrr possible from earlier."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2e",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2e",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2e)",
+    "text": "Troubleshooting (2e)\n\nWith files are ‘fake’ csv files\n\n\nexcel_files_with_csv_extension &lt;- tibble(datasheet = all_datasheets) %&gt;% \n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  mutate(data = map(.x = path_to_sheet, .f = read_data_possibly_v2)) %&gt;% \n  mutate(nr_rows_in_tibble = map_dbl(.x = data, .f = nrow)) %&gt;% \n  ## filter all the ones with 0s as these are mistakes\n  filter(nr_rows_in_tibble == 0) %&gt;% \n  select(datasheet) %&gt;% ## select only the datasheet names  \n  pull() ## and pull these into a vector\n\nexcel_files_with_csv_extension[1:10]\n\n [1] \"001_6_22_23_PostTreatment2.csv\"     \"001_6_5_23_PreTreatment.csv\"       \n [3] \"001_7_14_23_PostTreatment5.csv\"     \"001_7_7_23_PostTreatment4.csv\"     \n [5] \"002_6_22_23_PostTreatment2.csv\"     \"002_6_5_23_PreTreatment.csv\"       \n [7] \"002_7_14_23_2ndposttreatment1.xlsx\" \"002_7_14_23_PostTreatment5.csv\"    \n [9] \"002_7_28_23_ControlWeek8.csv\"       \"002_7_7_23_PostTreatment4.csv\"     \n\n\nThere are 362 csv files that actually are excel files."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2f",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2f",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2f)",
+    "text": "Troubleshooting (2f)\n\nUpdates to the function to also load excel files\n\n\nread_data_v3 = function(filetype, filepath) { \n  if(filetype == \"csv\") { \n    data.table::fread(filepath\n                      , header = TRUE\n                      , skip = \"transect\"\n                      , select = 2:6\n                      , blank.lines.skip = TRUE\n                      ) \n    } else { \n      read_excel(filepath, skip = 4) %&gt;% \n        select(transect, section, tick_species, tick_stage, tick_count)\n    } ## end of else \n  } ## end of function\n\nread_data_possibly_v3 &lt;- purrr::possibly(.f = read_data_v3, otherwise = tibble())"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2d-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2d-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2d)",
+    "text": "Troubleshooting (2d)\n\ntibble(datasheet = all_datasheets) %&gt;% \n  slice(1:10) %&gt;% \n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  mutate(filetype = if_else(str_detect(datasheet, \"csv\"), \"csv\", \"xlsx\")) %&gt;% \n  ## if a file is part of the 'fake' list change the extension\n  mutate(real_filetype = if_else(condition =datasheet %in% excel_files_with_csv_extension\n                                 , true  = 'xlsx'\n                                 , false = filetype)) %&gt;% \n  mutate(data = map2(.x = real_filetype,  ## map2 needs two inputs\n                     .y = path_to_sheet, \n                     .f = read_data_possibly_v3)) %&gt;% \n  mutate(nr_rows_in_tibble = map_dbl(.x = data, .f = nrow)) %&gt;% \n  select(- path_to_sheet)\n\n# A tibble: 10 × 5\n   datasheet                   filetype real_filetype data     nr_rows_in_tibble\n   &lt;chr&gt;                       &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;               &lt;dbl&gt;\n 1 001 07_07_2023.csv          csv      csv           &lt;dt&gt;                    96\n 2 001 6_15_23.csv             csv      csv           &lt;dt&gt;                    96\n 3 001_060523_pretreatment.csv csv      csv           &lt;dt&gt;                    96\n 4 001_062623_posttreatment3.… csv      csv           &lt;dt&gt;                    96\n 5 001_071423_posttreatment1.… csv      csv           &lt;dt&gt;                    96\n 6 001_071923_posttreatment2.… csv      csv           &lt;dt&gt;                    96\n 7 001_072823_posttreatment3.… csv      csv           &lt;dt&gt;                    96\n 8 001_080323_posttreatment8.… csv      csv           &lt;dt&gt;                    96\n 9 001_6_15_23_posttreatment1… csv      csv           &lt;dt&gt;                    96\n10 001_6_22_23_PostTreatment2… csv      xlsx          &lt;tibble&gt;                96"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-2e-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-2e-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (2e)",
+    "text": "Troubleshooting (2e)\n\nLooks like we are getting somewhere\nNext step is to combine all the sheets\n\n\ncombined_sheets &lt;- tibble(datasheet = all_datasheets) %&gt;% \n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  mutate(filetype = if_else(str_detect(datasheet, \"csv\"), \"csv\", \"xlsx\")) %&gt;% \n  mutate(real_filetype = if_else(datasheet %in% excel_files_with_csv_extension, \n                                 'xlsx', filetype)) %&gt;% \n  mutate(data = map2(.x = real_filetype, .y = path_to_sheet, \n                     .f = read_data_possibly_v3)) %&gt;% \n  mutate(nr_rows_in_tibble = map_dbl(.x = data, .f = nrow))"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#are-we-there",
+    "href": "presentations/data_wragling_of_field_data.html#are-we-there",
+    "title": "Data wrangling with field data",
+    "section": "Are we there?",
+    "text": "Are we there?\n\ncombined_sheets %&gt;% \n  unnest(cols = c(data))\n\nError in `list_unchop()`:\n! Can't combine `x[[1]]$tick_count` &lt;integer&gt; and `x[[3]]$tick_count` &lt;character&gt;.\n\n\n\nUnfortunately we have another sigh moment.\nReason is that we have two data types in one column."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#quick-reminder",
+    "href": "presentations/data_wragling_of_field_data.html#quick-reminder",
+    "title": "Data wrangling with field data",
+    "section": "Quick reminder",
+    "text": "Quick reminder\n\nThe full content of columns in R need to be in same data type and units\n\ncharacter (e.g, “a”, “swc”)\nnumeric (real or decimal) (e.g, 2, 2.0)\nlogical (FALSE, TRUE)\ninteger (e.g, 2L, as.integer(3))\ncomplex (e.g, 1 + 0i, 1 + 4i) &lt;- These can be annoying"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3a",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3a",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3a)",
+    "text": "Troubleshooting (3a)\n\ncombined_sheets_temp &lt;- combined_sheets %&gt;% \n  mutate(temp_data = map(.x = data, \n  ## turn all the columns to character                         \n                         .f = mutate_all, as.character)) \n\ncombined_sheets_temp %&gt;% \n  select(datasheet, temp_data) %&gt;% \n  unnest(cols = c(temp_data)) %&gt;% \n  ## turn the tick count column back to numeric\n  ## if this doesn't work the cell will turn into NA\n  mutate(temp_count = as.numeric(tick_count)) %&gt;% \n  filter(!is.na(tick_count)) %&gt;% \n  filter(is.na(temp_count))\n\n# A tibble: 7,105 × 7\n   datasheet      transect section tick_species tick_stage tick_count temp_count\n   &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;\n 1 001_060523_pr… wood     b       Ix           A          N/A                NA\n 2 001_060523_pr… wood     b       Ix           N          N/A                NA\n 3 001_060523_pr… wood     b       Ix           L          N/A                NA\n 4 001_060523_pr… wood     c       Ix           A          N/A                NA\n 5 001_060523_pr… wood     c       Ix           N          N/A                NA\n 6 001_060523_pr… wood     c       Ix           L          N/A                NA\n 7 001_060523_pr… wood     d       Ix           A          N/A                NA\n 8 001_060523_pr… wood     d       Ix           N          N/A                NA\n 9 001_060523_pr… wood     d       Ix           L          N/A                NA\n10 001_060523_pr… wood-ec… b       Ix           A          N/A                NA\n# ℹ 7,095 more rows"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3a-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3a-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3a)",
+    "text": "Troubleshooting (3a)\nWhat are the non-numeric values?\n\n## ok there are cells that have different values then NA or a number\ncombined_sheets_temp %&gt;% \n  select(datasheet, temp_data) %&gt;% \n  unnest(cols = c(temp_data)) %&gt;% \n  mutate(temp_count = as.numeric(tick_count)) %&gt;% filter(is.na(temp_count)) %&gt;% \n  select(tick_count) %&gt;% distinct() %&gt;% pull()\n\n [1] NA      \"N/A\"   \"NA\"    \"Na\"    \"20+\"   \"nA\"    \"N.A\"   \"1(M)\"  \"1(F)\" \n[10] \"1 (F)\" \"1pm\""
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3b",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3b",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3b)",
+    "text": "Troubleshooting (3b)\n\nMultiple NA values\nTell R about these NA values\nWe could use mutate, but better to adapt function.\n\n\nread_data_v4 = function(filetype, filepath) {\n  if(filetype == \"csv\") {\n    data.table::fread(filepath , header = TRUE , skip = \"transect\"\n                      , select = 2:6, blank.lines.skip = TRUE, \n                      na.strings = c(NA, \"N/A\", \"NA\", \"Na\", \"nA\", \"N.A\")) \n    } else { \n      read_excel(filepath , skip = 4 , \n                 na = c(\"N/A\", \"NA\", \"Na\", \"nA\", \"N.A\"), \n                 .name_repair = \"unique_quiet\", progress = FALSE) %&gt;% \n        select(transect, section, tick_species, tick_stage, tick_count) \n    }\n}\n  \nread_data_possibly_v4 &lt;- purrr::possibly(.f = read_data_v4, \n                                         otherwise = tibble())"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3c",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3c",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3c)",
+    "text": "Troubleshooting (3c)\nLets look at the other values?\n\ncombined_sheets_temp %&gt;% \n  select(datasheet, temp_data) %&gt;% \n  unnest(cols = c(temp_data)) %&gt;% \n  filter(tick_count %in% (c(\"20+\", \"1(M)\", \"1(F)\", \"1 (F)\", \"1pm\")))\n\n# A tibble: 10 × 6\n   datasheet                 transect section tick_species tick_stage tick_count\n   &lt;chr&gt;                     &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     \n 1 009_072823_posttreatment… wood     b       Ix           L          20+       \n 2 026 06_06_2023.csv        lawn-ec… d       De           A          1(M)      \n 3 030 06_06_2023 Pre_Treat… wood     b       De           A          1(F)      \n 4 031 06_06_2023 Pre_Treat… wood-ec… a       De           A          1(M)      \n 5 048 6_12_23.csv           wood     a       Ix           A          1 (F)     \n 6 048 6_6_23.csv            lawn-ec… a       Ix           A          1 (F)     \n 7 049 6_6_23.csv            lawn-ec… c       Ix           A          1(M)      \n 8 051_7_18_23.csv           wood     a       Ix           L          1pm       \n 9 065 6_12_23.csv           wood     b       Ix           A          1 (F)     \n10 067 6_12_23.csv           wood     d       Ix           A          1 (F)"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3c-tbd",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3c-tbd",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3c) tbd",
+    "text": "Troubleshooting (3c) tbd\n\ntemp_exclude &lt;- combined_sheets_temp %&gt;% \n  select(datasheet, temp_data) %&gt;% \n  unnest(cols = c(temp_data)) %&gt;% \n  filter(tick_count %in% (c(\"20+\", \"1(M)\", \"1(F)\", \"1 (F)\", \"1pm\"))) %&gt;% \n  select(datasheet) %&gt;% \n  pull()\n\ntemp_exclude\n\n [1] \"009_072823_posttreatment3.csv\"    \"026 06_06_2023.csv\"              \n [3] \"030 06_06_2023 Pre_Treatment.csv\" \"031 06_06_2023 Pre_Treatment.csv\"\n [5] \"048 6_12_23.csv\"                  \"048 6_6_23.csv\"                  \n [7] \"049 6_6_23.csv\"                   \"051_7_18_23.csv\"                 \n [9] \"065 6_12_23.csv\"                  \"067 6_12_23.csv\"                 \n\n\nSince there are just a few, it probably is easiest/best to fix by hand. To be save make a comment or keep a raw raw version."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3d",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3d",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3d)",
+    "text": "Troubleshooting (3d)\n\ncombined_sheets %&gt;% \n  filter(!(datasheet %in% temp_exclude)) %&gt;% ## temp excluding the problem sheets\n  unnest(cols = c(data))\n\n# A tibble: 103,872 × 10\n   datasheet  path_to_sheet filetype real_filetype transect section tick_species\n   &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;       \n 1 001 07_07… C://Users//d… csv      csv           wood     a       Ix          \n 2 001 07_07… C://Users//d… csv      csv           wood     a       Ix          \n 3 001 07_07… C://Users//d… csv      csv           wood     a       Ix          \n 4 001 07_07… C://Users//d… csv      csv           wood     b       Ix          \n 5 001 07_07… C://Users//d… csv      csv           wood     b       Ix          \n 6 001 07_07… C://Users//d… csv      csv           wood     b       Ix          \n 7 001 07_07… C://Users//d… csv      csv           wood     c       Ix          \n 8 001 07_07… C://Users//d… csv      csv           wood     c       Ix          \n 9 001 07_07… C://Users//d… csv      csv           wood     c       Ix          \n10 001 07_07… C://Users//d… csv      csv           wood     d       Ix          \n# ℹ 103,862 more rows\n# ℹ 3 more variables: tick_stage &lt;chr&gt;, tick_count &lt;dbl&gt;,\n#   nr_rows_in_tibble &lt;dbl&gt;\n\n\nSo after we fix the alternative numbers it should work."
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#final-function",
+    "href": "presentations/data_wragling_of_field_data.html#final-function",
+    "title": "Data wrangling with field data",
+    "section": "Final function",
+    "text": "Final function\n\n## final function\nread_data_coundata = function(filetype, filepath) {\n  if(filetype == \"csv\") {\n    data.table::fread(filepath , header = TRUE , skip = \"transect\"\n                      , select = 2:6, blank.lines.skip = TRUE,\n                      , na.strings = c(NA, \"N/A\", \"NA\", \"Na\", \"nA\", \"N.A\"))\n    } else {\n      read_excel(filepath, skip = 4,\n                 na = c(\"N/A\", \"NA\", \"Na\", \"nA\", \"N.A\"), \n                 .name_repair = \"unique_quiet\", progress = FALSE) %&gt;% \n        select(transect, section, tick_species, tick_stage, tick_count)\n    }\n}"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#metadata-2",
+    "href": "presentations/data_wragling_of_field_data.html#metadata-2",
+    "title": "Data wrangling with field data",
+    "section": "Metadata",
+    "text": "Metadata\n\nfirst two lines contain metadata regarding the houses\nbesides the header row there is only 1 line of data\nas a reminder\n\n\nread_csv(list.files(path = sheet_folder, full.names = TRUE)[2], n_max = 1)\n\n# A tibble: 1 × 12\n  house date   start_time end_time mowed temp     VMC   cloud_cover w_person\n  &lt;dbl&gt; &lt;chr&gt;  &lt;time&gt;     &lt;time&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;   \n1     1 6/1523 09:05      09:24    No    58 (air) 21%   Cloudy      SA      \n# ℹ 3 more variables: we_person &lt;chr&gt;, `le-person` &lt;chr&gt;, l_person &lt;chr&gt;"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#metadata-3",
+    "href": "presentations/data_wragling_of_field_data.html#metadata-3",
+    "title": "Data wrangling with field data",
+    "section": "Metadata",
+    "text": "Metadata\n\nso only one row of data and we have need all 12 column\nwe know now that not all files are simply csv with a fixed structure\nlets see if we can adapt the last version of the read_data function\n\n\nread_metadata_v1 = function(filetype, filepath) { ## can we do it with 1 version? \n  if(filetype == \"csv\") {\n    data.table::fread(filepath,  header = TRUE, blank.lines.skip = TRUE\n                      , na.strings = c(NA, \"N/A\", \"NA\", \"Na\", \"nA\", \"N.A\")\n                      #, .name_repair = \"unique_quiet\",\n                      , check.names = TRUE\n                      , nrows = 1) ## besides the header we only want 1 row\n    } else { read_excel(filepath \n                        , na = c(\"N/A\", \"NA\", \"Na\", \"nA\", \"N.A\") \n                        , n_max = 1 )\n    }\n  }"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#metadata-4",
+    "href": "presentations/data_wragling_of_field_data.html#metadata-4",
+    "title": "Data wrangling with field data",
+    "section": "Metadata",
+    "text": "Metadata\n\nfirst with a few\n\n\ntemp_metadata &lt;- tibble(datasheet = all_datasheets) %&gt;% \n  mutate(path_to_sheet = paste0(sheet_folder, datasheet)) %&gt;% \n  mutate(filetype = if_else(str_detect(datasheet, \"csv\"), \"csv\", \"xlsx\")) %&gt;% \n  mutate(real_filetype = if_else(datasheet %in% excel_files_with_csv_extension, \n                                 'xlsx', filetype)) %&gt;% \n  mutate(metadata = map2(.x = real_filetype, .y = path_to_sheet, \n                         .f = read_metadata_v1))  \n  \ntemp_metadata %&gt;% \n  slice(1:10) %&gt;% \n  unnest(cols = c(metadata))\n\nError in `list_unchop()`:\n! Can't combine `x[[1]]$temp` &lt;integer&gt; and `x[[2]]$temp` &lt;character&gt;.\n\n\nAgain a conflict between datatypes in a column"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3b-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3b-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3b)",
+    "text": "Troubleshooting (3b)\n\ntemp_metadata %&gt;% \n  slice(1:10) %&gt;% \n  mutate(temp_metadata = map(.x = metadata, .f = mutate_all, as.character)) %&gt;% \n  select(datasheet, temp_metadata) %&gt;% \n  unnest(cols = c(temp_metadata))"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3b-2",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3b-2",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3b)",
+    "text": "Troubleshooting (3b)\n\n\n\nhousedatestart_timeend_timemowedtempVMCcloud_coverw_personwe_personle.personl_personle-person17/7/202310:1910:24No8029%Sunny16/15239:059:24No58 (air)21%CloudySAXLCMCM16/5/239:109:40N5011cloudyMLAPCMZS16/26/239:4710:00N7144cloudyTZCMCMML17/14/231:151:20N8825sunnyZSZSTZTZ17/19/232:202:308836ZSEO17/28/233:003:05N8818sunnyTZTZTZDC18/3/2312:1512:23N7325sunnyZSCMCMZS16/15/239:059:24N5821CloudySAXLCMCM12023-06-221899-12-31 11:20:001899-12-31 11:30:00N8930SunnyTZADEOEO\n\n\n\nit only complained about temp, but I also see issues in other variables\nAny suggestions on what they are ?"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3c-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3c-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3c)",
+    "text": "Troubleshooting (3c)\n\n\n\nhousedatestart_timeend_timemowedtempVMCcloud_coverw_personwe_personle.personl_personle-person17/7/202310:1910:24No8029%Sunny16/15239:059:24No58 (air)21%CloudySAXLCMCM16/5/239:109:40N5011cloudyMLAPCMZS16/26/239:4710:00N7144cloudyTZCMCMML17/14/231:151:20N8825sunnyZSZSTZTZ17/19/232:202:308836ZSEO17/28/233:003:05N8818sunnyTZTZTZDC18/3/2312:1512:23N7325sunnyZSCMCMZS16/15/239:059:24N5821CloudySAXLCMCM12023-06-221899-12-31 11:20:001899-12-31 11:30:00N8930SunnyTZADEOEO"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3d-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3d-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3d)",
+    "text": "Troubleshooting (3d)\n\nlets go ahead and run open all the data\n\ndata is still all character\ndo we have big issues?\nor just a few that we can fix manually\n\n\nFirst it seem to have 2 extra columns lets check those first\n\ncheck_metadata %&gt;%  slice(1:5)\n\n# A tibble: 5 × 20\n  datasheet path_to_sheet filetype real_filetype metadata house date  start_time\n  &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     \n1 001 07_0… C://Users//d… csv      csv           &lt;dt&gt;     1     7/7/… 10:19     \n2 001 6_15… C://Users//d… csv      csv           &lt;dt&gt;     1     6/15… 9:05      \n3 001_0605… C://Users//d… csv      csv           &lt;dt&gt;     1     6/5/… 9:10      \n4 001_0626… C://Users//d… csv      csv           &lt;dt&gt;     1     6/26… 9:47      \n5 001_0714… C://Users//d… csv      csv           &lt;dt&gt;     1     7/14… 1:15      \n# ℹ 12 more variables: end_time &lt;chr&gt;, mowed &lt;chr&gt;, temp &lt;chr&gt;, VMC &lt;chr&gt;,\n#   cloud_cover &lt;chr&gt;, w_person &lt;chr&gt;, we_person &lt;chr&gt;, le.person &lt;chr&gt;,\n#   l_person &lt;chr&gt;, `le-person` &lt;chr&gt;, Temp &lt;chr&gt;, ...1 &lt;chr&gt;"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3e",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3e",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3e)",
+    "text": "Troubleshooting (3e)\n\ncheck_metadata %&gt;% filter(!is.na(Temp)) %&gt;% \n  select(datasheet, house, temp, Temp) \n\n# A tibble: 1 × 4\n  datasheet                      house temp  Temp \n  &lt;chr&gt;                          &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 018_6_16_23_posttreatment1.csv 18    &lt;NA&gt;  81   \n\n\nOk, so Temp is temp, lets fix it\n\nstep1 &lt;- check_metadata %&gt;% mutate(temp = if_else(condition = is.na(temp)\n                                                  , true = Temp\n                                                  , false = temp)) %&gt;% \n  select(-Temp) ## remove the extra column"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3f",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3f",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3f)",
+    "text": "Troubleshooting (3f)\nNow the checking …1 and fixing it.\n\nstep1 %&gt;% filter(!is.na(...1))   \n\n# A tibble: 4 × 19\n  datasheet path_to_sheet filetype real_filetype metadata house date  start_time\n  &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     \n1 022_6_22… C://Users//d… xlsx     xlsx          &lt;tibble&gt; &lt;NA&gt;  6_22… 1899-12-3…\n2 024_6_23… C://Users//d… xlsx     xlsx          &lt;tibble&gt; &lt;NA&gt;  6_23… 1899-12-3…\n3 026_6_22… C://Users//d… xlsx     xlsx          &lt;tibble&gt; &lt;NA&gt;  6_22… 1899-12-3…\n4 027_6_22… C://Users//d… xlsx     xlsx          &lt;tibble&gt; &lt;NA&gt;  6_22… 1899-12-3…\n# ℹ 11 more variables: end_time &lt;chr&gt;, mowed &lt;chr&gt;, temp &lt;chr&gt;, VMC &lt;chr&gt;,\n#   cloud_cover &lt;chr&gt;, w_person &lt;chr&gt;, we_person &lt;chr&gt;, le.person &lt;chr&gt;,\n#   l_person &lt;chr&gt;, `le-person` &lt;chr&gt;, ...1 &lt;chr&gt;\n\nstep1 %&gt;% filter(!is.na(...1))  %&gt;% \n  select(datasheet, house, ...1) \n\n# A tibble: 4 × 3\n  datasheet                       house ...1 \n  &lt;chr&gt;                           &lt;chr&gt; &lt;chr&gt;\n1 022_6_22_23_posttreatment2.xlsx &lt;NA&gt;  22   \n2 024_6_23_23_posttreatment2.xlsx &lt;NA&gt;  24   \n3 026_6_22_23_posttreatment2.xlsx &lt;NA&gt;  26   \n4 027_6_22_23_posttreatment2.xlsx &lt;NA&gt;  27   \n\nstep2 &lt;- step1 %&gt;% mutate(house = if_else(is.na(house), ...1, house)) %&gt;%\n  select(-...1)"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3g",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3g",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3g)",
+    "text": "Troubleshooting (3g)\n\nNext we check why not all temp is numeric\n\n\nstep2 %&gt;% mutate(temp_numeric = as.numeric(temp))\n\nError in `mutate()`:\nℹ In argument: `temp_numeric = as.numeric(temp)`.\nCaused by error:\n! invalid multibyte string at '&lt;a1&gt; F'\n\n\n\nI had no idea what that means\nhas something to do with a non standard character (thanks Google)\nyou can find them by looking at character length"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3g-1",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3g-1",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3g)",
+    "text": "Troubleshooting (3g)\n\nas.numeric_possible &lt;- possibly(.f = as.numeric, otherwise = 999)\n\nstep2 %&gt;% mutate(temporal_temp = map_dbl(.x = temp, .f = as.numeric_possible)) %&gt;% \n  select(datasheet, house, temp, temporal_temp) %&gt;% \n  filter(temporal_temp == 999)\n\n# A tibble: 45 × 4\n   datasheet                         house temp  temporal_temp\n   &lt;chr&gt;                             &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt;\n 1 029_06.27.2023_PostTreatment3.csv 29    83� F           999\n 2 033_06.27.2023_PostTreatment3.csv 33    82� F           999\n 3 034_06.22.2023_PostTreatment2.csv 34    84� F           999\n 4 035_06.22.2023_PostTreatment2.csv 35    81� F           999\n 5 036_06.22.2023_PostTreatment2.csv 36    83� F           999\n 6 037_06.22.2023_PostTreatment2.csv 37    81� F           999\n 7 038_06.22.2023_PostTreatment2.csv 38    81� F           999\n 8 039_06.22.2023_PostTreatment2.csv 39    88� F           999\n 9 040_06.21.2023_PostTreatment2.csv 40    75� F           999\n10 041_06.21.2023_PostTreatment2.csv 41    77� F           999\n# ℹ 35 more rows\n\n\n\nThe question mark is a subscript i.\nThis is a tricky one to solve unless you go into all those datasheets and fix it,"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#troubleshooting-3h",
+    "href": "presentations/data_wragling_of_field_data.html#troubleshooting-3h",
+    "title": "Data wrangling with field data",
+    "section": "Troubleshooting (3h)",
+    "text": "Troubleshooting (3h)\n\nut I noticed (using View) that none of the temperatures in the problem sheets were above 99.\nSo we could just take the first 2 digits\n\n\nstep2 %&gt;% \n  mutate(temporal_temp = map_dbl(.x = temp, .f = as.numeric_possible)) %&gt;% \n  select(datasheet, house, temp, temporal_temp) %&gt;% \n  filter(!is.na(temp)) %&gt;% \n  filter(temporal_temp == 999 | is.na(temporal_temp)) %&gt;% \n  mutate(temp_numeric = as.numeric(if_else(condition = temporal_temp == 999 | is.na(temporal_temp), \n                                       true = str_sub(string = temp, 1, 2), \n                                       false = temp))) %&gt;% \n  slice(1:10)\n\n# A tibble: 10 × 5\n   datasheet                         house temp      temporal_temp temp_numeric\n   &lt;chr&gt;                             &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;\n 1 001 6_15_23.csv                   1     58 (air)             NA           58\n 2 019 07_07_2023.csv                19    Sunny                NA           NA\n 3 024_06.29.2023_PostTreatment3.csv 24    81° F                NA           81\n 4 025_06.29.2023_PostTreatment3.csv 25    85° F                NA           85\n 5 028_6_16_23_posttreatment1.csv    28    Pt Cloudy            NA           NA\n 6 029_06.27.2023_PostTreatment3.csv 29    83� F               999           83\n 7 033_06.27.2023_PostTreatment3.csv 33    82� F               999           82\n 8 034 06_06_2023 Pre_Treatment .csv 34    81-86                NA           81\n 9 034_06.22.2023_PostTreatment2.csv 34    84� F               999           84\n10 034_06.29.2023_PostTreatment3.csv 34    88° F                NA           88"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#next-vmc",
+    "href": "presentations/data_wragling_of_field_data.html#next-vmc",
+    "title": "Data wrangling with field data",
+    "section": "Next VMC",
+    "text": "Next VMC\n\nstep3 %&gt;% mutate(VMC_numeric = as.numeric(VMC)) %&gt;% filter(is.na(VMC_numeric))\n\n# A tibble: 282 × 22\n   datasheet          path_to_sheet  filetype real_filetype metadata house date \n   &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;         &lt;list&gt;   &lt;chr&gt; &lt;chr&gt;\n 1 001 07_07_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     1     7/7/…\n 2 001 6_15_23.csv    C://Users//da… csv      csv           &lt;dt&gt;     1     6/15…\n 3 002 07_07_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     2     7/7/…\n 4 002 6_15_23.csv    C://Users//da… csv      csv           &lt;dt&gt;     2     6/15…\n 5 004 07_07_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     4     7/7/…\n 6 006 07_06_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     6     7/6/…\n 7 006 07_18_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     6     7/18…\n 8 007 07_07_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     7     7/7/…\n 9 008 07_06_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     8     7/6/…\n10 008 07_18_2023.csv C://Users//da… csv      csv           &lt;dt&gt;     8     7/18…\n# ℹ 272 more rows\n# ℹ 15 more variables: start_time &lt;chr&gt;, end_time &lt;chr&gt;, mowed &lt;chr&gt;,\n#   temp &lt;chr&gt;, VMC &lt;chr&gt;, cloud_cover &lt;chr&gt;, w_person &lt;chr&gt;, we_person &lt;chr&gt;,\n#   le.person &lt;chr&gt;, l_person &lt;chr&gt;, `le-person` &lt;chr&gt;, temporal_temp &lt;dbl&gt;,\n#   temp_numeric &lt;dbl&gt;, temp_C &lt;dbl&gt;, VMC_numeric &lt;dbl&gt;\n\n## see if we remove % sign we fix the issue\n\nstep3 %&gt;% \n  mutate(VMC_numeric = as.numeric(str_remove_all(string = VMC, pattern = \"%\"))) %&gt;% \n  filter(!is.na(VMC) & is.na(VMC_numeric)) %&gt;% select(datasheet, contains(\"VMC\"))\n\n# A tibble: 3 × 3\n  datasheet                   VMC                 VMC_numeric\n  &lt;chr&gt;                       &lt;chr&gt;                     &lt;dbl&gt;\n1 057 06_07_2023.csv          14:R 42:L                    NA\n2 057 6_7_23.csv              14 (R) 42 (L)                NA\n3 057_060723_pretreatment.csv 14% right, 42% left          NA\n\n## almost \n## fix last few manually\n\nstep4 &lt;- step3 %&gt;% mutate(VMC_numeric = as.numeric(str_remove_all(string = VMC, pattern = \"%\")))"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#finally-dates-and-times",
+    "href": "presentations/data_wragling_of_field_data.html#finally-dates-and-times",
+    "title": "Data wrangling with field data",
+    "section": "Finally dates and times",
+    "text": "Finally dates and times\n\nstep4 %&gt;% \n  select(datasheet, date) %&gt;% \n  mutate(date_ymd = mdy(date)) %&gt;% \n  mutate(date_ymd = if_else(is.na(date_ymd), ymd(date), date_ymd)) %&gt;% \n  filter(is.na(date_ymd))\n\n# A tibble: 4 × 3\n  datasheet                         date        date_ymd\n  &lt;chr&gt;                             &lt;chr&gt;       &lt;date&gt;  \n1 001 6_15_23.csv                   6/1523      NA      \n2 037_06.15.2023_PostTreatment1.csv 06/15/20223 NA      \n3 055 6_7_23.csv                    7-Jun       NA      \n4 060 06_12_2023.csv                12-Jun      NA      \n\n\n\nFew left that would be easiest fix mannually.\nAlmost there. Just times left"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#fixing-times-1",
+    "href": "presentations/data_wragling_of_field_data.html#fixing-times-1",
+    "title": "Data wrangling with field data",
+    "section": "Fixing Times (1)",
+    "text": "Fixing Times (1)\n\n(step4a &lt;- step4 %&gt;% \n  filter(!is.na(start_time) | !is.na(end_time)) %&gt;% \n  select(datasheet, start_time, end_time) %&gt;% \n  mutate(start_time_hm = hm(start_time), \n         end_time_hm = hm(end_time)))\n\n# A tibble: 1,080 × 5\n   datasheet                      start_time  end_time start_time_hm end_time_hm\n   &lt;chr&gt;                          &lt;chr&gt;       &lt;chr&gt;    &lt;Period&gt;      &lt;Period&gt;   \n 1 001 07_07_2023.csv             10:19       10:24    10H 19M 0S    10H 24M 0S \n 2 001 6_15_23.csv                9:05        9:24     9H 5M 0S      9H 24M 0S  \n 3 001_060523_pretreatment.csv    9:10        9:40     9H 10M 0S     9H 40M 0S  \n 4 001_062623_posttreatment3.csv  9:47        10:00    9H 47M 0S     10H 0M 0S  \n 5 001_071423_posttreatment1.csv  1:15        1:20     1H 15M 0S     1H 20M 0S  \n 6 001_071923_posttreatment2.csv  2:20        2:30     2H 20M 0S     2H 30M 0S  \n 7 001_072823_posttreatment3.csv  3:00        3:05     3H 0M 0S      3H 5M 0S   \n 8 001_080323_posttreatment8.csv  12:15       12:23    12H 15M 0S    12H 23M 0S \n 9 001_6_15_23_posttreatment1.csv 9:05        9:24     9H 5M 0S      9H 24M 0S  \n10 001_6_22_23_PostTreatment2.csv 1899-12-31… 1899-12… NA            NA         \n# ℹ 1,070 more rows"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#fixing-times-2",
+    "href": "presentations/data_wragling_of_field_data.html#fixing-times-2",
+    "title": "Data wrangling with field data",
+    "section": "Fixing Times (2)",
+    "text": "Fixing Times (2)\n\nsome issues left\n\n\nstep4 %&gt;% \n  select(datasheet, start_time, end_time) %&gt;% \n  pivot_longer(names_to = \"time_group\", values_to = \"time\", cols = c(start_time:end_time)) %&gt;% \n  filter(!is.na(time)) %&gt;% \n  mutate(time_hm = hm(time)) %&gt;% \n  filter(is.na(time_hm)) %&gt;% \n  mutate(time_hm = if_else(!is.na(time_hm), time_hm, hms(str_remove(time, \"1899-12-31\")))) %&gt;% \n  filter(is.na(time_hm)) \n\n# A tibble: 2 × 4\n  datasheet                       time_group time  time_hm \n  &lt;chr&gt;                           &lt;chr&gt;      &lt;chr&gt; &lt;Period&gt;\n1 043_6_15_23_posttreatment1.xlsx start_time 11    NA      \n2 056_6_15_23_posttreatment1.xlsx end_time   1     NA      \n\n\n\nstep4a %&gt;% \n   mutate(start_time_hm = hms(str_remove(start_time, \"1899-12-31\")), \n          end_time_hm = hms(str_remove(end_time, \"1899-12-31\"))) \n  filter(!is.na(start_time) & is.na(start_time_hm))\n        #!is.na(end_time) & is.na(end_time_hm)))\n\n## fix these by hand\n\n# final_metadata &lt;- step5 %&gt;% mutate(start_time_hm = hm(start_time), end_time_hm = hm(end_time)) %&gt;% mutate(start = str_remove(start_time, \"1899-12-31\"), end = str_remove(end_time, \"1899-12-31\")) %&gt;% mutate(start_time_hm = if_else(is.na(start_time_hm), hms(start),start_time_hm), end_time_hm = if_else(is.na(end_time_hm), hms(end),end_time_hm))\n\n## need to fix some of the column names\n\n#full_count_dataset %&gt;% inner_join(final_metadata) \\## this won't work, because the errors that are still in the dataset"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#data-control",
+    "href": "presentations/data_wragling_of_field_data.html#data-control",
+    "title": "Data wrangling with field data",
+    "section": "Data control",
+    "text": "Data control\n\nthere should be 68 houses * 20 sheets = 1360\nfilenames contains some info\n\nhouse\ndata\ntreatment\n\n\n\n## before dealing with all these problems we should check if we have all the data.\nhouse_sheet_info = tibble(datasheet = all_datasheets_cleaned) %&gt;% \n  mutate(info = str_remove_all(datasheet, pattern = '.csv|.xlsx')) %&gt;% \n  mutate(info = str_remove_all(info, pattern = '\\\\(.*')) %&gt;% \n  mutate(info = str_squish(info)) %&gt;% \n  separate(info, into = c(NA, \"house\", \"year\", \"month\", \"day\", \"treatment\"), remove = FALSE) %&gt;% \n  mutate(completed = complete.cases(.)) \n\nhouse_sheet_info %&gt;% \n  mutate(date = ymd(paste(year, month, day, sep = \"-\"))) %&gt;% \n  group_by(house, date) %&gt;% \n  summarise(n())\n\n# A tibble: 554 × 3\n# Groups:   house [66]\n   house date       `n()`\n   &lt;chr&gt; &lt;date&gt;     &lt;int&gt;\n 1 001   2023-06-05     1\n 2 001   2023-06-15     1\n 3 001   2023-06-22     1\n 4 001   2023-06-26     1\n 5 001   2023-07-07     1\n 6 001   2023-07-14     1\n 7 001   2023-07-19     1\n 8 001   2023-07-28     1\n 9 001   2023-08-03     1\n10 002   2023-06-05     1\n# ℹ 544 more rows\n\nhouse_sheet_info %&gt;% \n  group_by(house, treatment)  %&gt;% \n  summarise(nr_sheets = n()) %&gt;% \n  ungroup() %&gt;% \n  complete(house, treatment) %&gt;% \n  mutate(treatment = forcats::fct_relevel(treatment, \"pretreatment\")) %&gt;% \n  mutate(nr_sheets = as_factor(nr_sheets)) %&gt;% \n  ggplot(aes(x=treatment, y = house, fill = nr_sheets)) +\n    geom_tile() +\n    scale_fill_manual(values=c(\"#fdae61\", \"#fee08b\", \"#e6f598\", \"#abdda4\"), na.value = \"grey90\") +\n    cowplot::theme_cowplot() +\n    theme(axis.text.x=element_text(angle=45,hjust=1)) \n\n\n#But we have length(list.files(path = sheet_folder)) (68 * 20) - length(list.files(path = sheet_folder)) ## are missing\ntibble(filename = list.files(path = sheet_folder)) %&gt;% mutate(house = as.numeric(str_sub(filename, 1, 3))) %&gt;%\ngroup_by(house) %&gt;% summarise(nr_sheets = n()) %&gt;% summarise(max_nr_sheets = max(nr_sheets), min_nr_sheets = min(nr_sheets), median_nr_sheets = median(nr_sheets))"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#the-warning-is-because-naming-was-not-consistent",
+    "href": "presentations/data_wragling_of_field_data.html#the-warning-is-because-naming-was-not-consistent",
+    "title": "Data wrangling with field data",
+    "section": "the warning is because naming was not consistent",
+    "text": "the warning is because naming was not consistent\ntibble(filename = list.files(path = sheet_folder)) %&gt;% mutate(house = as.numeric(str_sub(filename, 1, 3))) %&gt;%\ngroup_by(house) %&gt;% summarise(nr_sheets = n()) %&gt;% group_by(nr_sheets) %&gt;% summarise(nr_houses = n()) %&gt;% arrange(-nr_sheets)"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#quick-side-step",
+    "href": "presentations/data_wragling_of_field_data.html#quick-side-step",
+    "title": "Data wrangling with field data",
+    "section": "quick side step",
+    "text": "quick side step"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#note-that-here-there-are-na-values-because-the-tick-count-was-not-filled-out",
+    "href": "presentations/data_wragling_of_field_data.html#note-that-here-there-are-na-values-because-the-tick-count-was-not-filled-out",
+    "title": "Data wrangling with field data",
+    "section": "note that here there are NA values, because the tick count was not filled out",
+    "text": "note that here there are NA values, because the tick count was not filled out"
+  },
+  {
+    "objectID": "presentations/data_wragling_of_field_data.html#are-these-all-0-or-are-the-not-sampled",
+    "href": "presentations/data_wragling_of_field_data.html#are-these-all-0-or-are-the-not-sampled",
+    "title": "Data wrangling with field data",
+    "section": "are these all 0 or are the not sampled?",
+    "text": "are these all 0 or are the not sampled?\n\nlist.files()\n\n[1] \"data_wraggling_with_field_data_to_be_deleted.R\"\n[2] \"data_wragling_of_field_data.qmd\"               \n[3] \"data_wragling_of_field_data.rmarkdown\"         \n[4] \"data_wragling_of_field_data_files\"             \n[5] \"figures\"                                       \n[6] \"git_version_control.qmd\"                       \n[7] \"good_data_practises.qmd\"                       \n[8] \"pdf\"                                           \n[9] \"reproducibility_workshop.qmd\""
+  },
+  {
+    "objectID": "presentations/git_version_control.html#what-is-version-control",
+    "href": "presentations/git_version_control.html#what-is-version-control",
+    "title": "Introduction into git",
+    "section": "What is version control",
+    "text": "What is version control"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#lets-have-some-fun",
+    "href": "presentations/git_version_control.html#lets-have-some-fun",
+    "title": "Introduction into git",
+    "section": "Let’s have some fun !!",
+    "text": "Let’s have some fun !!"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#lets-have-some-fun-1",
+    "href": "presentations/git_version_control.html#lets-have-some-fun-1",
+    "title": "Introduction into git",
+    "section": "Let’s have some fun",
+    "text": "Let’s have some fun\nSorry I forgot I am in an mosquito lab"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#terminal",
+    "href": "presentations/git_version_control.html#terminal",
+    "title": "Introduction into git",
+    "section": "Terminal",
+    "text": "Terminal\n\n‘Easy’ start with git bash\n\nhttps://education.github.com/git-cheat-sheet-education.pdf"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#naming",
+    "href": "presentations/git_version_control.html#naming",
+    "title": "Introduction into git",
+    "section": "Naming",
+    "text": "Naming\n\nUse descriptive names for folders, files and variables\n\n\nUnderstandable but not to long\n\nm1 versus glm_count_full\ndata versus tick_counts_EA\n\n\n\n\n\n\n\n\nTip\n\n\nWhile a computer will ultimately run your code, it’ll be read by humans, so write code intended for humans!"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#naming-1",
+    "href": "presentations/git_version_control.html#naming-1",
+    "title": "Introduction into git",
+    "section": "Naming",
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#naming-2",
+    "href": "presentations/git_version_control.html#naming-2",
+    "title": "Introduction into git",
+    "section": "Naming",
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#naming-3",
+    "href": "presentations/git_version_control.html#naming-3",
+    "title": "Introduction into git",
+    "section": "Naming",
+    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’\n\nstyles\n\ncamelCase\nPascalCase\nsnake_case\n\n\n\nbe consistent"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#bonus",
+    "href": "presentations/git_version_control.html#bonus",
+    "title": "Introduction into git",
+    "section": "Bonus",
+    "text": "Bonus"
+  },
+  {
+    "objectID": "presentations/git_version_control.html#how-to-deal-with-r-programming-errors",
+    "href": "presentations/git_version_control.html#how-to-deal-with-r-programming-errors",
+    "title": "Introduction into git",
+    "section": "How to deal with R (programming) errors",
+    "text": "How to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions or use ChatGPT\ntrial and error\n\nit works –&gt; go back to your analysis\n\nerror -&gt; go back to 1."
+  },
+  {
     "objectID": "presentations/good_data_practises.html#data-1",
     "href": "presentations/good_data_practises.html#data-1",
     "title": "Good data practices",
@@ -126,101 +630,10 @@
     "text": "How to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions or use ChatGPT\ntrial and error\n\nit works –&gt; go back to your analysis\n\nerror -&gt; go back to 1."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Workshops",
-    "section": "",
-    "text": "This is the index site of the workshops page. It will have multiple presentations about data management, data analysis and data visualizations.\nThe site is created with Rstudio and Quarto (https://quarto.org/docs/websites)."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "David Jansen",
-    "section": "",
-    "text": "David Jansen is a data scientist at MCEVBD."
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "David Jansen",
-    "section": "Education",
-    "text": "Education\nUniversity of Zurich , Switzerland PhD in Animal communication | Sept 2009 - Apr 2013\nResume"
-  },
-  {
-    "objectID": "presentations/data_wragling_of_field_data.html",
-    "href": "presentations/data_wragling_of_field_data.html",
-    "title": "Data wrangling with field data",
-    "section": "",
-    "text": "For the xxx project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet. On the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.\nThe rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 ecotones and every zone has 4 sections. So it total there were 4 * 4 * 2 * 3 = 96 counts per yard per visit.\nThe files would be saved with as a csv file with the housenumber, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment.\nThe aim of the code I was writing was to open all the files, extract both the metadate and teh count data and combine all of it into a large file.\nAn early test of the code on a few of the sheets went well and worked as expected.\nHere is the story of how it went."
-  },
-  {
-    "objectID": "presentations/data_wragling_of_field_data.html#background",
-    "href": "presentations/data_wragling_of_field_data.html#background",
-    "title": "Data wrangling with field data",
-    "section": "Background",
-    "text": "Background\nFor the xxx project of Zack student collected tick count data in the the yard of peoples houses. This data was collected on a standardize datasheet. On the top of the datasheet there was a line for some metadata such as date, time, weather and name of people collecting the data.\nThe rest of the form had space to note the counts of 2 tick species in 3 different life stages. There were 4 ecotones and every zone has 4 sections. So it total there were 4 * 4 * 2 * 3 = 96 counts per yard per visit.\nThe files would be saved with as a csv file with the housenumber, date (mm_dd_yy) and experiment stage in the name. For example 012_07_12_23_pretreatment.\nThe aim of the code I was writing was to open all the files, extract both the metadate and teh count data and combine all of it into a large file.\nAn early test of the code on a few of the sheets went well and worked as expected.\nHere is the story of how it went."
-  },
-  {
-    "objectID": "presentations/git_version_control.html#what-is-version-control",
-    "href": "presentations/git_version_control.html#what-is-version-control",
-    "title": "Introduction into git",
-    "section": "What is version control",
-    "text": "What is version control"
-  },
-  {
-    "objectID": "presentations/git_version_control.html#naming",
-    "href": "presentations/git_version_control.html#naming",
-    "title": "Introduction into git",
-    "section": "Naming",
-    "text": "Naming\n\nUse descriptive names for folders, files and variables\n\n\nUnderstandable but not to long\n\nm1 versus glm_count_full\ndata versus tick_counts_EA\n\n\n\n\n\n\n\n\nTip\n\n\nWhile a computer will ultimately run your code, it’ll be read by humans, so write code intended for humans!"
-  },
-  {
-    "objectID": "presentations/git_version_control.html#naming-1",
-    "href": "presentations/git_version_control.html#naming-1",
-    "title": "Introduction into git",
-    "section": "Naming",
-    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’"
-  },
-  {
-    "objectID": "presentations/git_version_control.html#naming-2",
-    "href": "presentations/git_version_control.html#naming-2",
-    "title": "Introduction into git",
-    "section": "Naming",
-    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’"
-  },
-  {
-    "objectID": "presentations/git_version_control.html#naming-3",
-    "href": "presentations/git_version_control.html#naming-3",
-    "title": "Introduction into git",
-    "section": "Naming",
-    "text": "Naming\n\nBe aware on naming rules of programs\n\nAvoid special characters ($, @, *)\nAvoid name of functions\nNo spaces !!\nCase-sensitive (e.g. R) versus case insensitive (SQL)\nR (and many other languages) names can’t start with numbers and does not like spaces\n‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’\n\nstyles\n\ncamelCase\nPascalCase\nsnake_case\n\n\n\nbe consistent"
-  },
-  {
-    "objectID": "presentations/git_version_control.html#bonus",
-    "href": "presentations/git_version_control.html#bonus",
-    "title": "Introduction into git",
-    "section": "Bonus",
-    "text": "Bonus"
-  },
-  {
-    "objectID": "presentations/git_version_control.html#how-to-deal-with-r-programming-errors",
-    "href": "presentations/git_version_control.html#how-to-deal-with-r-programming-errors",
-    "title": "Introduction into git",
-    "section": "How to deal with R (programming) errors",
-    "text": "How to deal with R (programming) errors\n\ndon’t get frustrated by error messages\nread the error message\ngoogle the error message\ngoogle solutions or use ChatGPT\ntrial and error\n\nit works –&gt; go back to your analysis\n\nerror -&gt; go back to 1."
-  },
-  {
-    "objectID": "presentations/git_version_control.html#lets-have-some-fun",
-    "href": "presentations/git_version_control.html#lets-have-some-fun",
-    "title": "Introduction into git",
-    "section": "Let’s have some fun !!",
-    "text": "Let’s have some fun !!"
-  },
-  {
-    "objectID": "presentations/git_version_control.html#lets-have-some-fun-1",
-    "href": "presentations/git_version_control.html#lets-have-some-fun-1",
-    "title": "Introduction into git",
-    "section": "Let’s have some fun",
-    "text": "Let’s have some fun\nSorry I forgot I am in an mosquito lab"
+    "objectID": "presentations/reproducibility_workshop.html#folder-organization",
+    "href": "presentations/reproducibility_workshop.html#folder-organization",
+    "title": "Research reproducibility",
+    "section": "Folder organization",
+    "text": "Folder organization"
   }
 ]
