@@ -12,6 +12,7 @@ website:
       - section: "Presentations"
         contents:
           - presentations/good_data_practises.qmd
+          - presentations/data_wragling_of_field_data
           - presentations/git_version_control.qmd
 
 format:
