@@ -438,7 +438,7 @@
     "href": "presentations/data_wragling_of_field_data.html#are-these-all-0-or-are-the-not-sampled",
     "title": "Data wrangling with field data",
     "section": "are these all 0 or are the not sampled?",
-    "text": "are these all 0 or are the not sampled?\n\nlist.files()\n\n [1] \"CV.html\"                                       \n [2] \"CV.qmd\"                                        \n [3] \"data_wraggling_with_field_data_to_be_deleted.R\"\n [4] \"data_wragling_of_field_data.qmd\"               \n [5] \"data_wragling_of_field_data.rmarkdown\"         \n [6] \"data_wragling_of_field_data_files\"             \n [7] \"figures\"                                       \n [8] \"git_version_control.qmd\"                       \n [9] \"good_data_practises.qmd\"                       \n[10] \"MCEVBD_interview\"                              \n[11] \"MCEVBD_interview.qmd\"                          \n[12] \"pdf\"                                           \n[13] \"reproducibility_workshop.qmd\""
+    "text": "are these all 0 or are the not sampled?\n\nlist.files()\n\n [1] \"cv.html\"                                       \n [2] \"cv.qmd\"                                        \n [3] \"data_wraggling_with_field_data_to_be_deleted.R\"\n [4] \"data_wragling_of_field_data.qmd\"               \n [5] \"data_wragling_of_field_data.rmarkdown\"         \n [6] \"data_wragling_of_field_data_files\"             \n [7] \"figures\"                                       \n [8] \"git_version_control.qmd\"                       \n [9] \"good_data_practises.qmd\"                       \n[10] \"MCEVBD_interview\"                              \n[11] \"MCEVBD_interview.qmd\"                          \n[12] \"pdf\"                                           \n[13] \"reproducibility_workshop.qmd\""
   },
   {
     "objectID": "presentations/git_version_control.html#what-is-version-control",
@@ -698,5 +698,12 @@
     "title": "Research reproducibility",
     "section": "Folder organization",
     "text": "Folder organization"
+  },
+  {
+    "objectID": "presentations/cv.html",
+    "href": "presentations/cv.html",
+    "title": "Curriculum vitæ",
+    "section": "",
+    "text": "Download current CV"
   }
 ]
