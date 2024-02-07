@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../styles.css">
@@ -322,6 +387,8 @@
       margin-right: 0; 
     }
   </style>
+  <link href="../site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+  <script src="../site_libs/tabwid-1.1.3/tabwid.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -349,8 +416,10 @@ David Jansen
 <li><p>Basic Syntax Overview</p></li>
 <li><p>Example Visualizations</p></li>
 </ul>
-<p>{slide, footnote=“Thank you chatgpt to help me make some of these slides.”}</p>
-</section>
+
+<aside><div>
+<p>Thank you chatgpt to help me make some of these slides</p>
+</div></aside></section>
 <section id="what-is-ggplot2" class="slide level2">
 <h2>What is ggplot2?</h2>
 <ul>
@@ -368,85 +437,149 @@ David Jansen
 <li>Based on a coherent grammar of graphics, making it easy to understand and use.</li>
 <li>Works well with tidy data principles.</li>
 <li>Offers extensive documentation and a large community of users.</li>
-<li>There are many package that build on ggplot to work with specific kinds of data, e.g.;
+</ul></li>
+</ul>
+</section>
+<section id="why-use-ggplot2-1" class="slide level2">
+<h2>Why Use ggplot2?</h2>
 <ul>
-<li><strong>survminer</strong> for survival analysis</li>
-<li><strong>ggcorrplot</strong> for correlation plots</li>
-<li><strong>gganimate</strong> make plot animations ## Key Features of ggplot2</li>
-</ul></li>
-</ul></li>
 <li><strong>Grammar of Graphics:</strong> A systematic way to describe the components of a graph, including data, aesthetics, and geometric objects.</li>
 <li><strong>Layered Grammar:</strong> Allows you to build complex plots by adding layers of data and visual elements.</li>
 <li><strong>Faceting:</strong> Easily create multiple plots based on subsets of your data.</li>
 <li><strong>Themes:</strong> Customize the appearance of your plots with built-in or custom themes.</li>
 </ul>
 </section>
+<section id="why-use-ggplot2-2" class="slide level2">
+<h2>Why Use ggplot2?</h2>
+<ul>
+<li>There are many package that build on ggplot to work with specific kinds of data, e.g.;
+<ul>
+<li><strong>survminer</strong> for survival analysis</li>
+<li><strong>ggcorrplot</strong> for correlation plots</li>
+<li><strong>gganimate</strong> make plot animations ## Key Features of ggplot2</li>
+</ul></li>
+</ul>
+</section>
 <section id="basic-syntax-overview" class="slide level2">
 <h2>Basic Syntax Overview</h2>
 <ul>
 <li><code>ggplot()</code> function: Initializes a ggplot object.</li>
+<li><code>data</code> Can be given either directly or through a pipe</li>
 <li><code>aes()</code> function: Specifies aesthetic mappings between data variables and visual properties.</li>
 <li><code>geom_*()</code> functions: Add geometric objects (points, lines, bars, etc.) to your plot.</li>
 <li><code>facet_*()</code> functions: Facet your plot by one or more variables.</li>
 <li><code>theme()</code> function: Customize the appearance of your plot.</li>
 </ul>
 </section>
-<section id="example-visualizations" class="slide level2">
-<h2>Example Visualizations</h2>
+<section id="data-prep-for-plotting" class="slide level2">
+<h2>Data prep for plotting</h2>
 <ul>
-<li>Show examples of different types of plots created with ggplot2, such as:
-<ul>
-<li>Scatter plots</li>
-<li>Line plots</li>
-<li>Bar plots</li>
-<li>Histograms</li>
-<li>Box plots</li>
-<li>Density plots</li>
-</ul></li>
-<li>Briefly discuss how each plot is created and customized using ggplot2 syntax.</li>
+<li>Generally data needs to be in a long format</li>
+<li>Columns need top be in format you want to plot</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a><span class="fu">tibble</span>(<span class="at">location =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>),</span>
+<span id="cb1-4"><a></a>       <span class="at">week1 =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>),</span>
+<span id="cb1-5"><a></a>       <span class="at">week2 =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">15</span>),</span>
+<span id="cb1-6"><a></a>       <span class="at">week3 =</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">15</span>),</span>
+<span id="cb1-7"><a></a>       <span class="at">week4 =</span> <span class="fu">c</span>(<span class="dv">11</span>,  <span class="dv">20</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a></a>  flextable<span class="sc">::</span><span class="fu">flextable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-9abd60bc{}.cl-9aac8166{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-9ab86e2c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-9ab86e36{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-9ab89348{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ab8935c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ab8935d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ab89366{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ab89370{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ab8937a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-9abd60bc"><thead><tr style="overflow-wrap:break-word;"><th class="cl-9ab89348"><p class="cl-9ab86e2c"><span class="cl-9aac8166">location</span></p></th><th class="cl-9ab8935c"><p class="cl-9ab86e36"><span class="cl-9aac8166">week1</span></p></th><th class="cl-9ab8935c"><p class="cl-9ab86e36"><span class="cl-9aac8166">week2</span></p></th><th class="cl-9ab8935c"><p class="cl-9ab86e36"><span class="cl-9aac8166">week3</span></p></th><th class="cl-9ab8935c"><p class="cl-9ab86e36"><span class="cl-9aac8166">week4</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-9ab8935d"><p class="cl-9ab86e2c"><span class="cl-9aac8166">A</span></p></td><td class="cl-9ab89366"><p class="cl-9ab86e36"><span class="cl-9aac8166">10</span></p></td><td class="cl-9ab89366"><p class="cl-9ab86e36"><span class="cl-9aac8166">12</span></p></td><td class="cl-9ab89366"><p class="cl-9ab86e36"><span class="cl-9aac8166">14</span></p></td><td class="cl-9ab89366"><p class="cl-9ab86e36"><span class="cl-9aac8166">11</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9ab89370"><p class="cl-9ab86e2c"><span class="cl-9aac8166">B</span></p></td><td class="cl-9ab8937a"><p class="cl-9ab86e36"><span class="cl-9aac8166">12</span></p></td><td class="cl-9ab8937a"><p class="cl-9ab86e36"><span class="cl-9aac8166">15</span></p></td><td class="cl-9ab8937a"><p class="cl-9ab86e36"><span class="cl-9aac8166">15</span></p></td><td class="cl-9ab8937a"><p class="cl-9ab86e36"><span class="cl-9aac8166">20</span></p></td></tr></tbody></table></div>
+</div>
+</div>
 </section>
-<section id="conclusion" class="slide level2">
-<h2>Conclusion</h2>
+<section id="data-prep-for-plotting-1" class="slide level2">
+<h2>Data prep for plotting</h2>
 <ul>
-<li><strong>Summary:</strong>
-<ul>
-<li>ggplot2 is a powerful tool for creating elegant and customizable data visualizations in R.</li>
-<li>Its grammar of graphics framework makes it intuitive and flexible.</li>
-</ul></li>
-<li><strong>Resources:</strong>
-<ul>
-<li>Official ggplot2 documentation</li>
-<li>Online tutorials and community forums</li>
-</ul></li>
-<li><strong>Questions:</strong> Open the floor for any questions or discussion.</li>
+<li>Generally data needs to be in a long format</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">location =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>),</span>
+<span id="cb2-2"><a></a>       <span class="at">week1 =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>),</span>
+<span id="cb2-3"><a></a>       <span class="at">week2 =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">15</span>),</span>
+<span id="cb2-4"><a></a>       <span class="at">week3 =</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">15</span>),</span>
+<span id="cb2-5"><a></a>       <span class="at">week4 =</span> <span class="fu">c</span>(<span class="dv">11</span>,  <span class="dv">20</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"week"</span>, <span class="at">values_to =</span> <span class="st">"count"</span>, week1<span class="sc">:</span>week4) <span class="sc">%&gt;%</span>  </span>
+<span id="cb2-7"><a></a>  <span class="fu">mutate</span>(<span class="at">week =</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(week, <span class="at">pattern =</span> <span class="st">"week"</span>))) </span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-11"><a></a>  flextable<span class="sc">::</span><span class="fu">flextable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-9ad61170{}.cl-9acf2540{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-9ad1c5f2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-9ad1c5fc{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-9ad1d4de{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ad1d4e8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ad1d4e9{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ad1d4f2{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ad1d4f3{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ad1d4fc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-9ad61170"><thead><tr style="overflow-wrap:break-word;"><th class="cl-9ad1d4de"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">location</span></p></th><th class="cl-9ad1d4e8"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">week</span></p></th><th class="cl-9ad1d4e8"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">count</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-9ad1d4e9"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">A</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">1</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">10</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9ad1d4e9"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">A</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">2</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">12</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9ad1d4e9"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">A</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">3</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">14</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9ad1d4e9"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">A</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">4</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">11</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9ad1d4e9"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">B</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">1</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">12</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9ad1d4e9"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">B</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">2</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">15</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9ad1d4e9"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">B</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">3</span></p></td><td class="cl-9ad1d4f2"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">15</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9ad1d4f3"><p class="cl-9ad1c5f2"><span class="cl-9acf2540">B</span></p></td><td class="cl-9ad1d4fc"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">4</span></p></td><td class="cl-9ad1d4fc"><p class="cl-9ad1c5fc"><span class="cl-9acf2540">20</span></p></td></tr></tbody></table></div>
+</div>
+</div>
 </section>
-<section id="what-is-ggplot" class="slide level2">
-<h2>What is ggplot</h2>
-</section>
-<section id="essentials-parts-of-a-ggplot" class="slide level2">
-<h2>Essentials parts of a ggplot</h2>
-<p>ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point() ```</p>
-<p>Let’s go through this step by step</p>
+<section id="first-simple-plot-1" class="slide level2">
+<h2>First simple plot (1)</h2>
 <ul>
-<li><p>ggplot() is the function to start the plot</p>
-<ul>
-<li><p>It needs data</p></li>
-<li><p>It needs aesthetics (aes)</p>
-<ul>
-<li><p>what part of the data do you want to show and how</p>
-<ul>
-<li><p>x and y</p></li>
-<li><p>color</p></li>
-<li><p>shape</p></li>
-<li><p>…</p></li>
-</ul></li>
-</ul></li>
-</ul></li>
+<li>basic plot</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> week, <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb3-2"><a></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<div class="quarto-auto-generated-content">
+</div>
+<img data-src="intro_into_ggplot_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="first-simple-plot-2" class="slide level2">
+<h2>First simple plot (2)</h2>
+<ul>
+<li>add color</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> week, <span class="at">y =</span> count, <span class="at">color =</span> location)) <span class="sc">+</span></span>
+<span id="cb4-2"><a></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro_into_ggplot_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<section id="first-simple-plot-2-1" class="slide level2">
+<h2>First simple plot (2)</h2>
+<ul>
+<li>change size of dots</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> week, <span class="at">y =</span> count, <span class="at">color =</span> location)) <span class="sc">+</span></span>
+<span id="cb5-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro_into_ggplot_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="first-simple-plot-3" class="slide level2">
+<h2>First simple plot (3)</h2>
+<ul>
+<li>change axis</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> week, <span class="at">y =</span> count, <span class="at">color =</span> location)) <span class="sc">+</span></span>
+<span id="cb6-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">22</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro_into_ggplot_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="first-simple-plot-4" class="slide level2">
+<h2>First simple plot (4)</h2>
+<ul>
+<li>change labels and theme</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> week, <span class="at">y =</span> count, <span class="at">color =</span> location)) <span class="sc">+</span></span>
+<span id="cb7-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">22</span>)) <span class="sc">+</span></span>
+<span id="cb7-4"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"sample week"</span>, <span class="at">y =</span> <span class="st">"tick count"</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a></a>  <span class="fu">theme_classic</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="intro_into_ggplot_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="ok-lets-have-some-fun-with-more-complex-tables" class="slide level2">
+<h2>Ok lets have some fun with more complex tables</h2>
+</section>
+<section id="combination-of-3-plots" class="slide level2">
+<h2>Combination of 3 plots</h2>
+
+
+<img data-src="..\images/Fig3.png" class="quarto-figure quarto-figure-center r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
@@ -643,6 +776,44 @@ David Jansen
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

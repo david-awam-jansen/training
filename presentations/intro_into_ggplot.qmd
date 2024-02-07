@@ -32,81 +32,144 @@ output:
 
 -   Example Visualizations
 
-{slide, footnote="Thank you chatgpt to help me make some of these slides."}
+::: aside
+Thank you chatgpt to help me make some of these slides
+:::
 
 ## What is ggplot2?
 
-- **Definition:** ggplot2 is an R package for creating data visualizations based on the grammar of graphics.
-- **Created by:** Hadley Wickham
-- **First released:** 2007
-
+-   **Definition:** ggplot2 is an R package for creating data visualizations based on the grammar of graphics.
+-   **Created by:** Hadley Wickham
+-   **First released:** 2007
 
 ## Why Use ggplot2?
-- **Advantages:**
-  - Produces visually appealing and customizable plots.
-  - Based on a coherent grammar of graphics, making it easy to understand and use.
-  - Works well with tidy data principles.
-  - Offers extensive documentation and a large community of users.
-  - There are many package that build on ggplot to work with specific kinds of data, e.g.; 
-    - **survminer** for survival analysis
-    - **ggcorrplot** for correlation plots
-    - **gganimate** make plot animations
-## Key Features of ggplot2
-- **Grammar of Graphics:** A systematic way to describe the components of a graph, including data, aesthetics, and geometric objects.
-- **Layered Grammar:** Allows you to build complex plots by adding layers of data and visual elements.
-- **Faceting:** Easily create multiple plots based on subsets of your data.
-- **Themes:** Customize the appearance of your plots with built-in or custom themes.
+
+-   **Advantages:**
+    -   Produces visually appealing and customizable plots.
+    -   Based on a coherent grammar of graphics, making it easy to understand and use.
+    -   Works well with tidy data principles.
+    -   Offers extensive documentation and a large community of users.
+
+## Why Use ggplot2?
+
+-   **Grammar of Graphics:** A systematic way to describe the components of a graph, including data, aesthetics, and geometric objects.
+-   **Layered Grammar:** Allows you to build complex plots by adding layers of data and visual elements.
+-   **Faceting:** Easily create multiple plots based on subsets of your data.
+-   **Themes:** Customize the appearance of your plots with built-in or custom themes.
+
+## Why Use ggplot2?
+
+-   There are many package that build on ggplot to work with specific kinds of data, e.g.;
+    -   **survminer** for survival analysis
+    -   **ggcorrplot** for correlation plots
+    -   **gganimate** make plot animations \## Key Features of ggplot2
 
 ## Basic Syntax Overview
-- `ggplot()` function: Initializes a ggplot object.
-- `aes()` function: Specifies aesthetic mappings between data variables and visual properties.
-- `geom_*()` functions: Add geometric objects (points, lines, bars, etc.) to your plot.
-- `facet_*()` functions: Facet your plot by one or more variables.
-- `theme()` function: Customize the appearance of your plot.
 
-## Example Visualizations
-- Show examples of different types of plots created with ggplot2, such as:
-  - Scatter plots
-  - Line plots
-  - Bar plots
-  - Histograms
-  - Box plots
-  - Density plots
-- Briefly discuss how each plot is created and customized using ggplot2 syntax.
+-   `ggplot()` function: Initializes a ggplot object.
+-   `data` Can be given either directly or through a pipe
+-   `aes()` function: Specifies aesthetic mappings between data variables and visual properties.
+-   `geom_*()` functions: Add geometric objects (points, lines, bars, etc.) to your plot.
+-   `facet_*()` functions: Facet your plot by one or more variables.
+-   `theme()` function: Customize the appearance of your plot.
 
-## Conclusion
-- **Summary:** 
-  - ggplot2 is a powerful tool for creating elegant and customizable data visualizations in R.
-  - Its grammar of graphics framework makes it intuitive and flexible.
-- **Resources:** 
-  - Official ggplot2 documentation
-  - Online tutorials and community forums
-- **Questions:** Open the floor for any questions or discussion.
+## Data prep for plotting
 
+-   Generally data needs to be in a long format
+-   Columns need top be in format you want to plot
 
+```{r}
+library(tidyverse)
 
-## What is ggplot
-
-## Essentials parts of a ggplot
-
-ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-    geom_point()
+tibble(location = c("A", "B"),
+       week1 = c(10, 12),
+       week2 = c(12, 15),
+       week3 = c(14, 15),
+       week4 = c(11,  20)) %>% 
+  flextable::flextable()
 ```
 
-Let's go through this step by step
+## Data prep for plotting
 
--   ggplot() is the function to start the plot
+-   Generally data needs to be in a long format
 
-    -   It needs data
+```{r}
+df <- tibble(location = c("A", "B"),
+       week1 = c(10, 12),
+       week2 = c(12, 15),
+       week3 = c(14, 15),
+       week4 = c(11,  20)) %>% 
+  pivot_longer(names_to = "week", values_to = "count", week1:week4) %>%  
+  mutate(week = as.numeric(str_remove(week, pattern = "week"))) 
 
-    -   It needs aesthetics (aes)
 
-        -   what part of the data do you want to show and how
+df %>% 
+  flextable::flextable()
+```
 
-            -   x and y
+## First simple plot (1)
 
-            -   color
+-   basic plot
 
-            -   shape
+```{r}
+ggplot(data = df, aes(x = week, y = count)) +
+  geom_point()
+```
 
-            -   ...
+## First simple plot (2)
+
+-   add color
+
+```{r}
+ggplot(data = df, aes(x = week, y = count, color = location)) +
+  geom_point()
+```
+
+## First simple plot (2)
+
+-   change size of dots
+
+```{r}
+ggplot(data = df, aes(x = week, y = count, color = location)) +
+  geom_point(size = 5)
+```
+
+## First simple plot (3)
+
+-   change axis
+
+```{r}
+ggplot(data = df, aes(x = week, y = count, color = location)) +
+  geom_point(size = 5) +
+  scale_y_continuous(limits = c(0,22))
+```
+
+## First simple plot (4)
+
+-   change labels and theme
+
+```{r}
+ggplot(data = df, aes(x = week, y = count, color = location)) +
+  geom_point(size = 5) +
+  scale_y_continuous(limits = c(0,22)) +
+  labs(x = "sample week", y = "tick count") +
+  theme_classic() 
+  
+```
+
+# Ok lets have some fun with more complex figures
+
+## Zack's heatmap
+
+![](/images/heatmap){fig-align="center"}
+
+## Zack's heatmap (code)
+
+```{r}
+
+
+```
+
+## Combination of 3 plots
+
+![](/images/Fig3){fig-align="center"}

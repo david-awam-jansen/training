@@ -1,0 +1,109 @@
+treatment_type,week,transect,median_Ix,sum_Ix,min_Ix,max_Ix,area_dragged,nr_sections,density
+Untreated,1,lawn,0,10,10,10,316,79,12.658227848101268
+Untreated,1,lawn-ecotone,0,18,18,18,316,79,22.78481012658228
+Untreated,1,wood,0,38,38,38,316,79,48.10126582278481
+Untreated,1,wood-ecotone,0,22,22,22,316,79,27.848101265822784
+Untreated,2,lawn,0,19,19,19,301,75,25.333333333333336
+Untreated,2,lawn-ecotone,0,29,29,29,301,75,38.66666666666667
+Untreated,2,wood,0,45,45,45,301,75,60
+Untreated,2,wood-ecotone,0,22,22,22,301,76,28.94736842105263
+Untreated,3,lawn,0,13,13,13,304,76,17.105263157894736
+Untreated,3,lawn-ecotone,0,28,28,28,304,76,36.84210526315789
+Untreated,3,wood,0,19,19,19,304,76,25
+Untreated,3,wood-ecotone,0,26,26,26,304,76,34.21052631578947
+Untreated,4,lawn,0,7,7,7,300,75,9.333333333333334
+Untreated,4,lawn-ecotone,0,14,14,14,300,75,18.666666666666668
+Untreated,4,wood,0,26,26,26,300,75,34.666666666666664
+Untreated,4,wood-ecotone,0,12,12,12,300,75,16
+Untreated,5,lawn,0,4,4,4,291,75,5.333333333333334
+Untreated,5,lawn-ecotone,0,7,7,7,291,75,9.333333333333334
+Untreated,5,wood,0,9,9,9,291,70,12.857142857142856
+Untreated,5,wood-ecotone,0,14,14,14,291,71,19.718309859154928
+Untreated,6,lawn,0,3,3,3,300,75,4
+Untreated,6,lawn-ecotone,0,3,3,3,300,75,4
+Untreated,6,wood,0,14,14,14,300,75,18.666666666666668
+Untreated,6,wood-ecotone,0,3,3,3,300,75,4
+Untreated,7,lawn,0,3,3,3,299,75,4
+Untreated,7,lawn-ecotone,0,3,3,3,299,75,4
+Untreated,7,wood,0,5,5,5,299,75,6.666666666666666
+Untreated,7,wood-ecotone,0,10,10,10,299,74,13.513513513513514
+Untreated,8,lawn,0,3,3,3,312,78,3.8461538461538463
+Untreated,8,lawn-ecotone,0,3,3,3,312,78,3.8461538461538463
+Untreated,8,wood,0,9,9,9,312,78,11.538461538461538
+Untreated,8,wood-ecotone,0,3,3,3,312,78,3.8461538461538463
+Untreated,0,lawn,0,4,4,4,299,75,5.333333333333334
+Untreated,0,lawn-ecotone,0,10,10,10,299,75,13.333333333333332
+Untreated,0,wood,0,38,38,38,299,74,51.35135135135135
+Untreated,0,wood-ecotone,0,21,21,21,299,75,28.000000000000004
+Mosquito Only,1,lawn,0,1,1,1,319,82,1.2195121951219512
+Mosquito Only,1,lawn-ecotone,0,4,4,4,319,79,5.063291139240507
+Mosquito Only,1,wood,0,13,13,13,319,80,16.25
+Mosquito Only,1,wood-ecotone,0,3,3,3,319,80,3.75
+Mosquito Only,2,lawn,0,4,4,4,306,78,5.128205128205129
+Mosquito Only,2,lawn-ecotone,0,6,6,6,306,79,7.59493670886076
+Mosquito Only,2,wood,0,12,12,12,306,72,16.666666666666668
+Mosquito Only,2,wood-ecotone,0,3,3,3,306,76,3.947368421052632
+Mosquito Only,3,lawn,0,5,5,5,299,75,6.666666666666666
+Mosquito Only,3,lawn-ecotone,0,5,5,5,299,78,6.41025641025641
+Mosquito Only,3,wood,0,18,18,18,299,70,25.71428571428571
+Mosquito Only,3,wood-ecotone,0,14,14,14,299,76,18.421052631578945
+Mosquito Only,4,lawn,0,3,3,3,NA,74,4.054054054054054
+Mosquito Only,4,lawn-ecotone,0,3,3,3,NA,75,4
+Mosquito Only,4,wood,0,9,9,9,NA,69,13.043478260869565
+Mosquito Only,4,wood-ecotone,0,3,3,3,NA,71,4.225352112676056
+Mosquito Only,5,lawn,0,2,2,2,307,79,2.5316455696202533
+Mosquito Only,5,lawn-ecotone,0,4,4,4,307,79,5.063291139240507
+Mosquito Only,5,wood,0,2,2,2,307,75,2.666666666666667
+Mosquito Only,5,wood-ecotone,0,3,3,3,307,75,4
+Mosquito Only,6,lawn,0,1,1,1,293,76,1.3157894736842104
+Mosquito Only,6,lawn-ecotone,0,3,3,3,293,75,4
+Mosquito Only,6,wood,0,0,0,0,293,69,0
+Mosquito Only,6,wood-ecotone,0,1,1,1,293,70,1.4285714285714286
+Mosquito Only,7,lawn,0,1,1,1,301,79,1.2658227848101267
+Mosquito Only,7,lawn-ecotone,0,2,2,2,301,79,2.5316455696202533
+Mosquito Only,7,wood,0,0,0,0,301,70,0
+Mosquito Only,7,wood-ecotone,0,3,3,3,301,73,4.10958904109589
+Mosquito Only,8,lawn,0,1,1,1,307,79,1.2658227848101267
+Mosquito Only,8,lawn-ecotone,0,1,1,1,307,79,1.2658227848101267
+Mosquito Only,8,wood,0,1,1,1,307,72,1.3888888888888886
+Mosquito Only,8,wood-ecotone,0,1,1,1,307,76,1.3157894736842104
+Mosquito Only,0,lawn,0,13,13,13,304,78,16.666666666666668
+Mosquito Only,0,lawn-ecotone,0,27,27,27,304,78,34.61538461538462
+Mosquito Only,0,wood,0,21,21,21,304,76,27.631578947368425
+Mosquito Only,0,wood-ecotone,0,26,26,26,304,80,32.5
+Mosquito & Tick,1,lawn,0,3,3,3,326,85,3.5294117647058827
+Mosquito & Tick,1,lawn-ecotone,0,1,1,1,326,86,1.1627906976744187
+Mosquito & Tick,1,wood,0,5,5,5,326,74,6.756756756756757
+Mosquito & Tick,1,wood-ecotone,0,0,0,0,326,82,0
+Mosquito & Tick,2,lawn,0,6,6,6,330,85,7.058823529411765
+Mosquito & Tick,2,lawn-ecotone,0,3,3,3,330,85,3.5294117647058827
+Mosquito & Tick,2,wood,0,4,4,4,330,81,4.938271604938271
+Mosquito & Tick,2,wood-ecotone,0,0,0,0,330,81,0
+Mosquito & Tick,3,lawn,0,2,2,2,323,81,2.4691358024691357
+Mosquito & Tick,3,lawn-ecotone,0,1,1,1,323,85,1.176470588235294
+Mosquito & Tick,3,wood,0,7,7,7,323,76,9.210526315789473
+Mosquito & Tick,3,wood-ecotone,0,2,2,2,323,79,2.5316455696202533
+Mosquito & Tick,4,lawn,0,1,1,1,330,85,1.176470588235294
+Mosquito & Tick,4,lawn-ecotone,0,1,1,1,330,85,1.176470588235294
+Mosquito & Tick,4,wood,0,12,12,12,330,80,15
+Mosquito & Tick,4,wood-ecotone,0,0,0,0,330,80,0
+Mosquito & Tick,5,lawn,0,0,0,0,325,85,0
+Mosquito & Tick,5,lawn-ecotone,0,0,0,0,325,85,0
+Mosquito & Tick,5,wood,0,2,2,2,325,76,2.631578947368421
+Mosquito & Tick,5,wood-ecotone,0,1,1,1,325,79,1.2658227848101267
+Mosquito & Tick,6,lawn,0,0,0,0,328,83,0
+Mosquito & Tick,6,lawn-ecotone,0,0,0,0,328,85,0
+Mosquito & Tick,6,wood,0,0,0,0,328,79,0
+Mosquito & Tick,6,wood-ecotone,0,0,0,0,328,80,0
+Mosquito & Tick,7,lawn,0,0,0,0,310,81,0
+Mosquito & Tick,7,lawn-ecotone,0,1,1,1,310,82,1.2195121951219512
+Mosquito & Tick,7,wood,0,1,1,1,310,73,1.36986301369863
+Mosquito & Tick,7,wood-ecotone,0,1,1,1,310,78,1.2820512820512822
+Mosquito & Tick,8,lawn,0,1,1,1,329,86,1.1627906976744187
+Mosquito & Tick,8,lawn-ecotone,0,0,0,0,329,86,0
+Mosquito & Tick,8,wood,0,0,0,0,329,76,0
+Mosquito & Tick,8,wood-ecotone,0,0,0,0,329,81,0
+Mosquito & Tick,0,lawn,0,13,13,13,330,87,14.942528735632186
+Mosquito & Tick,0,lawn-ecotone,0,19,19,19,330,87,21.839080459770116
+Mosquito & Tick,0,wood,0,19,19,19,330,79,24.050632911392405
+Mosquito & Tick,0,wood-ecotone,0,9,9,9,330,80,11.25

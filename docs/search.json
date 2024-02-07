@@ -4,7 +4,7 @@
     "href": "presentations/intro_into_ggplot.html#agenda",
     "title": "Introduction to ggplot2",
     "section": "Agenda",
-    "text": "Agenda\n\nWhat is ggplot2?\nWhy use ggplot2?\nKey Features of ggplot2\nBasic Syntax Overview\nExample Visualizations\n\n{slide, footnote=“Thank you chatgpt to help me make some of these slides.”}",
+    "text": "Agenda\n\nWhat is ggplot2?\nWhy use ggplot2?\nKey Features of ggplot2\nBasic Syntax Overview\nExample Visualizations\n\n\n\nThank you chatgpt to help me make some of these slides",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
@@ -26,7 +26,7 @@
     "href": "presentations/intro_into_ggplot.html#why-use-ggplot2",
     "title": "Introduction to ggplot2",
     "section": "Why Use ggplot2?",
-    "text": "Why Use ggplot2?\n\nAdvantages:\n\nProduces visually appealing and customizable plots.\nBased on a coherent grammar of graphics, making it easy to understand and use.\nWorks well with tidy data principles.\nOffers extensive documentation and a large community of users.\nThere are many package that build on ggplot to work with specific kinds of data, e.g.;\n\nsurvminer for survival analysis\nggcorrplot for correlation plots\ngganimate make plot animations ## Key Features of ggplot2\n\n\nGrammar of Graphics: A systematic way to describe the components of a graph, including data, aesthetics, and geometric objects.\nLayered Grammar: Allows you to build complex plots by adding layers of data and visual elements.\nFaceting: Easily create multiple plots based on subsets of your data.\nThemes: Customize the appearance of your plots with built-in or custom themes.",
+    "text": "Why Use ggplot2?\n\nAdvantages:\n\nProduces visually appealing and customizable plots.\nBased on a coherent grammar of graphics, making it easy to understand and use.\nWorks well with tidy data principles.\nOffers extensive documentation and a large community of users.",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
@@ -37,7 +37,7 @@
     "href": "presentations/intro_into_ggplot.html#basic-syntax-overview",
     "title": "Introduction to ggplot2",
     "section": "Basic Syntax Overview",
-    "text": "Basic Syntax Overview\n\nggplot() function: Initializes a ggplot object.\naes() function: Specifies aesthetic mappings between data variables and visual properties.\ngeom_*() functions: Add geometric objects (points, lines, bars, etc.) to your plot.\nfacet_*() functions: Facet your plot by one or more variables.\ntheme() function: Customize the appearance of your plot.",
+    "text": "Basic Syntax Overview\n\nggplot() function: Initializes a ggplot object.\ndata Can be given either directly or through a pipe\naes() function: Specifies aesthetic mappings between data variables and visual properties.\ngeom_*() functions: Add geometric objects (points, lines, bars, etc.) to your plot.\nfacet_*() functions: Facet your plot by one or more variables.\ntheme() function: Customize the appearance of your plot.",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
@@ -82,6 +82,127 @@
     "title": "Introduction to ggplot2",
     "section": "Essentials parts of a ggplot",
     "text": "Essentials parts of a ggplot\nggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point() ```\nLet’s go through this step by step\n\nggplot() is the function to start the plot\n\nIt needs data\nIt needs aesthetics (aes)\n\nwhat part of the data do you want to show and how\n\nx and y\ncolor\nshape\n…",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#why-use-ggplot2-1",
+    "href": "presentations/intro_into_ggplot.html#why-use-ggplot2-1",
+    "title": "Introduction to ggplot2",
+    "section": "Why Use ggplot2?",
+    "text": "Why Use ggplot2?\n\nGrammar of Graphics: A systematic way to describe the components of a graph, including data, aesthetics, and geometric objects.\nLayered Grammar: Allows you to build complex plots by adding layers of data and visual elements.\nFaceting: Easily create multiple plots based on subsets of your data.\nThemes: Customize the appearance of your plots with built-in or custom themes.",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#why-use-ggplot2-2",
+    "href": "presentations/intro_into_ggplot.html#why-use-ggplot2-2",
+    "title": "Introduction to ggplot2",
+    "section": "Why Use ggplot2?",
+    "text": "Why Use ggplot2?\n\nThere are many package that build on ggplot to work with specific kinds of data, e.g.;\n\nsurvminer for survival analysis\nggcorrplot for correlation plots\ngganimate make plot animations ## Key Features of ggplot2",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#data-prep-for-plotting",
+    "href": "presentations/intro_into_ggplot.html#data-prep-for-plotting",
+    "title": "Introduction to ggplot2",
+    "section": "Data prep for plotting",
+    "text": "Data prep for plotting\n\nGenerally data needs to be in a long format\nColumns need top be in format you want to plot\n\n\nlibrary(tidyverse)\n\ntibble(location = c(\"A\", \"B\"),\n       week1 = c(10, 12),\n       week2 = c(12, 15),\n       week3 = c(14, 15),\n       week4 = c(11,  20)) %&gt;% \n  flextable::flextable()\n\nlocationweek1week2week3week4A10121411B12151520",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#data-prep-for-plotting-1",
+    "href": "presentations/intro_into_ggplot.html#data-prep-for-plotting-1",
+    "title": "Introduction to ggplot2",
+    "section": "Data prep for plotting",
+    "text": "Data prep for plotting\n\nGenerally data needs to be in a long format\n\n\ndf &lt;- tibble(location = c(\"A\", \"B\"),\n       week1 = c(10, 12),\n       week2 = c(12, 15),\n       week3 = c(14, 15),\n       week4 = c(11,  20)) %&gt;% \n  pivot_longer(names_to = \"week\", values_to = \"count\", week1:week4) %&gt;%  \n  mutate(week = as.numeric(str_remove(week, pattern = \"week\"))) \n\n\ndf %&gt;% \n  flextable::flextable()\n\nlocationweekcountA110A212A314A411B112B215B315B420",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#first-simple-plot-1",
+    "href": "presentations/intro_into_ggplot.html#first-simple-plot-1",
+    "title": "Introduction to ggplot2",
+    "section": "First simple plot (1)",
+    "text": "First simple plot (1)\n\nbasic plot\n\n\nggplot(data = df, aes(x = week, y = count)) +\n  geom_point()",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#first-simple-plot-2",
+    "href": "presentations/intro_into_ggplot.html#first-simple-plot-2",
+    "title": "Introduction to ggplot2",
+    "section": "First simple plot (2)",
+    "text": "First simple plot (2)\n\nadd color\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point()",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#first-simple-plot-2-1",
+    "href": "presentations/intro_into_ggplot.html#first-simple-plot-2-1",
+    "title": "Introduction to ggplot2",
+    "section": "First simple plot (2)",
+    "text": "First simple plot (2)\n\nchange size of dots\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point(size = 5)",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#first-simple-plot-3",
+    "href": "presentations/intro_into_ggplot.html#first-simple-plot-3",
+    "title": "Introduction to ggplot2",
+    "section": "First simple plot (3)",
+    "text": "First simple plot (3)\n\nchange axis\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point(size = 5) +\n  scale_y_continuous(limits = c(0,22))",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#first-simple-plot-4",
+    "href": "presentations/intro_into_ggplot.html#first-simple-plot-4",
+    "title": "Introduction to ggplot2",
+    "section": "First simple plot (4)",
+    "text": "First simple plot (4)\n\nchange labels and theme\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point(size = 5) +\n  scale_y_continuous(limits = c(0,22)) +\n  labs(x = \"sample week\", y = \"tick count\") +\n  theme_classic()",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#ok-lets-have-some-fun-with-more-complex-tables",
+    "href": "presentations/intro_into_ggplot.html#ok-lets-have-some-fun-with-more-complex-tables",
+    "title": "Introduction to ggplot2",
+    "section": "Ok lets have some fun with more complex tables",
+    "text": "Ok lets have some fun with more complex tables",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#combination-of-3-plots",
+    "href": "presentations/intro_into_ggplot.html#combination-of-3-plots",
+    "title": "Introduction to ggplot2",
+    "section": "Combination of 3 plots",
+    "text": "Combination of 3 plots",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
