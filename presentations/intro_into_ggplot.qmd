@@ -1,0 +1,41 @@
+---
+title: "Introduction into ggplot"
+date: last-modified
+author: "David Jansen"
+execute:
+  include: true
+  echo: true
+format:
+  revealjs: 
+    theme: sky
+    css: ../styles.css
+    reveal_plugins: notes
+    mathjax: NULL
+---
+
+## What is ggplot
+
+## Essentials parts of a ggplot
+
+```{r}
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+	geom_point()
+```
+
+Let's go through this step by step
+
+-   ggplot() is the function to start the plot
+
+    -   It needs data
+
+    -   It needs aesthetics (aes)
+
+        -   what part of the data do you want to show and how
+
+            -   x and y
+
+            -   color
+
+            -   shape
+
+            -   ...
