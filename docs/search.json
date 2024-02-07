@@ -235,7 +235,7 @@
     "href": "presentations/intro_into_ggplot.html#resources",
     "title": "Introduction to ggplot2",
     "section": "Resources",
-    "text": "Resources\n\nchatgpt and google\nfind examples and build from there\nuseful webpages\n\nhttps://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html\nhttps://ggplot2tor.com/theme/\nhttps://r-graph-gallery.com/\n\nR Graphics Cookbook (I have a copy)\nask me (I love making visualizations)",
+    "text": "Resources\n\nchatgpt and google\nfind examples and build from there\nuseful webpages\n\nhttps://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html\nhttps://ggplot2tor.com/theme/\nhttps://r-graph-gallery.com/\nhttps://rstudio.github.io/cheatsheets/html/data-visualization.html\n\nR Graphics Cookbook (I have a copy)\nask me (I love making visualizations)",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
@@ -247,6 +247,28 @@
     "title": "Introduction to ggplot2",
     "section": "Survival analysis in a baboon paper",
     "text": "Survival analysis in a baboon paper",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#tick-classification",
+    "href": "presentations/intro_into_ggplot.html#tick-classification",
+    "title": "Introduction to ggplot2",
+    "section": "Tick classification",
+    "text": "Tick classification\nThis is a very preliminary look at this data, so please judge or share the data.",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#tick-classification-1",
+    "href": "presentations/intro_into_ggplot.html#tick-classification-1",
+    "title": "Introduction to ggplot2",
+    "section": "Tick classification",
+    "text": "Tick classification\nThis is a very preliminary look at this data, so please judge or share the data.",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
