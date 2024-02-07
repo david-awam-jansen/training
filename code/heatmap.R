@@ -18,4 +18,4 @@ ggplot(aes(x = week, y = transect, fill = density)) +
 				legend.text = element_text(size = 16),
 				legend.title = element_text(size = 19),
 				title = element_text(size = 15),
-				strip.text = element_text(size = 15))
+				strip.text = element_text(size = 10))

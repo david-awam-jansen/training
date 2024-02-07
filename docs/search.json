@@ -207,5 +207,49 @@
       "Workshops",
       "Introduction into ggplot"
     ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#zacks-heatmap",
+    "href": "presentations/intro_into_ggplot.html#zacks-heatmap",
+    "title": "Introduction to ggplot2",
+    "section": "Zack’s heatmap",
+    "text": "Zack’s heatmap",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#zacks-heatmap-code",
+    "href": "presentations/intro_into_ggplot.html#zacks-heatmap-code",
+    "title": "Introduction to ggplot2",
+    "section": "Zack’s heatmap (code)",
+    "text": "Zack’s heatmap (code)\n\nggplot(data = heatmap_data, aes(x = week, y = transect, fill = density)) +\n    geom_tile() +\n    facet_grid(treatment_type ~ .) +\n    scale_fill_gradient(low = \"white\", high = \"black\") +\n    guides(fill = guide_colorbar(title = \"Density of nymphs per 1000m2\"))  +\n    labs(y = \"\") +\n    theme(legend.position = \"bottom\",\n                legend.key.size = unit(1, 'cm')) +\n    theme(panel.background = element_blank(),\n                plot.background = element_blank(),\n                axis.text = element_text(size = 19))+\n    geom_vline(xintercept = c(1.5, 5.5), linetype = \"dashed\", size = 1.5) +\n    theme(axis.title = element_text(size = 16),\n                legend.text = element_text(size = 16),\n                legend.title = element_text(size = 19),\n                title = element_text(size = 15),\n                strip.text = element_text(size = 15))",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#resources",
+    "href": "presentations/intro_into_ggplot.html#resources",
+    "title": "Introduction to ggplot2",
+    "section": "Resources",
+    "text": "Resources\n\nchatgpt and google\nfind examples and build from there\nuseful webpages\n\nhttps://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html\nhttps://ggplot2tor.com/theme/\nhttps://r-graph-gallery.com/\n\nR Graphics Cookbook (I have a copy)\nask me (I love making visualizations)",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#survival-analysis-in-a-baboon-paper",
+    "href": "presentations/intro_into_ggplot.html#survival-analysis-in-a-baboon-paper",
+    "title": "Introduction to ggplot2",
+    "section": "Survival analysis in a baboon paper",
+    "text": "Survival analysis in a baboon paper",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
   }
 ]
