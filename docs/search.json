@@ -1,0 +1,90 @@
+[
+  {
+    "objectID": "presentations/intro_into_ggplot.html#agenda",
+    "href": "presentations/intro_into_ggplot.html#agenda",
+    "title": "Introduction to ggplot2",
+    "section": "Agenda",
+    "text": "Agenda\n\nWhat is ggplot2?\nWhy use ggplot2?\nKey Features of ggplot2\nBasic Syntax Overview\nExample Visualizations\n\n{slide, footnote=“Thank you chatgpt to help me make some of these slides.”}",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#what-is-ggplot2",
+    "href": "presentations/intro_into_ggplot.html#what-is-ggplot2",
+    "title": "Introduction to ggplot2",
+    "section": "What is ggplot2?",
+    "text": "What is ggplot2?\n\nDefinition: ggplot2 is an R package for creating data visualizations based on the grammar of graphics.\nCreated by: Hadley Wickham\nFirst released: 2007",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#why-use-ggplot2",
+    "href": "presentations/intro_into_ggplot.html#why-use-ggplot2",
+    "title": "Introduction to ggplot2",
+    "section": "Why Use ggplot2?",
+    "text": "Why Use ggplot2?\n\nAdvantages:\n\nProduces visually appealing and customizable plots.\nBased on a coherent grammar of graphics, making it easy to understand and use.\nWorks well with tidy data principles.\nOffers extensive documentation and a large community of users.\nThere are many package that build on ggplot to work with specific kinds of data, e.g.;\n\nsurvminer for survival analysis\nggcorrplot for correlation plots\ngganimate make plot animations ## Key Features of ggplot2\n\n\nGrammar of Graphics: A systematic way to describe the components of a graph, including data, aesthetics, and geometric objects.\nLayered Grammar: Allows you to build complex plots by adding layers of data and visual elements.\nFaceting: Easily create multiple plots based on subsets of your data.\nThemes: Customize the appearance of your plots with built-in or custom themes.",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#basic-syntax-overview",
+    "href": "presentations/intro_into_ggplot.html#basic-syntax-overview",
+    "title": "Introduction to ggplot2",
+    "section": "Basic Syntax Overview",
+    "text": "Basic Syntax Overview\n\nggplot() function: Initializes a ggplot object.\naes() function: Specifies aesthetic mappings between data variables and visual properties.\ngeom_*() functions: Add geometric objects (points, lines, bars, etc.) to your plot.\nfacet_*() functions: Facet your plot by one or more variables.\ntheme() function: Customize the appearance of your plot.",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#example-visualizations",
+    "href": "presentations/intro_into_ggplot.html#example-visualizations",
+    "title": "Introduction to ggplot2",
+    "section": "Example Visualizations",
+    "text": "Example Visualizations\n\nShow examples of different types of plots created with ggplot2, such as:\n\nScatter plots\nLine plots\nBar plots\nHistograms\nBox plots\nDensity plots\n\nBriefly discuss how each plot is created and customized using ggplot2 syntax.",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#conclusion",
+    "href": "presentations/intro_into_ggplot.html#conclusion",
+    "title": "Introduction to ggplot2",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nSummary:\n\nggplot2 is a powerful tool for creating elegant and customizable data visualizations in R.\nIts grammar of graphics framework makes it intuitive and flexible.\n\nResources:\n\nOfficial ggplot2 documentation\nOnline tutorials and community forums\n\nQuestions: Open the floor for any questions or discussion.",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#what-is-ggplot",
+    "href": "presentations/intro_into_ggplot.html#what-is-ggplot",
+    "title": "Introduction to ggplot2",
+    "section": "What is ggplot",
+    "text": "What is ggplot",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#essentials-parts-of-a-ggplot",
+    "href": "presentations/intro_into_ggplot.html#essentials-parts-of-a-ggplot",
+    "title": "Introduction to ggplot2",
+    "section": "Essentials parts of a ggplot",
+    "text": "Essentials parts of a ggplot\nggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point() ```\nLet’s go through this step by step\n\nggplot() is the function to start the plot\n\nIt needs data\nIt needs aesthetics (aes)\n\nwhat part of the data do you want to show and how\n\nx and y\ncolor\nshape\n…",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  }
+]

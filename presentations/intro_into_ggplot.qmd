@@ -13,13 +13,84 @@ format:
     mathjax: NULL
 ---
 
+---
+title: "Introduction to ggplot2"
+output:
+  quarto::pdf_document:
+    number_sections: true
+---
+
+## Agenda
+
+-   What is ggplot2?
+
+-   Why use ggplot2?
+
+-   Key Features of ggplot2
+
+-   Basic Syntax Overview
+
+-   Example Visualizations
+
+{slide, footnote="Thank you chatgpt to help me make some of these slides."}
+
+## What is ggplot2?
+
+- **Definition:** ggplot2 is an R package for creating data visualizations based on the grammar of graphics.
+- **Created by:** Hadley Wickham
+- **First released:** 2007
+
+
+## Why Use ggplot2?
+- **Advantages:**
+  - Produces visually appealing and customizable plots.
+  - Based on a coherent grammar of graphics, making it easy to understand and use.
+  - Works well with tidy data principles.
+  - Offers extensive documentation and a large community of users.
+  - There are many package that build on ggplot to work with specific kinds of data, e.g.; 
+    - **survminer** for survival analysis
+    - **ggcorrplot** for correlation plots
+    - **gganimate** make plot animations
+## Key Features of ggplot2
+- **Grammar of Graphics:** A systematic way to describe the components of a graph, including data, aesthetics, and geometric objects.
+- **Layered Grammar:** Allows you to build complex plots by adding layers of data and visual elements.
+- **Faceting:** Easily create multiple plots based on subsets of your data.
+- **Themes:** Customize the appearance of your plots with built-in or custom themes.
+
+## Basic Syntax Overview
+- `ggplot()` function: Initializes a ggplot object.
+- `aes()` function: Specifies aesthetic mappings between data variables and visual properties.
+- `geom_*()` functions: Add geometric objects (points, lines, bars, etc.) to your plot.
+- `facet_*()` functions: Facet your plot by one or more variables.
+- `theme()` function: Customize the appearance of your plot.
+
+## Example Visualizations
+- Show examples of different types of plots created with ggplot2, such as:
+  - Scatter plots
+  - Line plots
+  - Bar plots
+  - Histograms
+  - Box plots
+  - Density plots
+- Briefly discuss how each plot is created and customized using ggplot2 syntax.
+
+## Conclusion
+- **Summary:** 
+  - ggplot2 is a powerful tool for creating elegant and customizable data visualizations in R.
+  - Its grammar of graphics framework makes it intuitive and flexible.
+- **Resources:** 
+  - Official ggplot2 documentation
+  - Online tutorials and community forums
+- **Questions:** Open the floor for any questions or discussion.
+
+
+
 ## What is ggplot
 
 ## Essentials parts of a ggplot
 
-```{r}
 ggplot(data = mtcars, aes(x = wt, y = mpg)) +
-	geom_point()
+    geom_point()
 ```
 
 Let's go through this step by step
