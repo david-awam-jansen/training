@@ -103,7 +103,7 @@
     "href": "presentations/intro_into_ggplot.html#why-use-ggplot2-2",
     "title": "Introduction to ggplot2",
     "section": "Why Use ggplot2?",
-    "text": "Why Use ggplot2?\n\nThere are many package that build on ggplot to work with specific kinds of data, e.g.;\n\nsurvminer for survival analysis\nggcorrplot for correlation plots\ngganimate make plot animations ## Key Features of ggplot2",
+    "text": "Why Use ggplot2?\n\nThere are many package that build on ggplot to work with specific kinds of data, e.g.;\n\nsurvminer for survival analysis\nggcorrplot for correlation plots\ngganimate make plot animations",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
@@ -147,7 +147,7 @@
     "href": "presentations/intro_into_ggplot.html#first-simple-plot-2",
     "title": "Introduction to ggplot2",
     "section": "First simple plot (2)",
-    "text": "First simple plot (2)\n\nadd color\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point()",
+    "text": "First simple plot (2)\n\nchange size of the dots\n\n\nggplot(data = df, aes(x = week, y = count)) +\n  geom_point(size = 5)",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
@@ -169,7 +169,7 @@
     "href": "presentations/intro_into_ggplot.html#first-simple-plot-3",
     "title": "Introduction to ggplot2",
     "section": "First simple plot (3)",
-    "text": "First simple plot (3)\n\nchange axis\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point(size = 5) +\n  scale_y_continuous(limits = c(0,22))",
+    "text": "First simple plot (3)\n\nchange the color of the dots\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point(size = 5)",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
@@ -180,7 +180,7 @@
     "href": "presentations/intro_into_ggplot.html#first-simple-plot-4",
     "title": "Introduction to ggplot2",
     "section": "First simple plot (4)",
-    "text": "First simple plot (4)\n\nchange labels and theme\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point(size = 5) +\n  scale_y_continuous(limits = c(0,22)) +\n  labs(x = \"sample week\", y = \"tick count\") +\n  theme_classic()",
+    "text": "First simple plot (4)\n\nchange axis\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point(size = 5) +\n  scale_y_continuous(limits = c(0,22))",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"
@@ -269,6 +269,17 @@
     "title": "Introduction to ggplot2",
     "section": "Tick classification",
     "text": "Tick classification\nThis is a very preliminary look at this data, so please judge or share the data.",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#first-simple-plot-5",
+    "href": "presentations/intro_into_ggplot.html#first-simple-plot-5",
+    "title": "Introduction to ggplot2",
+    "section": "First simple plot (5)",
+    "text": "First simple plot (5)\n\nchange labels and theme\n\n\nggplot(data = df, aes(x = week, y = count, color = location)) +\n  geom_point(size = 5) +\n  scale_y_continuous(limits = c(0,22)) +\n  labs(x = \"sample week\", y = \"tick count\") +\n  theme_classic()",
     "crumbs": [
       "Workshops",
       "Introduction into ggplot"

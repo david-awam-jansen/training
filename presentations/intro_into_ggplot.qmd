@@ -60,7 +60,7 @@ Thank you chatgpt to help me make some of these slides
 -   There are many package that build on ggplot to work with specific kinds of data, e.g.;
     -   **survminer** for survival analysis
     -   **ggcorrplot** for correlation plots
-    -   **gganimate** make plot animations \## Key Features of ggplot2
+    -   **gganimate** make plot animations 
 
 ## Basic Syntax Overview
 
@@ -116,23 +116,22 @@ ggplot(data = df, aes(x = week, y = count)) +
 
 ## First simple plot (2)
 
--   add color
+-   change size of the dots
 
 ```{r}
-ggplot(data = df, aes(x = week, y = count, color = location)) +
-  geom_point()
+ggplot(data = df, aes(x = week, y = count)) +
+  geom_point(size = 5)
 ```
 
-## First simple plot (2)
+## First simple plot (3)
 
--   change size of dots
-
+- change the color of the dots
 ```{r}
 ggplot(data = df, aes(x = week, y = count, color = location)) +
   geom_point(size = 5)
 ```
 
-## First simple plot (3)
+## First simple plot (4)
 
 -   change axis
 
@@ -142,7 +141,7 @@ ggplot(data = df, aes(x = week, y = count, color = location)) +
   scale_y_continuous(limits = c(0,22))
 ```
 
-## First simple plot (4)
+## First simple plot (5)
 
 -   change labels and theme
 
@@ -151,8 +150,7 @@ ggplot(data = df, aes(x = week, y = count, color = location)) +
   geom_point(size = 5) +
   scale_y_continuous(limits = c(0,22)) +
   labs(x = "sample week", y = "tick count") +
-  theme_classic() 
-  
+  theme_classic()
 ```
 
 # Ok, lets have some fun with more complex figures
