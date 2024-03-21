@@ -7,19 +7,25 @@ website:
     style: "docked"
     search: true
     contents:
-      - index.qmd
       - about.qmd
-      - cv.qmd
+      - index.qmd
+      - /support_files/cv.qmd
       - section: "Workshops"
         contents:
+          - text: Good data practises 
+            url: presentations/good_data_practises.qmd
           - text: Data Wrangling
-          - url: presentations/good_data_practises.qmd
-          - text: Data Wrangling
-            url: presentations/data_wragling_of_field_data.qmd
+            url: presentations/data_wrangling_of_field_data.qmd
           - text: Introduction into Git
             url: presentations/git_version_control.qmd
           - text: Introduction into ggplot
             url: presentations/intro_into_ggplot.qmd
+          - text: Reproducibility research
+            url: presentations/reproducibility_workshop.qmd
+       - section: "Workshops"
+        contents:
+          - text: MCEVBD interview
+          - url: presentations/MCEVBD_interview.qmd
 
 
 format:

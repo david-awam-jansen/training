@@ -284,5 +284,36 @@
       "Workshops",
       "Introduction into ggplot"
     ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "David Jansen",
+    "section": "",
+    "text": "David Jansen is a data scientist at MCEVBD.",
+    "crumbs": [
+      "David Jansen"
+    ]
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "David Jansen",
+    "section": "Education",
+    "text": "Education\nUniversity of Zurich , Switzerland PhD in Animal communication | Sep 2009 - Apr 2013 Wageningen University, Netherlands MsC in Forest and Nature Management - Ecology | Aug 2003 - June 2005\nClick here for my Resume or CV",
+    "crumbs": [
+      "David Jansen"
+    ]
+  },
+  {
+    "objectID": "presentations/intro_into_ggplot.html#lets-add-some-changes",
+    "href": "presentations/intro_into_ggplot.html#lets-add-some-changes",
+    "title": "Introduction to ggplot2",
+    "section": "lETS ADD SOME CHANGES",
+    "text": "lETS ADD SOME CHANGES",
+    "crumbs": [
+      "Workshops",
+      "Introduction into ggplot"
+    ]
   }
 ]

@@ -103,7 +103,7 @@ make_accuracy_plot <- function(tick_report_data, probability = 0) {
 	cowplot::plot_grid(prow,  legend, ncol = 1, rel_heights = c(1, .1))
 }
 
-make_accuracy_plot(tick_report_data, probability = 0.1)
+make_accuracy_plot(tick_report_data, probability = 1)
 
 set_tile_plot <- list(
 	geom_tile(color = "black"),

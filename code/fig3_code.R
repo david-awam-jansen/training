@@ -19,8 +19,7 @@ A <- coxph(data = xdata_females_with_social, Surv(statage, adult_survival_status
 	ggplot(aes(y = term, x = exp(estimate))) +
 	geom_segment(aes(x = low.99, xend = high.99, yend = term),
 							 size = 5, color = "dodgerblue", alpha = .7) +
-	geom_segment(aes(x = low.95, xend = high.95, yend = term),
-							 size = 5, color = "dodgerblue4") +
+
 	geom_point(size = 2,, color = "black") +
 	theme_cowplot() +
 	# scale_x_continuous(trans='log10',
@@ -28,7 +27,9 @@ A <- coxph(data = xdata_females_with_social, Surv(statage, adult_survival_status
 	# 									 limits = c(.45, 2)
 	labs(x="Hazard ratio") +
 	geom_vline(xintercept = 1) +
-	annotate("text",x= .8,y=text_height,label="Enhanced survival", color = "gray")+
+	annotate("text",x= .8,y=text_height,label="Enhanced survival", color = "gray")
+
+A +
 	annotate("text",x= 1.2,y=text_height,label="Reduces survival", color = "gray")+
 	geom_curve(x = .63, y = text_height - 0.025, xend = .55, yend = text_height - 0.025, curvature = 0,
 						 arrow = arrow(length = unit(0.08, "inch")), size = 1,
@@ -90,10 +91,13 @@ B <- ggplot() +
 					 label = paste0(round(medium_low_Pat_low_cum - medium_low_Pat_high_cum,2), " y")) +
 	scale_x_continuous(expand = c(0, 0), limits = c(0, 31)) +
 	scale_y_continuous(expand = c(0, 0), limits = c(0, 1)) +
-	cowplot::theme_cowplot(font_size = 8) +
-	theme(legend.position = "none",
-				legend.text=element_text(size=7),
-				plot.margin = unit(c(0, 0, 0, 0), "cm")) +
+	cowplot::theme_cowplot(font_size = 8)
+
+B <- B +
+	theme(			legend.text=element_text(size=7),
+				plot.margin = unit(c(0, 0, 0, 0), "cm"))
+
+B +
 	scale_color_manual(values = c("firebrick", "firebrick", "dodgerblue4", "dodgerblue4")) +
 	scale_linetype_manual(values = c("solid", "dotted", "solid", "dotted")) +
 	labs(x = "Age",
@@ -164,7 +168,7 @@ C <- ggplot() +
 
 plot_grid(plot_grid(A, labels = c("A.")
 										, label_size = 8
-										, label_x = 0
+										, label_x = .5
 										, label_y = 1
 										, hjust = -.5),
 					plot_grid(B, C, rel_heights = c(1, 2),
