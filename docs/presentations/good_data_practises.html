@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.548">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="David Jansen">
+<meta name="dcterms.date" content="2024-03-21">
+
+<title>Good data practices</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="../site_libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../presentations/good_data_practises.html">Workshops</a></li><li class="breadcrumb-item"><a href="../presentations/good_data_practises.html">Good data practises</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">David Jansen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="//support_files/cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Curriculum vitæ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Workshops</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../presentations/good_data_practises.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Good data practises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../presentations/data_wrangling_of_field_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Wrangling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../presentations/git_version_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction into Git</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../presentations/intro_into_ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction into ggplot</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../presentations/reproducibility_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility research</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Workshops</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+ <span class="menu-text">MCEVBD interview</span>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../presentations/MCEVBD_interview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MCEVBD job interview</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a>
+  <ul class="collapse">
+  <li><a href="#data-1" id="toc-data-1" class="nav-link" data-scroll-target="#data-1">Data (1)</a></li>
+  <li><a href="#data-1-1" id="toc-data-1-1" class="nav-link" data-scroll-target="#data-1-1">Data (1)</a></li>
+  <li><a href="#data-2" id="toc-data-2" class="nav-link" data-scroll-target="#data-2">Data (2)</a></li>
+  <li><a href="#data-3" id="toc-data-3" class="nav-link" data-scroll-target="#data-3">Data (3)</a></li>
+  <li><a href="#data-4" id="toc-data-4" class="nav-link" data-scroll-target="#data-4">Data (4)</a></li>
+  <li><a href="#data-4-1" id="toc-data-4-1" class="nav-link" data-scroll-target="#data-4-1">Data (4)</a></li>
+  <li><a href="#data-4-2" id="toc-data-4-2" class="nav-link" data-scroll-target="#data-4-2">Data (4)</a></li>
+  <li><a href="#data-4-3" id="toc-data-4-3" class="nav-link" data-scroll-target="#data-4-3">Data (4)</a></li>
+  <li><a href="#data-4-4" id="toc-data-4-4" class="nav-link" data-scroll-target="#data-4-4">Data (4)</a></li>
+  <li><a href="#wide-format-versus-long-format" id="toc-wide-format-versus-long-format" class="nav-link" data-scroll-target="#wide-format-versus-long-format">Wide format versus long format</a></li>
+  <li><a href="#data-documentation-1" id="toc-data-documentation-1" class="nav-link" data-scroll-target="#data-documentation-1">Data documentation (1)</a></li>
+  <li><a href="#data-documentation-2" id="toc-data-documentation-2" class="nav-link" data-scroll-target="#data-documentation-2">Data documentation (2)</a></li>
+  <li><a href="#naming" id="toc-naming" class="nav-link" data-scroll-target="#naming">Naming</a></li>
+  <li><a href="#naming-1" id="toc-naming-1" class="nav-link" data-scroll-target="#naming-1">Naming</a></li>
+  <li><a href="#naming-2" id="toc-naming-2" class="nav-link" data-scroll-target="#naming-2">Naming</a></li>
+  <li><a href="#naming-3" id="toc-naming-3" class="nav-link" data-scroll-target="#naming-3">Naming</a></li>
+  </ul></li>
+  <li><a href="#take-home" id="toc-take-home" class="nav-link" data-scroll-target="#take-home">Take home</a>
+  <ul class="collapse">
+  <li><a href="#bonus" id="toc-bonus" class="nav-link" data-scroll-target="#bonus">Bonus</a></li>
+  <li><a href="#how-to-deal-with-r-programming-errors" id="toc-how-to-deal-with-r-programming-errors" class="nav-link" data-scroll-target="#how-to-deal-with-r-programming-errors">How to deal with R (programming) errors</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="good_data_practises.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../presentations/good_data_practises.html">Workshops</a></li><li class="breadcrumb-item"><a href="../presentations/good_data_practises.html">Good data practises</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Good data practices</h1>
+<p class="subtitle lead">No spaces</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>David Jansen </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 21, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="content" class="level1 page-columns page-full">
+<h1>Content</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Data management</p></li>
+<li><p>Naming structures</p></li>
+</ul>
+<section id="data-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-1">Data (1)</h2>
+<ul>
+<li><p>Keep an as raw as possible version</p>
+<p><img src="./figures/raw_vegies.jpg" class="img-fluid"></p></li>
+</ul>
+</section>
+<section id="data-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-1-1">Data (1)</h2>
+<ul>
+<li>Keep an as raw as possible version</li>
+<li>Consider making your original data file read-only</li>
+</ul>
+<div class="nonincremental">
+<blockquote class="blockquote">
+<ul>
+<li>keep in a ‘save’ format</li>
+<li>Not excel format - transferring between platforms can cause an issue (e.g.&nbsp;dates)</li>
+<li>csv, tsv, maybe text</li>
+</ul>
+</blockquote>
+</div>
+<blockquote class="blockquote">
+<ul>
+<li>Don’t make changes to this raw data</li>
+</ul>
+</blockquote>
+</section>
+<section id="data-2" class="level2 page-columns page-full" data-transition="convex">
+<h2 data-transition="convex" class="anchored" data-anchor-id="data-2">Data (2)</h2>
+<ul>
+<li><p>Content of columns in correct data type and units</p>
+<ul>
+<li><p>character (e.g, “a”, “swc”)</p></li>
+<li><p>numeric (real or decimal) (e.g, 2, 2.0)</p></li>
+<li><p>logical (FALSE, TRUE)</p></li>
+<li><p>integer (e.g, 2L, as.integer(3))</p></li>
+<li><p>complex (e.g, 1 + 0i, 1 + 4i) &lt;- These can be annoying</p></li>
+</ul></li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>R sees logical as 0/1 (FALSE/TRUE). This can be handy during coding.</p>
+</div></div></section>
+<section id="data-3" class="level2">
+<h2 class="anchored" data-anchor-id="data-3">Data (3)</h2>
+<ul>
+<li>Try to have content of columns in correct data type and units</li>
+<li>An example why this <del>can</del> is important</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">species =</span> <span class="fu">c</span>(<span class="st">"elphant"</span>, <span class="st">"mouse"</span>, <span class="st">"cheetah"</span>),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> <span class="fu">c</span>(<span class="st">"24.0 mph"</span>, <span class="st">"8.1 mph"</span>, <span class="st">"74.6 mph"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed_mph =</span> <span class="fu">c</span>(<span class="dv">24</span>, <span class="fl">8.1</span>, <span class="fl">74.7</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">flextable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">fontsize</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">part =</span> <span class="st">"all"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">colformat_double</span>(<span class="at">digits =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">width</span>(<span class="at">j =</span> <span class="dv">2</span>, <span class="dv">1</span>, <span class="at">unit =</span> <span class="st">"in"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-1410e2a8{}.cl-1400f4a6{font-family:'Arial';font-size:14pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-140c425c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-140c4266{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-140c5562{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-140c556c{width:1in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-140c556d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-140c5576{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-140c5577{width:1in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-140c5580{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-140c5581{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-140c5582{width:1in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-140c5583{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-1410e2a8"><thead><tr style="overflow-wrap:break-word;"><th class="cl-140c5562"><p class="cl-140c425c"><span class="cl-1400f4a6">species</span></p></th><th class="cl-140c556c"><p class="cl-140c425c"><span class="cl-1400f4a6">speed</span></p></th><th class="cl-140c556d"><p class="cl-140c4266"><span class="cl-1400f4a6">speed_mph</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-140c5576"><p class="cl-140c425c"><span class="cl-1400f4a6">elphant</span></p></td><td class="cl-140c5577"><p class="cl-140c425c"><span class="cl-1400f4a6">24.0 mph</span></p></td><td class="cl-140c5580"><p class="cl-140c4266"><span class="cl-1400f4a6">24.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-140c5576"><p class="cl-140c425c"><span class="cl-1400f4a6">mouse</span></p></td><td class="cl-140c5577"><p class="cl-140c425c"><span class="cl-1400f4a6">8.1 mph</span></p></td><td class="cl-140c5580"><p class="cl-140c4266"><span class="cl-1400f4a6">8.1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-140c5581"><p class="cl-140c425c"><span class="cl-1400f4a6">cheetah</span></p></td><td class="cl-140c5582"><p class="cl-140c425c"><span class="cl-1400f4a6">74.6 mph</span></p></td><td class="cl-140c5583"><p class="cl-140c4266"><span class="cl-1400f4a6">74.7</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<p>. . .</p>
+<div class="{,columns}">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">species =</span> <span class="fu">c</span>(<span class="st">"elphant"</span>, <span class="st">"mouse"</span>, <span class="st">"cheetah"</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> <span class="fu">c</span>(<span class="st">"24.0 mph"</span>, <span class="st">"8.1 mph"</span>, <span class="st">"74.6 mph"</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed_mph =</span> <span class="fu">c</span>(<span class="dv">24</span>, <span class="fl">8.1</span>, <span class="fl">74.7</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> speed)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    cowplot<span class="sc">::</span><span class="fu">theme_cowplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="good_data_practises_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="column" style="width:45 %;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">species =</span> <span class="fu">c</span>(<span class="st">"elphant"</span>, <span class="st">"mouse"</span>, <span class="st">"cheetah"</span>),</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> <span class="fu">c</span>(<span class="st">"24.0 mph"</span>, <span class="st">"8.1 mph"</span>, <span class="st">"74.6 mph"</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed_mph =</span> <span class="fu">c</span>(<span class="dv">24</span>, <span class="fl">8.1</span>, <span class="fl">74.7</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> speed_mph)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    cowplot<span class="sc">::</span><span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">breaks=</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>()) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"speed (mph)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="good_data_practises_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-4" class="level2">
+<h2 class="anchored" data-anchor-id="data-4">Data (4)</h2>
+<ul>
+<li>Use a scripted program not only for analysis, but also for <strong><em>data cleaning</em></strong> and <strong><em>data wrangling</em></strong></li>
+</ul>
+</section>
+<section id="data-4-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-4-1">Data (4)</h2>
+<ul>
+<li><p>Use a scripted program not only for analysis, but also for <strong><em>data cleaning</em></strong> and <strong><em>data wrangling</em></strong></p></li>
+<li><p>reproducible</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./figures/Print_ Tofu Stir-Fry with Peanut Sauce _ The Modern Proper1024_1.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div></li>
+</ul>
+</section>
+<section id="data-4-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="data-4-2">Data (4)</h2>
+<ul>
+<li>Use a scripted program not only for analysis, but also for <strong><em>data cleaning</em></strong> and <strong><em>data wrangling</em></strong></li>
+<li>reproducible</li>
+<li>Keep raw version safe !!!</li>
+</ul>
+<div class="column" style="width:35%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./figures/IMG_20230504_135316059.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>raw_data_wide <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">day =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">House_A =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">2</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">House_B =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">4</span>, <span class="dv">2</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">House_C =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">12</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">House_D =</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">14</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">4</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">House_E =</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">1</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>raw_data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>   flextable<span class="sc">::</span><span class="fu">flextable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>   flextable<span class="sc">::</span><span class="fu">colformat_double</span>(<span class="at">digits =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-147918aa{}.cl-14706034{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-1473f334{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-14740a2c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14740a36{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14740a37{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-147918aa"><thead><tr style="overflow-wrap:break-word;"><th class="cl-14740a2c"><p class="cl-1473f334"><span class="cl-14706034">day</span></p></th><th class="cl-14740a2c"><p class="cl-1473f334"><span class="cl-14706034">House_A</span></p></th><th class="cl-14740a2c"><p class="cl-1473f334"><span class="cl-14706034">House_B</span></p></th><th class="cl-14740a2c"><p class="cl-1473f334"><span class="cl-14706034">House_C</span></p></th><th class="cl-14740a2c"><p class="cl-1473f334"><span class="cl-14706034">House_D</span></p></th><th class="cl-14740a2c"><p class="cl-1473f334"><span class="cl-14706034">House_E</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">1.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">10.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">2.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">1.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">11.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">14.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">2.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">10.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">10.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">12.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">14.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">2.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">3.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">8.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">9.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">5.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">6.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">8.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">4.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">4.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">4.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">4.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">2.0</span></p></td><td class="cl-14740a36"><p class="cl-1473f334"><span class="cl-14706034">11.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14740a37"><p class="cl-1473f334"><span class="cl-14706034">5.0</span></p></td><td class="cl-14740a37"><p class="cl-1473f334"><span class="cl-14706034">2.0</span></p></td><td class="cl-14740a37"><p class="cl-1473f334"><span class="cl-14706034">2.0</span></p></td><td class="cl-14740a37"><p class="cl-1473f334"><span class="cl-14706034">2.0</span></p></td><td class="cl-14740a37"><p class="cl-1473f334"><span class="cl-14706034">4.0</span></p></td><td class="cl-14740a37"><p class="cl-1473f334"><span class="cl-14706034">1.0</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-4-3" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="data-4-3">Data (4)</h2>
+<ul>
+<li><p>Use a scripted program not only for analysis, but also for <strong><em>data cleaning</em></strong> and <strong><em>data wrangling</em></strong></p></li>
+<li><p>reproducible</p></li>
+<li><p>Keep raw version safe !!!</p></li>
+<li><p>Lyric: “House E used pesticides and should be excluded for this study”</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> raw_data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>House_E) <span class="sc">%&gt;%</span>    <span class="do">## The owners used pesticides during the trials</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>      flextable<span class="sc">::</span><span class="fu">flextable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      flextable<span class="sc">::</span><span class="fu">colformat_double</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-14905f92{}.cl-14884e06{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-148b377e{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-148b480e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-148b480f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-148b4818{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-14905f92"><thead><tr style="overflow-wrap:break-word;"><th class="cl-148b480e"><p class="cl-148b377e"><span class="cl-14884e06">day</span></p></th><th class="cl-148b480e"><p class="cl-148b377e"><span class="cl-14884e06">House_A</span></p></th><th class="cl-148b480e"><p class="cl-148b377e"><span class="cl-14884e06">House_B</span></p></th><th class="cl-148b480e"><p class="cl-148b377e"><span class="cl-14884e06">House_C</span></p></th><th class="cl-148b480e"><p class="cl-148b377e"><span class="cl-14884e06">House_D</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">1.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">10.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">2.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">1.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">11.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">2.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">10.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">10.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">12.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">14.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">3.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">8.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">9.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">5.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">6.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">4.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">4.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">4.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">4.0</span></p></td><td class="cl-148b480f"><p class="cl-148b377e"><span class="cl-14884e06">2.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-148b4818"><p class="cl-148b377e"><span class="cl-14884e06">5.0</span></p></td><td class="cl-148b4818"><p class="cl-148b377e"><span class="cl-14884e06">2.0</span></p></td><td class="cl-148b4818"><p class="cl-148b377e"><span class="cl-14884e06">2.0</span></p></td><td class="cl-148b4818"><p class="cl-148b377e"><span class="cl-14884e06">2.0</span></p></td><td class="cl-148b4818"><p class="cl-148b377e"><span class="cl-14884e06">4.0</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+</section>
+<section id="data-4-4" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="data-4-4">Data (4)</h2>
+<ul>
+<li><p>Use a scripted program not only for analysis, but also for <strong><em>data cleaning</em></strong> and <strong><em>data wrangling</em></strong></p></li>
+<li><p>reproducible</p></li>
+<li><p>Keep raw version safe !!!</p></li>
+<li><p>Lyric: “House E used pesticides and should be excluded for this study”</p></li>
+<li><p>A few months later…</p></li>
+</ul>
+<blockquote class="blockquote">
+<ul>
+<li>Lyric: “I changed my mind about house_E”</li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<ul>
+<li>“Sorry I deleted that data” versus “Let me rerun code”</li>
+</ul>
+</blockquote>
+</section>
+<section id="wide-format-versus-long-format" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="wide-format-versus-long-format">Wide format versus long format</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>raw_data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  flextable<span class="sc">::</span><span class="fu">flextable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  flextable<span class="sc">::</span><span class="fu">colformat_double</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-14a55726{}.cl-149d8082{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-14a035ca{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-14a04600{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14a0460a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14a0460b{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-14a55726"><thead><tr style="overflow-wrap:break-word;"><th class="cl-14a04600"><p class="cl-14a035ca"><span class="cl-149d8082">day</span></p></th><th class="cl-14a04600"><p class="cl-14a035ca"><span class="cl-149d8082">House_A</span></p></th><th class="cl-14a04600"><p class="cl-14a035ca"><span class="cl-149d8082">House_B</span></p></th><th class="cl-14a04600"><p class="cl-14a035ca"><span class="cl-149d8082">House_C</span></p></th><th class="cl-14a04600"><p class="cl-14a035ca"><span class="cl-149d8082">House_D</span></p></th><th class="cl-14a04600"><p class="cl-14a035ca"><span class="cl-149d8082">House_E</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">1.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">10.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">2.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">1.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">11.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">14.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">2.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">10.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">10.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">12.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">14.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">2.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">3.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">8.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">9.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">5.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">6.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">8.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">4.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">4.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">4.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">4.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">2.0</span></p></td><td class="cl-14a0460a"><p class="cl-14a035ca"><span class="cl-149d8082">11.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14a0460b"><p class="cl-14a035ca"><span class="cl-149d8082">5.0</span></p></td><td class="cl-14a0460b"><p class="cl-14a035ca"><span class="cl-149d8082">2.0</span></p></td><td class="cl-14a0460b"><p class="cl-14a035ca"><span class="cl-149d8082">2.0</span></p></td><td class="cl-14a0460b"><p class="cl-14a035ca"><span class="cl-149d8082">2.0</span></p></td><td class="cl-14a0460b"><p class="cl-14a035ca"><span class="cl-149d8082">4.0</span></p></td><td class="cl-14a0460b"><p class="cl-14a035ca"><span class="cl-149d8082">1.0</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<ul>
+<li>wide often easier for recording</li>
+<li>long often required for analysis</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>raw_data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"houses"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"tick_count"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="sc">-</span>day) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  flextable<span class="sc">::</span><span class="fu">flextable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  flextable<span class="sc">::</span><span class="fu">colformat_double</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-14bc3aa4{}.cl-14b3cf54{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-14b717c2{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-14b717d6{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-14b728f2{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14b728f3{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14b728fc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14b728fd{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14b728fe{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-14b72906{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-14bc3aa4"><thead><tr style="overflow-wrap:break-word;"><th class="cl-14b728f2"><p class="cl-14b717c2"><span class="cl-14b3cf54">day</span></p></th><th class="cl-14b728f3"><p class="cl-14b717d6"><span class="cl-14b3cf54">houses</span></p></th><th class="cl-14b728f2"><p class="cl-14b717c2"><span class="cl-14b3cf54">tick_count</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">1.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_A</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">10.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">1.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_B</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">2.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">1.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_C</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">1.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">1.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_D</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">11.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">1.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_E</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">14.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">2.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_A</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">10.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">2.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_B</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">10.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">2.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_C</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">12.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">2.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_D</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">14.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">2.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_E</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">2.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">3.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_A</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">8.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">3.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_B</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">9.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">3.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_C</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">5.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">3.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_D</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">6.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">3.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_E</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">8.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">4.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_A</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">4.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">4.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_B</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">4.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">4.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_C</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">4.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">4.0</span></p></td><td class="cl-14b728fd"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_D</span></p></td><td class="cl-14b728fc"><p class="cl-14b717c2"><span class="cl-14b3cf54">2.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-14b728fe"><p class="cl-14b717c2"><span class="cl-14b3cf54">4.0</span></p></td><td class="cl-14b72906"><p class="cl-14b717d6"><span class="cl-14b3cf54">House_E</span></p></td><td class="cl-14b728fe"><p class="cl-14b717c2"><span class="cl-14b3cf54">11.0</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-documentation-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-documentation-1">Data documentation (1)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/data_metadat.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You know details of project and data structure (at this moment), but what about future you or others.</p>
+</div>
+</div>
+</section>
+<section id="data-documentation-2" class="level2 smaller page-columns page-full">
+<h2 class="smaller anchored" data-anchor-id="data-documentation-2">Data documentation (2)</h2>
+<ul>
+<li>README
+<ul>
+<li>one per dataset</li>
+<li>provide a title for the dataset</li>
+<li>brief description per column</li>
+<li>publicly available data may need more details</li>
+<li><a href="https://guides.lib.uci.edu/datamanagement/readme" class="uri">https://guides.lib.uci.edu/datamanagement/readme</a></li>
+</ul></li>
+<li>Metadata
+<ul>
+<li>often 1 per study</li>
+<li>information does generally not change
+<ul>
+<li>e.g.&nbsp;details on study sites</li>
+</ul></li>
+<li>data about data</li>
+</ul></li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>https://datadryad.org/stash/best_practices https://data.research.cornell.edu/content/readme</p>
+</div></div></section>
+<section id="naming" class="level2">
+<h2 class="anchored" data-anchor-id="naming">Naming</h2>
+<ul>
+<li>Use descriptive names for folders, files and variables</li>
+</ul>
+<blockquote class="blockquote">
+<ul>
+<li>Understandable but not to long
+<ul>
+<li>m1 versus glm_count_full</li>
+<li>data versus tick_counts_EA</li>
+</ul></li>
+</ul>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While a computer will ultimately run your code, it’ll be read by humans, so write code intended for humans!</p>
+</div>
+</div>
+</section>
+<section id="naming-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="naming-1">Naming</h2>
+<blockquote class="blockquote">
+<ul>
+<li>Be aware on naming rules of programs
+<ul>
+<li>Avoid special characters ($, @, *)</li>
+<li>Avoid name of functions</li>
+<li>No spaces !!</li>
+<li>Case-sensitive (e.g.&nbsp;R) versus case insensitive (SQL)</li>
+<li>R (and many other languages) names can’t start with numbers and does not like spaces</li>
+<li>‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’</li>
+</ul></li>
+</ul>
+</blockquote>
+</section>
+<section id="naming-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="naming-2">Naming</h2>
+<ul>
+<li>Be aware on naming rules of programs
+<ul>
+<li>Avoid special characters ($, @, *)</li>
+<li>Avoid name of functions</li>
+<li>No spaces !!</li>
+<li>Case-sensitive (e.g.&nbsp;R) versus case insensitive (SQL)</li>
+<li>R (and many other languages) names can’t start with numbers and does not like spaces</li>
+<li>‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’</li>
+</ul></li>
+</ul>
+</section>
+<section id="naming-3" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="naming-3">Naming</h2>
+<ul>
+<li>Be aware on naming rules of programs
+<ul>
+<li>Avoid special characters ($, @, *)</li>
+<li>Avoid name of functions</li>
+<li>No spaces !!</li>
+<li>Case-sensitive (e.g.&nbsp;R) versus case insensitive (SQL)</li>
+<li>R (and many other languages) names can’t start with numbers and does not like spaces</li>
+<li>‘car speed in miles per hour’ versus ‘car speed (mph)’ versus car_speed_mph’</li>
+</ul></li>
+<li>styles
+<ul>
+<li>camelCase</li>
+<li>PascalCase</li>
+<li>snake_case</li>
+</ul></li>
+</ul>
+<blockquote class="blockquote">
+<ul>
+<li>be consistent</li>
+</ul>
+</blockquote>
+</section>
+</section>
+<section id="take-home" class="level1">
+<h1>Take home</h1>
+<blockquote class="blockquote">
+<ul>
+<li>keep raw data raw</li>
+<li>use code to clean data</li>
+<li>document code and data</li>
+<li><strong><em>No Spaces :-)</em></strong></li>
+</ul>
+</blockquote>
+<section id="bonus" class="level2">
+<h2 class="anchored" data-anchor-id="bonus">Bonus</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/debugging.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="how-to-deal-with-r-programming-errors" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="how-to-deal-with-r-programming-errors">How to deal with R (programming) errors</h2>
+<ol type="1">
+<li><p>don’t get frustrated by error messages</p></li>
+<li><p>read the error message</p></li>
+<li><p>google the error message</p></li>
+<li><p>google solutions or use ChatGPT</p></li>
+<li><p>trial and error</p>
+<ol type="1">
+<li><p>it works –&gt; go back to your analysis</p>
+<p><img src="figures/1000_F_264248967_rZHfZJ3b7dfAzrippDMZ35pbjOAfanKH.jpg" class="img-fluid" width="100"></p></li>
+<li><p>error -&gt; go back to 1.</p></li>
+</ol></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

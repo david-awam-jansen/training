@@ -1,5 +1,5 @@
 ---
-title: "Introduction into ggplot"
+title: "Introduction into ggplot2"
 date: last-modified
 author: "David Jansen"
 execute:

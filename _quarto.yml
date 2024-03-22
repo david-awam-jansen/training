@@ -22,12 +22,13 @@ website:
             url: presentations/intro_into_ggplot.qmd
           - text: Reproducibility research
             url: presentations/reproducibility_workshop.qmd
-       - section: "Workshops"
+
+      - section: "Presentaions"
         contents:
-          - text: MCEVBD interview
-          - url: presentations/MCEVBD_interview.qmd
+         - text: MCEVBD interview
+         - url: presentations/MCEVBD_interview.qmd
 
-
+  
 format:
   html:
     theme: cosmo
